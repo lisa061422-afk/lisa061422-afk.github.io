@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Renke Wang | Personal Academic Website</title>
+  <meta
+    name="description"
+    content="Renke Wang — Ph.D. Candidate at George Mason University. Research on control and scheduling co-design for multi-agent and shared-resource systems."
+  />
+  <meta name="author" content="Renke Wang" />
+
+  <!-- Fonts: Inter (sans) + Source Serif 4 (serif accent for headings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============================================================
+       SITE HEADER / NAVIGATION
+  ============================================================ -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="brand">Renke Wang</a>
+      <button
+        class="nav-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#demos">Demos</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         HOME / HERO SECTION
+         To update:
+           - Edit name, position, affiliation, and bio below.
+           - Replace the photo placeholder by uncommenting the
+             <img> tag and adding your photo (e.g., assets/profile.jpg).
+    ============================================================ -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Ph.D. Candidate &middot; George Mason University</p>
+          <h1>Renke Wang</h1>
+          <p class="lead">
+            I am a Ph.D. candidate in Electrical and Computer Engineering at
+            George Mason University. My research focuses on scheduling, resource
+            allocation, and control co-design for cyber-physical systems (CPS), with
+            the goal of optimizing system-level performance while respecting
+            resource limits, safety requirements, and system dynamics. I develop
+            online model predictive control (MPC) frameworks and optimization
+            formulations for real-time scheduling and control, with applications
+            to warehouse robot coordination, traffic vehicle scheduling,
+            networked control systems, and human-robot collaboration.
+          </p>
+        </div>
+
+        <div class="hero-photo">
+          <div class="photo-frame">
+            <!-- Profile photo. Currently points to me.jpg already on
+                 the GMU server. Replace with a different filename if
+                 you upload a new photo. -->
+            <img src="me.jpg" alt="Renke Wang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <span class="photo-placeholder" aria-hidden="true" style="display:none;">RW</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         VISUAL DEMONSTRATIONS (moved up to sit right under the hero)
+    ============================================================ -->
+    <section id="demos" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <h2>Visual Demonstrations</h2>
+        </header>
+        <div class="demo-grid">
+          <figure class="demo">
+            <video src="demo_warehouse.mp4" controls loop muted playsinline preload="metadata"></video>
+            <figcaption>
+              <strong>Warehouse Scheduling</strong>
+            </figcaption>
+          </figure>
+          <figure class="demo">
+            <video src="demo_traffic.mp4" controls loop muted playsinline preload="metadata"></video>
+            <figcaption>
+              <strong>Traffic Scheduling</strong>
+            </figcaption>
+          </figure>
+          <figure class="demo">
+            <video src="demo_principle.mp4" controls loop muted playsinline preload="metadata"></video>
+            <figcaption>
+              <strong>Scheduling Principle Animation</strong>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RESEARCH INTERESTS
+         To update: edit the list items below. Each <li> is one card.
+    ============================================================ -->
+    <section id="research" class="section">
+      <div class="container">
+        <header class="section-header">
+          <h2>Research Interests</h2>
+        </header>
+
+        <ul class="interest-grid">
+          <li>
+            <h3>Cyber-Physical and Networked Control Systems</h3>
+            <p>
+              CPS/NCS with recurring tasks, timing constraints, and
+              limited shared resources.
+            </p>
+          </li>
+          <li>
+            <h3>Scheduling, Resource Allocation, and Control Co-Design</h3>
+            <p>
+              Joint scheduling and control for multiple systems sharing
+              limited resources.
+            </p>
+          </li>
+          <li>
+            <h3>Model Predictive Control for Real-Time Systems</h3>
+            <p>
+              Online MPC for scheduling, priority decisions, and
+              constrained control.
+            </p>
+          </li>
+          <li>
+            <h3>Optimization-Based Scheduling</h3>
+            <p>
+              MIP / nonconvex formulations; centralized CR-MPC and
+              distributed C-ADMM.
+            </p>
+          </li>
+          <li>
+            <h3>Robust Control Under Timing Uncertainty</h3>
+            <p>
+              Tube-based / robust MPC for systems under timing
+              perturbations.
+            </p>
+          </li>
+          <li>
+            <h3>Planning and Search Algorithms</h3>
+            <p>
+              Tree / graph search and multi-step lookahead planning for
+              scheduling and path planning.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SELECTED PROJECTS
+         To update:
+           - Edit each <article class="project-card"> below.
+           - Add or remove cards as needed.
+           - Optionally link a project page or paper from the title.
+    ============================================================ -->
+    <section id="projects" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <h2>Projects</h2>
+        </header>
+
+        <!-- ===== Project group 1 ===== -->
+        <div class="project-group">
+          <h3>Scheduling and Control Co-Design with Determined Resource Occupation Orders</h3>
+          <p class="group-lead">
+            This project studies systems whose resource-occupation sequences
+            are determined in advance. The goal is to jointly design scheduling
+            decisions and control actions so robots or vehicles can move through
+            shared resources safely and efficiently while satisfying resource,
+            safety, timing, and system-dynamics constraints.
+          </p>
+          <div class="subproject-grid">
+            <article class="subproject">
+              <h4>Single-Zone Shared-Resource Scheduling and Control</h4>
+              <p>
+                Contention-resolving MPC for coordinating robots or vehicles
+                through localized shared-resource areas, such as warehouse
+                merging zones or traffic intersections.
+              </p>
+            </article>
+            <article class="subproject">
+              <h4>Networked Multi-Zone Scheduling and Control</h4>
+              <p>
+                Contention-resolving MPC for robots or vehicles moving through
+                multiple coupled shared-resource zones in warehouse or traffic
+                networks, including centralized formulations and distributed
+                solution frameworks for larger resource graphs.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <!-- ===== Project group 2 ===== -->
+        <div class="project-group">
+          <h3>Resource Allocation with Scheduling and Control Joint Design</h3>
+          <p class="group-lead">
+            This project studies scheduling and control problems where each
+            system&rsquo;s recurring tasks may select among multiple available
+            resources. Unlike the determined-order setting, the resource
+            occupation sequence is not fixed in advance and must be decided
+            jointly with scheduling and control.
+          </p>
+          <div class="subproject-grid">
+            <article class="subproject">
+              <h4>Human Attention Allocation in Multi-Human Multi-Robot (MHMR) Collaborative Systems</h4>
+              <p>
+                Scheduling and allocation of limited human attention in MHMR
+                collaborative systems, where multiple robots may request
+                assistance from human operators.
+              </p>
+            </article>
+            <article class="subproject">
+              <h4>Robust Co-Design for Blimp Motion Control with Heterogeneous Computational Resources</h4>
+              <p>
+                Scheduling and control co-design for multiple blimps sharing
+                limited computational resources with different working
+                efficiencies.
+              </p>
+            </article>
+            <article class="subproject">
+              <h4>Path Planning and Scheduling Co-Design for Multi-Merging Zones (Ongoing Work)</h4>
+              <p>
+                Joint path planning and scheduling for controlled systems moving
+                through multiple merging zones, using learning-guided methods to
+                support path-selection and resource-access decisions.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <!-- ===== Project group 3 ===== -->
+        <div class="project-group">
+          <h3>Robust Control Design under Timing Perturbations</h3>
+          <p class="group-lead">
+            This project studies control systems where the actual
+            control-update time may deviate from the estimated or scheduled
+            update time. The focus is on maintaining stability and performance
+            when timing perturbations affect piecewise-constant control signals.
+          </p>
+          <div class="subproject-grid">
+            <article class="subproject">
+              <h4>Linear Time-Invariant Systems under Timing Perturbations</h4>
+              <p>
+                Tube-based MPC with dynamic feedback gain for linear
+                time-invariant networked control systems affected by random
+                timing perturbations.
+              </p>
+            </article>
+            <article class="subproject">
+              <h4>Nonlinear Systems under Timing Perturbations (Ongoing Work)</h4>
+              <p>
+                Extension of the timing-perturbation framework to nonlinear
+                systems using Jacobian linearization and Koopman-based
+                approximation methods.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PUBLICATIONS
+         To update when a new paper appears:
+           - Add a new <li> at the top of the matching <ol> below.
+           - Format: Authors, "Title," Venue, Year. [PDF] [BibTeX]
+           - Bold your own name with <strong>R. Wang</strong>.
+           - To add other groups (e.g., "Manuscripts Under Review",
+             "Posters & Demos"), copy a <div class="pub-group"> block
+             and edit the heading.
+    ============================================================ -->
+    <section id="publications" class="section">
+      <div class="container">
+        <header class="section-header">
+          <h2>Publications</h2>
+          <p class="section-lead">
+            See also my
+            <a
+              href="https://scholar.google.com/citations?user=q_1CykwAAAAJ&amp;hl=en"
+              target="_blank"
+              rel="noopener"
+            >Google Scholar profile</a>.
+          </p>
+        </header>
+
+        <ol class="pub-list">
+          <li>
+            <p class="pub-citation">
+              <strong>R. Wang</strong> and N. Yao,
+              &ldquo;Contention-Resolving Model Predictive Control for
+              Coordinating Automated Vehicles at a Multi-Lane Traffic
+              Intersection,&rdquo;
+              in <em>Proc. 2025 IEEE Conference on Control Technology
+              and Applications (CCTA)</em>, 2025.
+            </p>
+          </li>
+          <li>
+            <p class="pub-citation">
+              R. Kumar, <strong>R. Wang</strong>, and N. Yao,
+              &ldquo;One Human and Multi-Robot Collaboration: Evaluating
+              the Impact of Attention-Guided On-Screen Recommendations on
+              Human Multitasking Efficiency, Cognitive Load, and
+              Trust,&rdquo;
+              in <em>Proc. 34th IEEE International Conference on Robot
+              and Human Interactive Communication (RO-MAN)</em>, 2025.
+            </p>
+          </li>
+          <li>
+            <p class="pub-citation">
+              <strong>R. Wang</strong> and N. Yao,
+              &ldquo;Robust Model Predictive Control for Networked
+              Control Systems with Timing Perturbations,&rdquo;
+              in <em>Proc. 2024 American Control Conference (ACC)</em>,
+              2024.
+            </p>
+          </li>
+          <li>
+            <p class="pub-citation">
+              N. Yao and <strong>R. Wang</strong>,
+              &ldquo;Optimal real-time human attention allocation and
+              scheduling in a multi-human and multi-robot collaborative
+              system,&rdquo;
+              in <em>Proc. 2024 IEEE Conference on Control Technology
+              and Applications (CCTA)</em>, 2024.
+            </p>
+          </li>
+          <li>
+            <p class="pub-citation">
+              J. Lian and <strong>R. Wang</strong>,
+              &ldquo;Stochastic stability of positive Markov jump linear
+              systems with fixed dwell time,&rdquo;
+              <em>Nonlinear Analysis: Hybrid Systems</em>, 2021.
+            </p>
+          </li>
+          <li>
+            <p class="pub-citation">
+              J. Lian, <strong>R. Wang</strong>, and F. Wu,
+              &ldquo;Exponential stability analysis and controller design
+              for LTI positive system with controller failure,&rdquo;
+              in <em>Proc. 12th Asian Control Conference (ASCC)</em>,
+              2019.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TECHNICAL SKILLS
+         To update: edit lists inside each .skill-block.
+    ============================================================ -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <h2>Technical Skills</h2>
+        </header>
+
+        <div class="skills-grid">
+          <div class="skill-block">
+            <h3>Programming Languages</h3>
+            <ul>
+              <li>Python</li>
+              <li>MATLAB</li>
+            </ul>
+          </div>
+
+          <div class="skill-block">
+            <h3>Optimization and Solver Tools</h3>
+            <ul>
+              <li>Mixed-integer programming (MIP)</li>
+              <li>Quadratic programming (QP)</li>
+              <li>Nonlinear programming (NLP)</li>
+              <li>Linear matrix inequalities (LMIs)</li>
+              <li>CasADi</li>
+              <li>YALMIP / Gurobi</li>
+              <li>fmincon</li>
+            </ul>
+          </div>
+
+          <div class="skill-block">
+            <h3>Control, Scheduling, and Distributed Methods</h3>
+            <ul>
+              <li>Model predictive control (MPC)</li>
+              <li>Robust MPC / tube-based MPC</li>
+              <li>Scheduling algorithms</li>
+              <li>Consensus Alternating Direction Method of Multipliers (C-ADMM)</li>
+            </ul>
+          </div>
+
+          <div class="skill-block">
+            <h3>Search Algorithms</h3>
+            <ul>
+              <li>Tree search</li>
+              <li>A* / heuristic search</li>
+            </ul>
+          </div>
+
+          <div class="skill-block">
+            <h3>Research Tools</h3>
+            <ul>
+              <li>LaTeX</li>
+              <li>Git / GitHub</li>
+              <li>Simulation and visualization</li>
+              <li>Academic writing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CV
+         To update:
+           - Place your CV PDF in this folder (e.g., RenkeWang_CV.pdf).
+           - Update the href below to point to that file.
+           - Update the "Last updated" date.
+    ============================================================ -->
+    <section id="cv" class="section">
+      <div class="container">
+        <header class="section-header">
+          <h2>Curriculum Vitae</h2>
+        </header>
+
+        <div class="cv-action">
+          <!-- Points to RenkeWang_CV.pdf on the GMU server.
+               Opens in a new tab so the browser's PDF viewer renders
+               it inline (visitors can still download from the viewer
+               toolbar). Replace href if you rename the file. -->
+          <a href="RenkeWang_CV.pdf" class="btn btn-primary"
+             target="_blank" rel="noopener">
+            View CV (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT
+         To update: edit each link below.
+    ============================================================ -->
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <header class="section-header">
+          <h2>Contact</h2>
+        </header>
+
+        <div class="contact-grid">
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Email</span>
+              <span class="contact-emails">
+                <a href="mailto:rwang26@gmu.edu">rwang26@gmu.edu</a>
+                <span class="sep" aria-hidden="true">&middot;</span>
+                <a href="mailto:lisa061422@gmail.com">lisa061422@gmail.com</a>
+              </span>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a
+                href="https://www.linkedin.com/in/renke-wang-gmu"
+                target="_blank"
+                rel="noopener"
+              >linkedin.com/in/renke-wang-gmu</a>
+            </li>
+          </ul>
+
+          <!-- Leave-a-message form, powered by Formspree (no backend needed).
+               Endpoint configured (f/xnjyvwwv) -> delivers to lisa061422@gmail.com.
+               First real submission triggers a one-time confirmation email
+               from Formspree; click it to activate delivery. -->
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/xnjyvwwv"
+            method="POST"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              aria-label="Your email"
+              required
+            />
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Leave me a message…"
+              aria-label="Message"
+              required
+            ></textarea>
+            <!-- Honeypot anti-spam field; bots fill it, humans don't see it -->
+            <input
+              type="text"
+              name="_gotcha"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="display:none"
+            />
+            <button type="submit" class="btn btn-primary">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       SITE FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2026</span> Renke Wang. All rights reserved.</p>
+      <p class="footer-note">George Mason University &middot; Fairfax, Virginia</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
