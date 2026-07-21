@@ -47,11 +47,18 @@
 
     * { box-sizing: border-box; }
 
+    html { font-size: 16px; }
+
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.45;
+      letter-spacing: -0.005em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     .demo {
@@ -62,8 +69,8 @@
 
     .content-layout {
       display: grid;
-      grid-template-columns: minmax(230px, 0.72fr) minmax(520px, 1.75fr) minmax(330px, 1fr);
-      gap: 18px;
+      grid-template-columns: minmax(300px, 0.85fr) minmax(620px, 1.65fr) minmax(420px, 1.2fr);
+      gap: 24px;
       align-items: start;
     }
 
@@ -79,6 +86,16 @@
       top: 14px;
     }
 
+    .setup-panel {
+      padding-right: 18px;
+      border-right: 1px solid var(--border);
+    }
+
+    .method-panel {
+      padding-left: 18px;
+      border-left: 1px solid var(--border);
+    }
+
     .header,
     .legend,
     .scenario-controls,
@@ -92,27 +109,37 @@
 
     .header {
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 18px;
+      margin-bottom: 16px;
     }
 
     h1 {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+      font-size: clamp(1.75rem, 2.2vw, 2.2rem);
       font-weight: 600;
-      line-height: 1.25;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
     }
 
     .subtitle {
-      margin: 4px 0 0;
+      margin: 6px 0 0;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+      line-height: 1.35;
     }
 
     .legend {
-      gap: 14px;
-      font-size: 0.85rem;
+      gap: 18px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .plot-wrap > .legend {
+      width: 100%;
+      min-height: 44px;
+      justify-content: flex-end;
+      padding: 11px 10px 5px;
     }
 
     .legend-item {
@@ -136,8 +163,8 @@
       display: grid;
       grid-template-columns: 1fr;
       align-items: stretch;
-      gap: 12px;
-      padding: 12px 0;
+      gap: 14px;
+      padding: 14px 0 16px;
       border-top: 1px solid var(--border);
     }
 
@@ -145,9 +172,11 @@
       display: grid;
       grid-template-columns: 1fr;
       align-items: stretch;
-      gap: 8px;
+      gap: 7px;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
     .scenario-field select { width: 100%; }
@@ -156,15 +185,19 @@
       min-width: 138px;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 7px 9px;
+      padding: 9px 10px;
       background: var(--bg);
       color: var(--text);
       font: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .model-values {
       color: var(--text);
       font-size: 0.9rem;
+      font-weight: 500;
+      line-height: 1.4;
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
     }
@@ -172,37 +205,47 @@
     .condition-note {
       margin-left: 0;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.84rem;
+      line-height: 1.45;
       font-variant-numeric: tabular-nums;
       white-space: normal;
     }
 
     .delta-panel {
-      padding: 10px 0 12px;
+      padding: 14px 0 16px;
       border-bottom: 1px solid var(--border);
     }
 
     .delta-panel-heading {
       display: grid;
-      gap: 10px;
-      margin-bottom: 8px;
+      gap: 7px;
+      margin-bottom: 14px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .delta-panel-heading strong {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 650;
+      line-height: 1.38;
     }
 
     .delta-controls {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
     }
 
     .delta-control {
       display: grid;
       grid-template-columns: auto minmax(90px, 1fr);
       align-items: center;
-      gap: 4px 10px;
+      gap: 6px 10px;
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
+      line-height: 1.35;
       font-variant-numeric: tabular-nums;
     }
 
@@ -214,55 +257,105 @@
     .formula-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 20px;
       margin-top: 0;
-      padding: 12px 0;
+      padding: 14px 0 16px;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
     .formula-group h2 {
-      margin: 0 0 5px;
+      margin: 0 0 8px;
       color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
     }
 
-    .formula {
-      margin: 2px 0;
-      overflow-x: auto;
-      overflow-y: hidden;
-      font-size: clamp(0.86rem, 1.8vw, 1rem);
-      line-height: 1.55;
+    .formula-group + .formula-group {
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
     }
 
-    .formula mjx-container { margin: 0 !important; }
+    .formula {
+      margin: 4px 0;
+      overflow: visible;
+      font-size: clamp(0.9rem, 0.9vw, 1rem);
+      line-height: 1.62;
+    }
+
+    .formula mjx-container[display="true"] {
+      max-width: 100%;
+      text-align: left !important;
+    }
+
+    .formula.formula-block {
+      font-size: clamp(0.82rem, 0.82vw, 0.94rem);
+    }
+
+    .formula mjx-container,
+    .math-inline mjx-container,
+    .svg-math mjx-container { margin: 0 !important; }
 
     .formula.red { color: var(--perturbed); }
 
-    .event-readout {
-      min-height: 42px;
-      justify-content: space-between;
-      gap: 8px 18px;
-      padding: 9px 0;
+    .math-foreign { overflow: visible; }
+
+    .svg-math {
+      width: 100%;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 14px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .svg-math.end { text-align: right; }
+    .svg-math.middle { text-align: center; }
+    .math-foreign.zero-label .svg-math { color: var(--text); font-size: 13px; font-weight: 650; }
+    .math-foreign.plot-label .svg-math,
+    .math-foreign.timeline-label .svg-math { color: var(--text); font-size: 16px; font-weight: 650; }
+    .math-foreign.control-index-label .svg-math { color: var(--text); font-size: 13px; font-weight: 650; }
+    .math-foreign.delay-label .svg-math { color: var(--perturbed); font-size: 14px; font-weight: 650; }
+
+    .event-readout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: 50px 24px;
+      align-items: center;
+      height: 96px;
+      min-height: 96px;
+      gap: 6px;
+      padding: 8px 0;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.42;
       font-variant-numeric: tabular-nums;
     }
 
     .event-readout strong {
       color: var(--text);
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 650;
     }
 
-    #event-message { flex: 1 1 480px; }
+    #event-message {
+      display: flex;
+      min-width: 0;
+      min-height: 50px;
+      align-items: center;
+    }
 
     .event-values {
       display: inline-flex;
+      min-height: 24px;
+      align-items: center;
+      justify-content: flex-end;
       gap: 12px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      white-space: nowrap;
     }
 
     .plot-wrap {
@@ -301,8 +394,8 @@
     .zero-label {
       fill: var(--text);
       font-family: inherit;
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 650;
     }
 
     .axis-line,
@@ -319,14 +412,14 @@
     .control-index-label {
       fill: var(--muted);
       font-family: inherit;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .plot-label,
     .timeline-label {
       fill: var(--text);
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 650;
     }
 
     .nominal-tick { stroke: var(--nominal); }
@@ -351,8 +444,8 @@
 
     .control-index-label {
       fill: var(--text);
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 13px;
+      font-weight: 650;
     }
 
     .trajectory,
@@ -401,20 +494,20 @@
     }
 
     .controls {
-      gap: 8px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     button {
       appearance: none;
       border: 1px solid var(--accent);
       border-radius: 6px;
-      padding: 8px 13px;
+      padding: 9px 14px;
       background: var(--accent);
       color: var(--button-text);
       font: inherit;
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.875rem;
+      font-weight: 650;
       cursor: pointer;
     }
 
@@ -435,9 +528,10 @@
     .readout {
       justify-content: space-between;
       gap: 8px 18px;
-      margin-top: 8px;
+      margin-top: 10px;
       color: var(--muted);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
       font-variant-numeric: tabular-nums;
     }
 
@@ -464,12 +558,14 @@
       border: 0;
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1380px) {
       .demo { width: min(100%, 1120px); }
       .content-layout { grid-template-columns: minmax(230px, 0.8fr) minmax(0, 2fr); }
       .method-panel {
         position: static;
         grid-column: 1 / -1;
+        padding-left: 0;
+        border-left: 0;
       }
       .formula-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.45fr); }
     }
@@ -481,8 +577,22 @@
       .method-panel {
         position: static;
         grid-column: auto;
+        padding-inline: 0;
+        border-inline: 0;
       }
       .formula-grid { grid-template-columns: 1fr; }
+      .event-readout {
+        grid-template-rows: auto auto;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+      }
+      #event-message { min-height: 0; }
+      .event-values {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        white-space: normal;
+      }
       .header { align-items: flex-start; }
       .legend { width: 100%; }
       .axis-text, .tick-label, .delay-label { font-size: 14px; }
@@ -503,10 +613,6 @@
         <h1>Timing-Perturbation Compensation</h1>
         <p id="subtitle" class="subtitle">ACC 2024 · four-system interactive study</p>
       </div>
-      <div class="legend" aria-label="Trajectory legend">
-        <span class="legend-item"><span class="legend-line"></span>Nominal / precomputed</span>
-        <span class="legend-item"><span class="legend-line red"></span>Perturbed / runtime</span>
-      </div>
     </header>
 
     <div class="content-layout">
@@ -521,14 +627,14 @@
               <option value="3">System 4</option>
             </select>
           </label>
-          <span id="model-values" class="model-values">A₂ = 1.2 &nbsp;·&nbsp; B₂ = 1</span>
-          <span id="condition-note" class="condition-note">Calculated bound: Δ₂[k] &lt; 0.3582 s</span>
+          <span id="model-values" class="model-values math-inline">\(A_2=1.2,\quad B_2=1\)</span>
+          <span id="condition-note" class="condition-note">Calculated bound: <span class="math-inline">\(\Delta_2[k]&lt;0.3582\,\mathrm{s}\)</span></span>
         </div>
 
         <section class="delta-panel" aria-label="Individual timing perturbations">
           <div class="delta-panel-heading">
             <strong>Choose each unknown timing perturbation before running</strong>
-            <span id="delta-range-note">0 ≤ Δ₂[k] &lt; Δ̄₂</span>
+            <span id="delta-range-note" class="math-inline">\(0\leq\Delta_2[k]&lt;\bar{\Delta}_2\)</span>
           </div>
           <div id="delta-controls" class="delta-controls"></div>
         </section>
@@ -538,13 +644,17 @@
         <div class="event-readout" aria-live="polite">
           <span id="event-message"><strong>Initialization:</strong> nominal MPC plan is already available; the actual timing perturbations remain unknown.</span>
           <span class="event-values">
-            <span id="delta-readout">Δᵢ[k] = —</span>
-            <span id="gain-readout">K(Δᵢ[k]) = —</span>
-            <span id="control-readout">uᵢ[k] = 0.000</span>
+            <span id="delta-readout" class="math-inline">\(\Delta_i[k]=\mathrm{N/A}\)</span>
+            <span id="gain-readout" class="math-inline">\(K(\Delta_i[k])=\mathrm{N/A}\)</span>
+            <span id="control-readout" class="math-inline">\(u_i[k]=0.000\)</span>
           </span>
         </div>
 
         <div class="plot-wrap">
+          <div class="legend" aria-label="Trajectory legend">
+            <span class="legend-item"><span class="legend-line"></span>Nominal / precomputed</span>
+            <span class="legend-item"><span class="legend-line red"></span>Perturbed / runtime</span>
+          </div>
           <svg id="trajectory-svg" viewBox="0 0 980 720" role="img" aria-labelledby="svg-title svg-desc">
             <title id="svg-title">Formula-driven timing perturbation compensation for System 2</title>
             <desc id="svg-desc">Nominal update times are known in advance. Actual delayed update times appear during execution, when the dynamic-gain formula computes the corrected piecewise-constant control.</desc>
@@ -560,11 +670,11 @@
         </div>
 
         <div class="readout" aria-live="polite">
-          <strong id="time-readout">t = 0.00 s</strong>
+          <strong id="time-readout"><span class="math-inline">\(t=\)</span><span id="time-value">0.00</span><span class="math-inline">\(\,\mathrm{s}\)</span></strong>
           <span class="readout-values">
-            <span id="nominal-state-label">x₂<sup>n</sup>(t) = <strong id="nominal-state-readout">1.000</strong></span>
-            <span id="perturbed-state-label">x₂(t) = <strong id="perturbed-state-readout">1.000</strong></span>
-            <span>error = <strong id="error-readout">0.000</strong></span>
+            <span id="nominal-state-label"><span class="math-inline">\(x_2^{n}(t)=\)</span><strong id="nominal-state-readout">1.000</strong></span>
+            <span id="perturbed-state-label"><span class="math-inline">\(x_2(t)=\)</span><strong id="perturbed-state-readout">1.000</strong></span>
+            <span><span class="math-inline">\(e(t)=\)</span><strong id="error-readout">0.000</strong></span>
           </span>
         </div>
       </section>
@@ -580,9 +690,9 @@
           <div class="formula-group">
             <h2>Dynamic-gain correction at the revealed update time</h2>
             <p class="formula">\(\Delta_i[k]=\gamma_i[k]-\tilde{\gamma}_i[k]\)</p>
-            <p class="formula red">\(u_i[k]=u_i^n[k]-K(\Delta_i[k])\bigl[x_i(\gamma_i[k])-x_i^n(\gamma_i[k])\bigr]\)</p>
-            <p class="formula">\(K(\Delta_i[k])=B_i^{\dagger}A_i\bigl[e^{A_i(\tilde{\gamma}_i[k+1]-\gamma_i[k])}-I\bigr]^{-1}e^{A_i(\tilde{\gamma}_i[k+1]-\gamma_i[k])}\)</p>
-            <p id="bound-formula" class="formula">\(\lambda_M&gt;0:\quad \bar{\Delta}_i=\Delta t_m-\lambda_M^{-1}\ln\!\left(\frac{e^{\lambda_M\Delta t_m}+1}{2}\right)\)</p>
+            <p class="formula formula-block red">\[\begin{aligned}u_i[k]&amp;=u_i^n[k]-K(\Delta_i[k])\\[-2pt]&amp;\quad{}\times\bigl[x_i(\gamma_i[k])-x_i^n(\gamma_i[k])\bigr]\end{aligned}\]</p>
+            <p class="formula formula-block">\[\begin{aligned}K(\Delta_i[k])&amp;=B_i^{\dagger}A_i\bigl[e^{A_i(\tilde{\gamma}_i[k+1]-\gamma_i[k])}-I\bigr]^{-1}\\[-2pt]&amp;\quad{}\times e^{A_i(\tilde{\gamma}_i[k+1]-\gamma_i[k])}\end{aligned}\]</p>
+            <p id="bound-formula" class="formula formula-block">\[\begin{aligned}\lambda_M&gt;0:\quad \bar{\Delta}_i&amp;=\Delta t_m-\lambda_M^{-1}\ln\!\left(\frac{e^{\lambda_M\Delta t_m}+1}{2}\right)\end{aligned}\]</p>
           </div>
         </section>
       </aside>
@@ -884,7 +994,7 @@
         } else if (pending < MODEL.actualTimes.length - 1 && time >= MODEL.nominalTimes[pending] && time < MODEL.actualTimes[pending]) {
           eventMessage.innerHTML = `<strong>Waiting after γ̃₂[${pending}]=${MODEL.nominalTimes[pending].toFixed(2)} s:</strong> the perturbed system keeps the previous input until the unknown actual update γ₂[${pending}] occurs.`;
         } else if (event.index > 0) {
-          eventMessage.innerHTML = `<strong>Runtime update k=${event.index} at γ₂[${event.index}]=${event.time.toFixed(2)} s:</strong> Δ₂[${event.index}] is now measured, so (8)-(9) compute the new red control.`;
+          eventMessage.innerHTML = `<strong>Runtime update k=${event.index} at γ₂[${event.index}]=${event.time.toFixed(2)} s:</strong> Δ₂[${event.index}] is now measured, so the displayed correction computes the new red control.`;
         }
 
         if (event.index > 0) {
@@ -1014,6 +1124,7 @@
         { id: 4, A: 3 / 2, B: 1, bound: 0.4297, times: [0, 0.2, 2.2, 4.75, 6], deltas: [0, 0.42, 0.05, 0.15, 0], inputs: [0, -2.1311897, 0, 0] }
       ];
 
+      const demo = document.querySelector(".demo");
       const svg = document.getElementById("trajectory-svg");
       const systemSelect = document.getElementById("system-select");
       const modelValues = document.getElementById("model-values");
@@ -1029,6 +1140,7 @@
       const nextButton = document.getElementById("next-button");
       const slider = document.getElementById("time-slider");
       const timeReadout = document.getElementById("time-readout");
+      const timeValue = document.getElementById("time-value");
       const nominalReadout = document.getElementById("nominal-state-readout");
       const perturbedReadout = document.getElementById("perturbed-state-readout");
       const nominalStateLabel = document.getElementById("nominal-state-label");
@@ -1039,6 +1151,7 @@
       const gainReadout = document.getElementById("gain-readout");
       const controlReadout = document.getElementById("control-readout");
       const NS = "http://www.w3.org/2000/svg";
+      const HTML_NS = "http://www.w3.org/1999/xhtml";
 
       const layout = { width: 980, left: 82, right: 30, nominalLane: 50, actualLane: 104, stateTop: 185, stateBottom: 410, controlTop: 490, controlBottom: 650 };
       layout.plotWidth = layout.width - layout.left - layout.right;
@@ -1064,6 +1177,8 @@
       let startTimeValue = 0;
       let frameId = null;
       let lastEventIndex = 0;
+      let lastNarrativeKey = "";
+      let rebuilding = false;
       const deltaSets = new Map();
       const duration = 13500;
 
@@ -1078,12 +1193,30 @@
         return node;
       }
 
+      function mathSvgLabel({ x, y, latex, className = "axis-text", anchor = "start", width = 180, height = 28 }) {
+        let left = x;
+        if (anchor === "middle") left -= width / 2;
+        if (anchor === "end") left -= width;
+        const foreignObject = element("foreignObject", {
+          x: left,
+          y: y - height + 5,
+          width,
+          height,
+          class: `math-foreign ${className}`
+        });
+        const content = document.createElementNS(HTML_NS, "div");
+        content.className = `svg-math ${anchor}`;
+        content.textContent = String.raw`\(${latex}\)`;
+        foreignObject.appendChild(content);
+        return foreignObject;
+      }
+
       function line(x1, y1, x2, y2, className) {
         svg.appendChild(element("line", { x1, y1, x2, y2, class: className }));
       }
 
       function formatNumber(value, digits = 3) {
-        return Number(value.toFixed(digits)).toString().replace("-", "−");
+        return Number(value.toFixed(digits)).toString();
       }
 
       function dynamicGain(index) {
@@ -1163,8 +1296,8 @@
         line(layout.left, layout.nominalLane, layout.width - layout.right, layout.nominalLane, "timeline-line");
         line(layout.left, layout.actualLane, layout.width - layout.right, layout.actualLane, "timeline-line");
         svg.appendChild(element("text", { x: layout.left, y: 25, class: "timeline-label" }, "Control-update timeline"));
-        svg.appendChild(element("text", { x: layout.left - 10, y: layout.nominalLane + 4, class: "axis-text", "text-anchor": "end" }, `nominal γ̃${MODEL.id}[k]`));
-        svg.appendChild(element("text", { x: layout.left - 10, y: layout.actualLane + 4, class: "axis-text", "text-anchor": "end" }, `actual γ${MODEL.id}[k]`));
+        svg.appendChild(mathSvgLabel({ x: layout.left - 10, y: layout.nominalLane + 4, latex: String.raw`\text{nominal }\tilde{\gamma}_{${MODEL.id}}[k]`, anchor: "end", width: 76 }));
+        svg.appendChild(mathSvgLabel({ x: layout.left - 10, y: layout.actualLane + 4, latex: String.raw`\text{actual }\gamma_{${MODEL.id}}[k]`, anchor: "end", width: 76 }));
         for (let second = 0; second <= MODEL.horizon; second += 1) {
           const x = xScale(second);
           line(x, layout.stateTop, x, layout.stateBottom, "grid-line");
@@ -1181,7 +1314,7 @@
           const zeroY = stateY(0);
           line(layout.left, zeroY, layout.width - layout.right, zeroY, "zero-line");
           svg.appendChild(element("text", { x: layout.left - 11, y: zeroY + 4, class: "zero-label", "text-anchor": "end" }, "0"));
-          svg.appendChild(element("text", { x: layout.width - layout.right - 5, y: zeroY - 7, class: "zero-label", "text-anchor": "end" }, "y = 0"));
+          svg.appendChild(mathSvgLabel({ x: layout.width - layout.right - 5, y: zeroY - 7, latex: "y=0", className: "zero-label", anchor: "end", width: 58, height: 24 }));
         }
         tickValues(controlMin, controlMax, 4).forEach((value) => {
           const y = controlY(value);
@@ -1192,9 +1325,9 @@
         line(layout.left, layout.stateBottom, layout.width - layout.right, layout.stateBottom, "axis-line");
         line(layout.left, layout.controlTop, layout.left, layout.controlBottom, "axis-line");
         line(layout.left, layout.controlBottom, layout.width - layout.right, layout.controlBottom, "axis-line");
-        svg.appendChild(element("text", { x: layout.left, y: layout.stateTop - 18, class: "plot-label" }, `State trajectory x${MODEL.id}(t)`));
-        svg.appendChild(element("text", { x: layout.left, y: layout.controlTop - 18, class: "plot-label" }, `Piecewise-constant control input u${MODEL.id}(t)`));
-        svg.appendChild(element("text", { x: layout.left + layout.plotWidth / 2, y: 704, class: "axis-text", "text-anchor": "middle" }, "Time (s)"));
+        svg.appendChild(mathSvgLabel({ x: layout.left, y: layout.stateTop - 18, latex: String.raw`\text{State trajectory }x_{${MODEL.id}}(t)`, className: "plot-label", width: 260, height: 30 }));
+        svg.appendChild(mathSvgLabel({ x: layout.left, y: layout.controlTop - 18, latex: String.raw`\text{Piecewise-constant control input }u_{${MODEL.id}}(t)`, className: "plot-label", width: 390, height: 30 }));
+        svg.appendChild(mathSvgLabel({ x: layout.left + layout.plotWidth / 2, y: 704, latex: String.raw`\text{Time }(\mathrm{s})`, anchor: "middle", width: 130, height: 26 }));
       }
 
       function drawEvents() {
@@ -1212,8 +1345,8 @@
           const group = element("g", { class: "actual-group", opacity: index === 0 ? 1 : 0 });
           group.appendChild(element("line", { x1: actualX, y1: layout.actualLane - 9, x2: actualX, y2: layout.actualLane + 9, class: "event-tick actual-tick" }));
           group.appendChild(element("text", { x: actualX, y: layout.actualLane + 27, class: "tick-label", "text-anchor": "middle" }, formatNumber(MODEL.actualTimes[index], 3)));
-          if (index < MODEL.nominalInputs.length) group.appendChild(element("text", { x: actualX, y: layout.actualLane + 45, class: "control-index-label", "text-anchor": "middle" }, `u${MODEL.id}[${index}]`));
-          if (index > 0 && MODEL.deltas[index] > 0) group.appendChild(element("text", { x: (x + actualX) / 2, y: layout.actualLane - 15, class: "delay-label", "text-anchor": "middle" }, `Δ=${formatNumber(MODEL.deltas[index], 3)}`));
+          if (index < MODEL.nominalInputs.length) group.appendChild(mathSvgLabel({ x: actualX, y: layout.actualLane + 45, latex: String.raw`u_{${MODEL.id}}[${index}]`, className: "control-index-label", anchor: "middle", width: 72, height: 24 }));
+          if (index > 0 && MODEL.deltas[index] > 0) group.appendChild(mathSvgLabel({ x: (x + actualX) / 2, y: layout.actualLane - 15, latex: String.raw`\Delta=${formatNumber(MODEL.deltas[index], 3)}`, className: "delay-label", anchor: "middle", width: 92, height: 25 }));
           const ring = element("circle", { cx: actualX, cy: layout.actualLane, r: 4, class: "active-ring" });
           group.appendChild(ring);
           actualRings.push(ring);
@@ -1313,18 +1446,18 @@
         const id = MODEL.id;
         const aLatex = Number(MODEL.A.toFixed(4)).toString();
         const bLatex = Number(MODEL.B.toFixed(4)).toString();
-        conditionNote.textContent = `Calculated bound: Δ${id}[k] < ${MODEL.bound.toFixed(4)} s`;
-        deltaRangeNote.textContent = `0 ≤ Δ${id}[k] < Δ̄${id} = ${MODEL.bound.toFixed(4)} s · editable until γ̃${id}[k]`;
+        conditionNote.innerHTML = String.raw`Calculated bound: <span class="math-inline">\(\Delta_{${id}}[k]&lt;${MODEL.bound.toFixed(4)}\,\mathrm{s}\)</span>`;
+        deltaRangeNote.innerHTML = String.raw`<span class="math-inline">\(0\leq\Delta_{${id}}[k]&lt;\bar{\Delta}_{${id}}=${MODEL.bound.toFixed(4)}\,\mathrm{s}\)</span> · editable until <span class="math-inline">\(\tilde{\gamma}_{${id}}[k]\)</span>`;
         if (MODEL.A > 0) {
-          boundFormula.textContent = String.raw`\(\lambda_M>0:\quad \bar{\Delta}_{${id}}=\Delta t_m-\lambda_M^{-1}\ln\!\left(\frac{e^{\lambda_M\Delta t_m}+1}{2}\right)=${MODEL.bound.toFixed(4)}\,\mathrm{s},\quad \Delta t_m=${MODEL.minimumInterval.toFixed(3)},\ \lambda_M=${aLatex}\)`;
+          boundFormula.textContent = String.raw`\[\begin{aligned}\lambda_M>0:\quad \bar{\Delta}_{${id}}&=\Delta t_m-\lambda_M^{-1}\ln\!\left(\frac{e^{\lambda_M\Delta t_m}+1}{2}\right)\\[-2pt]&=${MODEL.bound.toFixed(4)}\,\mathrm{s},\qquad \Delta t_m=${MODEL.minimumInterval.toFixed(3)},\quad \lambda_M=${aLatex}\end{aligned}\]`;
         } else {
-          boundFormula.textContent = String.raw`\(\lambda_j<0:\quad \bar{\Delta}_{${id}}=\frac{1}{2}\Delta t_m=${MODEL.bound.toFixed(4)}\,\mathrm{s},\quad \Delta t_m=${MODEL.minimumInterval.toFixed(3)}\)`;
+          boundFormula.textContent = String.raw`\[\begin{aligned}\lambda_j<0:\quad \bar{\Delta}_{${id}}&=\frac{1}{2}\Delta t_m\\[-2pt]&=${MODEL.bound.toFixed(4)}\,\mathrm{s},\qquad \Delta t_m=${MODEL.minimumInterval.toFixed(3)}\end{aligned}\]`;
         }
-        subtitle.textContent = `ACC 2024 · System ${id} schedule · A=${formatNumber(MODEL.A, 3)}, B=${formatNumber(MODEL.B, 3)}`;
-        modelValues.textContent = `A${id} = ${formatNumber(MODEL.A, 4)}  ·  B${id} = ${formatNumber(MODEL.B, 4)}`;
+        subtitle.innerHTML = String.raw`ACC 2024 · System ${id} schedule · <span class="math-inline">\(A=${formatNumber(MODEL.A, 3)},\ B=${formatNumber(MODEL.B, 3)}\)</span>`;
+        modelValues.innerHTML = String.raw`<span class="math-inline">\(A_{${id}}=${formatNumber(MODEL.A, 4)},\quad B_{${id}}=${formatNumber(MODEL.B, 4)}\)</span>`;
         selectedDynamics.textContent = String.raw`\(\dot{x}_{${id}}(t)=${aLatex}x_{${id}}(t)+${bLatex}u_{${id}}(t),\qquad x_{${id}}(0)=1\)`;
-        nominalStateLabel.innerHTML = `x${id}<sup>n</sup>(t) = <strong id="nominal-state-readout">1.000</strong>`;
-        perturbedStateLabel.innerHTML = `x${id}(t) = <strong id="perturbed-state-readout">1.000</strong>`;
+        nominalStateLabel.innerHTML = String.raw`<span class="math-inline">\(x_{${id}}^{n}(t)=\)</span><strong id="nominal-state-readout">1.000</strong>`;
+        perturbedStateLabel.innerHTML = String.raw`<span class="math-inline">\(x_{${id}}(t)=\)</span><strong id="perturbed-state-readout">1.000</strong>`;
       }
 
       function eventDeltaMaximum(index) {
@@ -1341,7 +1474,8 @@
           const wrapper = document.createElement("label");
           wrapper.className = "delta-control";
           const name = document.createElement("span");
-          name.innerHTML = `Δ<sub>${MODEL.id}</sub>[${index}]`;
+          name.className = "math-inline";
+          name.textContent = String.raw`\(\Delta_{${MODEL.id}}[${index}]\)`;
           const value = document.createElement("strong");
           value.textContent = `${MODEL.deltas[index].toFixed(3)} s / ${maximum.toFixed(3)} s`;
           const input = document.createElement("input");
@@ -1375,10 +1509,17 @@
         });
       }
 
-      function typesetFormulas() {
+      function clearMath(targets) {
+        if (window.MathJax && typeof window.MathJax.typesetClear === "function") {
+          window.MathJax.typesetClear(targets.filter(Boolean));
+        }
+      }
+
+      function typesetMath(targets) {
+        const validTargets = targets.filter(Boolean);
         const renderMath = () => {
           if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
-            window.MathJax.typesetPromise([formulaGrid]).catch(() => {});
+            window.MathJax.typesetPromise(validTargets).catch(() => {});
           }
         };
         if (window.MathJax && typeof window.MathJax.typesetPromise === "function") renderMath();
@@ -1386,7 +1527,12 @@
       }
 
       function rebuild(autoPlay = false, refreshDeltaControls = true, restoreTime = 0) {
+        rebuilding = true;
         pause();
+        const mathTargets = refreshDeltaControls
+          ? [demo]
+          : [svg, eventMessage, deltaReadout, gainReadout, controlReadout];
+        clearMath(mathTargets);
         buildModel();
         DATA = simulate();
         const stateValues = DATA.nominalState.concat(DATA.perturbedState);
@@ -1407,10 +1553,8 @@
           element("desc", { id: "svg-desc" }, "Black nominal update times and trajectory are known in advance. Red delayed updates and dynamically corrected inputs are revealed during execution.")
         );
         if (refreshDeltaControls) {
-          if (window.MathJax && typeof window.MathJax.typesetClear === "function") window.MathJax.typesetClear([formulaGrid]);
           updateText();
           renderDeltaControls();
-          typesetFormulas();
         }
         drawAxes();
         drawEvents();
@@ -1427,7 +1571,10 @@
         svg.appendChild(nominalDot);
         svg.appendChild(perturbedDot);
         lastEventIndex = 0;
+        lastNarrativeKey = "";
         render(restoreTime);
+        rebuilding = false;
+        typesetMath(mathTargets);
         if (autoPlay && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) play();
       }
 
@@ -1450,21 +1597,31 @@
         const id = MODEL.id;
         const event = latestEvent(time);
         const pending = nextPendingIndex(time);
+        let narrativeKey = `${id}|event|${event.index}`;
+        if (event.index === 0 && time < MODEL.nominalTimes[1]) narrativeKey = `${id}|initial`;
+        else if (pending < MODEL.actualTimes.length - 1 && time >= MODEL.nominalTimes[pending] && time < MODEL.actualTimes[pending]) narrativeKey = `${id}|waiting|${pending}`;
+
+        if (narrativeKey !== lastNarrativeKey) {
+          const dynamicMathTargets = [eventMessage, deltaReadout, gainReadout, controlReadout];
+          if (!rebuilding) clearMath(dynamicMathTargets);
         if (event.index === 0 && time < MODEL.nominalTimes[1]) {
-          eventMessage.innerHTML = "<strong>Known at t=0:</strong> the complete black CasADi MPC plan is fixed; future red timing perturbations are not yet known.";
+            eventMessage.innerHTML = String.raw`<strong>Known at <span class="math-inline">\(t=0\)</span>:</strong> the complete black CasADi MPC plan is fixed; future red timing perturbations are not yet known.`;
         } else if (pending < MODEL.actualTimes.length - 1 && time >= MODEL.nominalTimes[pending] && time < MODEL.actualTimes[pending]) {
-          eventMessage.innerHTML = `<strong>Waiting after γ̃${id}[${pending}]=${MODEL.nominalTimes[pending].toFixed(3)} s:</strong> the perturbed system keeps the previous input until γ${id}[${pending}] occurs.`;
+            eventMessage.innerHTML = String.raw`<strong>Waiting after <span class="math-inline">\(\tilde{\gamma}_{${id}}[${pending}]=${MODEL.nominalTimes[pending].toFixed(3)}\,\mathrm{s}\)</span>:</strong> the perturbed system keeps the previous input until <span class="math-inline">\(\gamma_{${id}}[${pending}]\)</span> occurs.`;
         } else if (event.index > 0) {
-          eventMessage.innerHTML = `<strong>Runtime update k=${event.index} at γ${id}[${event.index}]=${event.time.toFixed(3)} s:</strong> Δ${id}[${event.index}] is measured and (8)-(9) compute the red control.`;
+            eventMessage.innerHTML = String.raw`<strong>Runtime update <span class="math-inline">\(k=${event.index}\)</span> at <span class="math-inline">\(\gamma_{${id}}[${event.index}]=${event.time.toFixed(3)}\,\mathrm{s}\)</span>:</strong> <span class="math-inline">\(\Delta_{${id}}[${event.index}]\)</span> is measured and the displayed dynamic-gain correction computes the red control.`;
         }
         if (event.index > 0) {
-          deltaReadout.textContent = `Δ${id}[${event.index}] = ${event.delta.toFixed(3)} s`;
-          gainReadout.textContent = `K(Δ${id}[${event.index}]) = ${event.gain.toFixed(3)}`;
-          controlReadout.textContent = `u${id}[${event.index}] = ${event.input.toFixed(3)}`;
+            deltaReadout.textContent = String.raw`\(\Delta_{${id}}[${event.index}]=${event.delta.toFixed(3)}\,\mathrm{s}\)`;
+            gainReadout.textContent = String.raw`\(K(\Delta_{${id}}[${event.index}])=${event.gain.toFixed(3)}\)`;
+            controlReadout.textContent = String.raw`\(u_{${id}}[${event.index}]=${event.input.toFixed(3)}\)`;
         } else {
-          deltaReadout.textContent = `Δ${id}[k] = —`;
-          gainReadout.textContent = `K(Δ${id}[k]) = —`;
-          controlReadout.textContent = `u${id}[0] = ${MODEL.nominalInputs[0].toFixed(3)}`;
+            deltaReadout.textContent = String.raw`\(\Delta_{${id}}[k]=\mathrm{N/A}\)`;
+            gainReadout.textContent = String.raw`\(K(\Delta_{${id}}[k])=\mathrm{N/A}\)`;
+            controlReadout.textContent = String.raw`\(u_{${id}}[0]=${MODEL.nominalInputs[0].toFixed(3)}\)`;
+          }
+          lastNarrativeKey = narrativeKey;
+          if (!rebuilding) typesetMath(dynamicMathTargets);
         }
         if (event.index !== lastEventIndex) {
           const ring = actualRings[event.index];
@@ -1505,7 +1662,7 @@
         });
         updateDeltaAvailability(currentTime);
         slider.value = currentTime.toFixed(2);
-        timeReadout.textContent = `t = ${currentTime.toFixed(2)} s`;
+        timeValue.textContent = currentTime.toFixed(2);
         document.getElementById("nominal-state-readout").textContent = nominalValue.toFixed(3);
         document.getElementById("perturbed-state-readout").textContent = perturbedValue.toFixed(3);
         errorReadout.textContent = (perturbedValue - nominalValue).toFixed(3);
