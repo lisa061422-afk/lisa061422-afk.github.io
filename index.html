@@ -184,9 +184,8 @@
     <!-- ============================================================
          SELECTED PROJECTS
          To update:
-           - Edit each <article class="project-card"> below.
-           - Add or remove cards as needed.
-           - Optionally link a project page or paper from the title.
+           - Edit each <li> in a project list below.
+           - Add optional figures after a list when visual explanations are available.
     ============================================================ -->
     <section id="projects" class="section section-alt">
       <div class="container">
@@ -204,16 +203,16 @@
             shared resources safely and efficiently while satisfying resource,
             safety, timing, and system-dynamics constraints.
           </p>
-          <div class="subproject-grid">
-            <article class="subproject">
+          <ul class="project-list">
+            <li>
               <h4>Single-Zone Shared-Resource Scheduling and Control</h4>
               <p>
                 Contention-resolving MPC for coordinating robots or vehicles
                 through localized shared-resource areas, such as warehouse
                 merging zones or traffic intersections.
               </p>
-            </article>
-            <article class="subproject">
+            </li>
+            <li>
               <h4>Networked Multi-Zone Scheduling and Control</h4>
               <p>
                 Contention-resolving MPC for robots or vehicles moving through
@@ -221,8 +220,9 @@
                 networks, including centralized formulations and distributed
                 solution frameworks for larger resource graphs.
               </p>
-            </article>
-          </div>
+            </li>
+          </ul>
+          <!-- Optional project figures can be added below this list. -->
         </div>
 
         <!-- ===== Project group 2 ===== -->
@@ -235,32 +235,33 @@
             occupation sequence is not fixed in advance and must be decided
             jointly with scheduling and control.
           </p>
-          <div class="subproject-grid">
-            <article class="subproject">
+          <ul class="project-list">
+            <li>
               <h4>Human Attention Allocation in Multi-Human Multi-Robot (MHMR) Collaborative Systems</h4>
               <p>
                 Scheduling and allocation of limited human attention in MHMR
                 collaborative systems, where multiple robots may request
                 assistance from human operators.
               </p>
-            </article>
-            <article class="subproject">
+            </li>
+            <li>
               <h4>Robust Co-Design for Blimp Motion Control with Heterogeneous Computational Resources</h4>
               <p>
                 Scheduling and control co-design for multiple blimps sharing
                 limited computational resources with different working
                 efficiencies.
               </p>
-            </article>
-            <article class="subproject">
+            </li>
+            <li>
               <h4>Path Planning and Scheduling Co-Design for Multi-Merging Zones (Ongoing Work)</h4>
               <p>
                 Joint path planning and scheduling for controlled systems moving
                 through multiple merging zones, using learning-guided methods to
                 support path-selection and resource-access decisions.
               </p>
-            </article>
-          </div>
+            </li>
+          </ul>
+          <!-- Optional project figures can be added below this list. -->
         </div>
 
         <!-- ===== Project group 3 ===== -->
@@ -272,31 +273,34 @@
             update time. The focus is on maintaining stability and performance
             when timing perturbations affect piecewise-constant control signals.
           </p>
-          <div class="subproject-grid">
-            <a
-              class="subproject subproject-link"
-              href="timing-perturbation-demo-v2.html"
-              target="_blank"
-              rel="noopener"
-              aria-label="Open the interactive timing-perturbation demonstration"
-            >
-              <h4>Linear Time-Invariant Systems under Timing Perturbations</h4>
+          <ul class="project-list">
+            <li>
+              <h4>
+                Illustrative LTI Paper Example
+                <a
+                  class="project-demo-link"
+                  href="timing-perturbation-demo-v2.html"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Example <span aria-hidden="true">&nearr;</span>
+                </a>
+              </h4>
               <p>
-                Tube-based MPC with dynamic feedback gain for linear
-                time-invariant networked control systems affected by random
-                timing perturbations.
+                Tube-based MPC with dynamic feedback gain for an LTI system
+                affected by timing perturbations.
               </p>
-              <span class="subproject-cta">Open Interactive Demo &rarr;</span>
-            </a>
-            <article class="subproject">
-              <h4>Nonlinear Systems under Timing Perturbations (Ongoing Work)</h4>
+            </li>
+            <li>
+              <h4>Nonlinear Extension (Ongoing Work)</h4>
               <p>
                 Extension of the timing-perturbation framework to nonlinear
                 systems using Jacobian linearization and Koopman-based
                 approximation methods.
               </p>
-            </article>
-          </div>
+            </li>
+          </ul>
+          <!-- Optional project figures can be added below this list. -->
         </div>
       </div>
     </section>
