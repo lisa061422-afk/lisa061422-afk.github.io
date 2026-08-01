@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Timing-Perturbation Compensation - Formula-Driven Demo</title>
+  <title>Illustrative LTI Example under Timing Perturbations</title>
   <script>
     window.MathJax = {
       tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]], displayMath: [["\\[", "\\]"]] },
@@ -610,7 +610,7 @@
   <main class="demo">
     <header class="header">
       <div>
-        <h1>Timing-Perturbation Compensation</h1>
+        <h1>Illustrative LTI Example under Timing Perturbations</h1>
         <p id="subtitle" class="subtitle">ACC 2024 · four-system interactive study</p>
       </div>
     </header>
@@ -621,20 +621,20 @@
           <label class="scenario-field" for="system-select">
             Paper system
             <select id="system-select">
-              <option value="0">System 1</option>
-              <option value="1" selected>System 2</option>
+              <option value="0" selected>System 1</option>
+              <option value="1">System 2</option>
               <option value="2">System 3</option>
               <option value="3">System 4</option>
             </select>
           </label>
-          <span id="model-values" class="model-values math-inline">\(A_2=1.2,\quad B_2=1\)</span>
-          <span id="condition-note" class="condition-note">Calculated bound: <span class="math-inline">\(\Delta_2[k]&lt;0.3582\,\mathrm{s}\)</span></span>
+          <span id="model-values" class="model-values math-inline">\(A_1=1,\quad B_1=1\)</span>
+          <span id="condition-note" class="condition-note">Calculated bound: <span class="math-inline">\(\Delta_1[k]&lt;0.1387\,\mathrm{s}\)</span></span>
         </div>
 
         <section class="delta-panel" aria-label="Individual timing perturbations">
           <div class="delta-panel-heading">
             <strong>Choose each unknown timing perturbation before running</strong>
-            <span id="delta-range-note" class="math-inline">\(0\leq\Delta_2[k]&lt;\bar{\Delta}_2\)</span>
+            <span id="delta-range-note" class="math-inline">\(0\leq\Delta_1[k]&lt;\bar{\Delta}_1\)</span>
           </div>
           <div id="delta-controls" class="delta-controls"></div>
         </section>
@@ -656,7 +656,7 @@
             <span class="legend-item"><span class="legend-line red"></span>Perturbed / runtime</span>
           </div>
           <svg id="trajectory-svg" viewBox="0 0 980 720" role="img" aria-labelledby="svg-title svg-desc">
-            <title id="svg-title">Formula-driven timing perturbation compensation for System 2</title>
+            <title id="svg-title">Formula-driven timing perturbation compensation for System 1</title>
             <desc id="svg-desc">Nominal update times are known in advance. Actual delayed update times appear during execution, when the dynamic-gain formula computes the corrected piecewise-constant control.</desc>
           </svg>
         </div>
@@ -672,8 +672,8 @@
         <div class="readout" aria-live="polite">
           <strong id="time-readout"><span class="math-inline">\(t=\)</span><span id="time-value">0.00</span><span class="math-inline">\(\,\mathrm{s}\)</span></strong>
           <span class="readout-values">
-            <span id="nominal-state-label"><span class="math-inline">\(x_2^{n}(t)=\)</span><strong id="nominal-state-readout">1.000</strong></span>
-            <span id="perturbed-state-label"><span class="math-inline">\(x_2(t)=\)</span><strong id="perturbed-state-readout">1.000</strong></span>
+            <span id="nominal-state-label"><span class="math-inline">\(x_1^{n}(t)=\)</span><strong id="nominal-state-readout">1.000</strong></span>
+            <span id="perturbed-state-label"><span class="math-inline">\(x_1(t)=\)</span><strong id="perturbed-state-readout">1.000</strong></span>
             <span><span class="math-inline">\(e(t)=\)</span><strong id="error-readout">0.000</strong></span>
           </span>
         </div>
@@ -685,7 +685,7 @@
             <h2>System dynamics</h2>
             <p class="formula">\(\dot{x}_i(t)=A_i x_i(t)+B_i u_i(t)\)</p>
             <p class="formula">\(u_i(t)=u_i[k],\quad t\in[\gamma_i[k],\gamma_i[k+1])\)</p>
-            <p id="selected-dynamics" class="formula">\(\text{System 2:}\quad \dot{x}_2(t)=1.2x_2(t)+u_2(t),\quad x_2(0)=1\)</p>
+            <p id="selected-dynamics" class="formula">\(\text{System 1:}\quad \dot{x}_1(t)=x_1(t)+u_1(t),\quad x_1(0)=1\)</p>
           </div>
           <div class="formula-group">
             <h2>Dynamic-gain correction at the revealed update time</h2>
@@ -1420,6 +1420,7 @@
         const nominalInputs = solveNominalMpc(A, B, preset.times);
         const deltaKey = `${preset.id}|${A.toPrecision(12)}|${B.toPrecision(12)}`;
         const defaultDeltas = preset.deltas.map((value, index) => {
+          if (preset.id === 1) return 0;
           if (index === 0 || index >= nominalInputs.length) return 0;
           const intervalLimit = preset.times[index + 1] - preset.times[index];
           return Math.min(value, bound * 0.999, intervalLimit * 0.999);
