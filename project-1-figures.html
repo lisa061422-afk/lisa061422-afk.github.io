@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Figures | Renke Wang</title>
+  <meta
+    name="description"
+    content="Figures for Distributed Scheduling and Control Co-Design for Multi-Layer Shared Resources."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#featured-project-1" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="figure-gallery-page">
+    <div class="container">
+      <header class="figure-gallery-header">
+        <p class="eyebrow">Project 1</p>
+        <h1>Distributed Scheduling and Control Co-Design for Multi-Layer Shared Resources</h1>
+        <p>System architecture, resource-occupation paths, and local scheduling decisions.</p>
+      </header>
+
+      <div class="figure-gallery">
+        <figure class="project-figure">
+          <a href="Figure1and2.png" target="_blank" rel="noopener">
+            <img
+              src="Figure1and2.png"
+              alt="Multi-layer networked control system architecture and control-task timing"
+            >
+          </a>
+          <figcaption>
+            Fig. 1. Multi-layer NCS architecture and control-task timing across
+            shared sensing, computation, and actuation resources.
+          </figcaption>
+        </figure>
+
+        <figure class="project-figure">
+          <a href="Graph.png" target="_blank" rel="noopener">
+            <img
+              src="Graph.png"
+              alt="Resource-occupation path and task-level timing variables"
+            >
+          </a>
+          <figcaption>
+            Fig. 2. Resource-occupation paths and shared timing variables used
+            to maintain consistency across distributed resource schedulers.
+          </figcaption>
+        </figure>
+
+        <figure class="project-figure">
+          <a href="lollipop_tree.png" target="_blank" rel="noopener">
+            <img
+              src="lollipop_tree.png"
+              alt="Decision-tree search and path-induced resource allocation"
+            >
+          </a>
+          <figcaption>
+            Fig. 3. Local contention-resolving MPC using decision-tree search
+            and path-induced resource allocation.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
