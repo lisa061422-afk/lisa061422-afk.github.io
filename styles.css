@@ -532,6 +532,18 @@ p { margin: 0 0 1em; }
 .subproject-layout--standard-media .subproject-media {
   max-width: 240px;
 }
+.project-list .subproject-layout--media-large {
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+.subproject-layout--media-large .subproject-media {
+  max-width: 280px;
+}
+.project-list .subproject-layout--media-small {
+  grid-template-columns: 200px minmax(0, 1fr);
+}
+.subproject-layout--media-small .subproject-media {
+  max-width: 200px;
+}
 .subproject-media {
   width: 100%;
   max-width: 190px;
