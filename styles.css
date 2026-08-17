@@ -969,19 +969,6 @@ p { margin: 0 0 1em; }
   }
 }
 
-/* ---------- CV ---------- */
-.cv-action {
-  display: flex;
-  align-items: baseline;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.cv-note {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
 /* ---------- Contact ---------- */
 .contact-list {
   list-style: none;
@@ -1179,7 +1166,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- Print ---------- */
 @media print {
-  .site-header, .nav-toggle, .hero-actions, .cv-action { display: none; }
+  .site-header, .nav-toggle, .hero-actions { display: none; }
   .section, .hero { padding: 1.5rem 0; }
   body { color: #000; background: #fff; }
 }
