@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECE 699 Unicycle Simulation | Renke Wang</title>
+  <meta
+    name="description"
+    content="MATLAB implementation, visualization, and analysis for the unicycle simulation portion of a Fall 2022 ECE 699 course project."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260824-ece699-1" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#ece699-unicycle-project" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="unicycle-detail-page">
+    <div class="container">
+      <header class="unicycle-detail-header">
+        <p class="eyebrow">ECE 699 Course Project &middot; Fall 2022</p>
+        <h1>Unicycle Robot Trajectory-Tracking Simulation</h1>
+        <p class="unicycle-detail-lead">
+          MATLAB implementation and visualization of a course-provided
+          unicycle-model feedback controller, evaluated across four distinct
+          initial-position and heading cases.
+        </p>
+        <div class="unicycle-detail-actions">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/lisa061422-afk/ece699-unicycle-simulation"
+            target="_blank"
+            rel="noopener"
+          >GitHub Repository</a>
+        </div>
+      </header>
+
+      <section class="unicycle-scope-grid" aria-label="Project scope and contribution">
+        <div class="unicycle-scope-card">
+          <h2>My Contribution</h2>
+          <ul>
+            <li>Implemented the nonlinear simulation and polar error dynamics in MATLAB.</li>
+            <li>Reproduced four initial-position and heading cases with consistent radian-based dynamics.</li>
+            <li>Generated separate trajectory, convergence, and MATLAB-rendered animation outputs for each case.</li>
+            <li>Checked closed-loop eigenvalues and terminal simulation errors numerically.</li>
+          </ul>
+        </div>
+        <div class="unicycle-scope-card unicycle-attribution-card">
+          <h2>Course and Team Context</h2>
+          <p>
+            The unicycle/differential-drive model and feedback-control theory
+            were provided through ECE 699 course materials and the instructor.
+            They are not presented here as original theoretical contributions.
+          </p>
+          <p>
+            The broader team project also included PyBullet modeling and a
+            physical robot implementation. This page presents only my MATLAB
+            simulation, visualization, and analysis work.
+          </p>
+        </div>
+      </section>
+
+      <section class="unicycle-results-summary" aria-labelledby="results-summary-heading">
+        <div>
+          <p class="eyebrow">Numerical Validation</p>
+          <h2 id="results-summary-heading">Convergence across all four cases</h2>
+        </div>
+        <dl>
+          <div>
+            <dt>Worst terminal position error, &rho;</dt>
+            <dd>0.000413</dd>
+          </div>
+          <div>
+            <dt>Worst terminal &alpha; error</dt>
+            <dd>0.1406&deg;</dd>
+          </div>
+          <div>
+            <dt>Worst terminal &phi; error</dt>
+            <dd>0.3218&deg;</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="unicycle-cases" aria-labelledby="simulation-cases-heading">
+        <header class="unicycle-cases-header">
+          <p class="eyebrow">MATLAB Results</p>
+          <h2 id="simulation-cases-heading">Four Simulation Cases</h2>
+          <p>
+            Each case is shown on its own row so that its animation and static
+            trajectory-and-error result remain easy to inspect independently.
+          </p>
+        </header>
+
+        <article class="unicycle-case">
+          <header class="unicycle-case-header">
+            <h3>Case 1</h3>
+            <p>&rho;<sub>0</sub> = 30, &alpha;<sub>0</sub> = +45&deg;, &phi;<sub>0</sub> = +30&deg;, &theta;<sub>0</sub> = 15&deg;</p>
+          </header>
+          <div class="unicycle-case-media">
+            <figure>
+              <video src="ece699-case-1-animation.mp4" controls loop muted playsinline preload="metadata"></video>
+              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 1 initial pose.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="ece699-case-1-result.png" target="_blank" rel="noopener">
+                <img src="ece699-case-1-result.png" alt="Case 1 trajectory and error convergence plots" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Static simulation result</strong><span>Trajectory and polar-error convergence.</span></figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="unicycle-case">
+          <header class="unicycle-case-header">
+            <h3>Case 2</h3>
+            <p>&rho;<sub>0</sub> = 30, &alpha;<sub>0</sub> = &minus;45&deg;, &phi;<sub>0</sub> = +30&deg;, &theta;<sub>0</sub> = 105&deg;</p>
+          </header>
+          <div class="unicycle-case-media">
+            <figure>
+              <video src="ece699-case-2-animation.mp4" controls loop muted playsinline preload="metadata"></video>
+              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 2 initial pose.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="ece699-case-2-result.png" target="_blank" rel="noopener">
+                <img src="ece699-case-2-result.png" alt="Case 2 trajectory and error convergence plots" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Static simulation result</strong><span>Trajectory and polar-error convergence.</span></figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="unicycle-case">
+          <header class="unicycle-case-header">
+            <h3>Case 3</h3>
+            <p>&rho;<sub>0</sub> = 30, &alpha;<sub>0</sub> = &minus;45&deg;, &phi;<sub>0</sub> = &minus;30&deg;, &theta;<sub>0</sub> = 165&deg;</p>
+          </header>
+          <div class="unicycle-case-media">
+            <figure>
+              <video src="ece699-case-3-animation.mp4" controls loop muted playsinline preload="metadata"></video>
+              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 3 initial pose.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="ece699-case-3-result.png" target="_blank" rel="noopener">
+                <img src="ece699-case-3-result.png" alt="Case 3 trajectory and error convergence plots" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Static simulation result</strong><span>Trajectory and polar-error convergence.</span></figcaption>
+            </figure>
+          </div>
+        </article>
+
+        <article class="unicycle-case">
+          <header class="unicycle-case-header">
+            <h3>Case 4</h3>
+            <p>&rho;<sub>0</sub> = 30, &alpha;<sub>0</sub> = +45&deg;, &phi;<sub>0</sub> = &minus;30&deg;, &theta;<sub>0</sub> = 75&deg;</p>
+          </header>
+          <div class="unicycle-case-media">
+            <figure>
+              <video src="ece699-case-4-animation.mp4" controls loop muted playsinline preload="metadata"></video>
+              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 4 initial pose.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="ece699-case-4-result.png" target="_blank" rel="noopener">
+                <img src="ece699-case-4-result.png" alt="Case 4 trajectory and error convergence plots" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Static simulation result</strong><span>Trajectory and polar-error convergence.</span></figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
