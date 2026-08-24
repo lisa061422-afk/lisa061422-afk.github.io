@@ -1032,6 +1032,9 @@ p { margin: 0 0 1em; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 1.25rem;
 }
+.project-overview-page .project-principle-demo-grid {
+  margin-top: 1.25rem;
+}
 
 @media (max-width: 760px) {
   .project-overview-page {
