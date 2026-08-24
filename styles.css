@@ -216,11 +216,11 @@ p { margin: 0 0 1em; }
 .hero-photo { display: flex; justify-content: center; }
 
 .photo-frame {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   aspect-ratio: 1 / 1;
-  flex: 0 0 180px;
-  padding: 4px;
+  flex: 0 0 150px;
+  padding: 3px;
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid var(--color-border);
@@ -1123,10 +1123,10 @@ p { margin: 0 0 1em; }
   }
   .hero-photo { order: -1; }
   .photo-frame {
-    width: 120px;
-    height: 120px;
-    flex-basis: 120px;
-    padding: 3px;
+    width: 100px;
+    height: 100px;
+    flex-basis: 100px;
+    padding: 2px;
   }
   .photo-placeholder { font-size: 2.6rem; }
 
