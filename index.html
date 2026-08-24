@@ -10,17 +10,17 @@
   />
   <meta name="author" content="Renke Wang" />
 
-  <!-- Fonts: Inter (sans) + Source Serif 4 (serif accent for headings) -->
+  <!-- Lato: restrained humanist sans-serif, used consistently across the site. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="styles.css?v=20260824-ece699-1" />
+  <link rel="stylesheet" href="styles.css?v=20260824-20" />
 </head>
-<body>
+<body class="home-page">
   <!-- ============================================================
        SITE HEADER / NAVIGATION
   ============================================================ -->
@@ -201,56 +201,26 @@
           <h2>Selected Projects</h2>
         </header>
 
+        <p class="projects-pathway">
+          <span>Robotics &amp; Planning</span>
+          <span aria-hidden="true">&rarr;</span>
+          <span>Optimization &amp; Scheduling</span>
+          <span aria-hidden="true">&rarr;</span>
+          <span>Networked Control &amp; Co-Design</span>
+          <span aria-hidden="true">&rarr;</span>
+          <span>Control &amp; Robustness</span>
+        </p>
+
         <!-- ===== Project group 1 ===== -->
         <div class="project-group">
-          <h3>Scheduling and Control Co-Design under Predetermined Resource-Occupation Orders</h3>
+          <h3>1. Robotics Planning &amp; Multi-Agent Coordination</h3>
           <p class="group-lead">
-            This research theme investigates the joint design of scheduling
-            decisions and control actions when resource-occupation orders are given.
+            Robotics-focused projects in route planning, online scheduling,
+            multi-agent coordination, and human&ndash;robot interaction.
           </p>
           <ul class="project-list">
-            <li class="project-showcase" id="featured-project-1">
-              <p class="project-number-label">Project 1</p>
-              <div class="project-showcase-layout">
-                <figure class="project-showcase-media">
-                  <div class="project-showcase-thumbnail">
-                    <img
-                      src="manufacturing_fig.png"
-                      alt="Networked manufacturing system with shared communication, computation, sensing, and actuation resources"
-                      loading="lazy"
-                      decoding="async"
-                    >
-                  </div>
-                  <figcaption>
-                    Shared communication, computation, sensing, and actuation
-                    resources in a networked manufacturing system.
-                  </figcaption>
-                </figure>
-
-                <div class="project-showcase-content">
-                  <h4>Distributed Scheduling and Control Co-Design for Multi-Layer Shared Resources</h4>
-                  <p class="project-summary">
-                    This project studies networked control systems in which multiple
-                    control tasks share sensing, computation, and actuation resources.
-                    I developed a distributed scheduling and control co-design framework
-                    that combines local contention-resolving MPC with consensus ADMM to
-                    coordinate resource-level decisions and maintain cross-layer timing
-                    consistency.
-                  </p>
-                  <p class="project-keywords">
-                    Networked Control Systems <span aria-hidden="true">&middot;</span>
-                    Distributed Optimization <span aria-hidden="true">&middot;</span>
-                    MPC <span aria-hidden="true">&middot;</span> C-ADMM
-                  </p>
-                  <p class="project-status">Manuscript under review at IEEE TCNS</p>
-                  <p class="project-links">
-                    <a href="project-1-figures.html" target="_blank" rel="noopener">Figures <span aria-hidden="true">&nearr;</span></a>
-                  </p>
-                </div>
-              </div>
-            </li>
             <li class="project-showcase" id="project-2">
-              <p class="project-number-label">Project 2</p>
+              <p class="project-number-label">Project 1</p>
               <div class="project-showcase-layout">
                 <figure class="project-showcase-media">
                   <div class="project-showcase-thumbnail">
@@ -268,76 +238,57 @@
                 </figure>
 
                 <div class="project-showcase-content">
-                  <h4>Multi-Agent Scheduling in Warehouse and Traffic Networks</h4>
+                  <h4>Multi-Agent Coordination in Warehouse and Multi-Intersection Traffic Networks</h4>
                   <p class="project-summary">
-                    This project develops online scheduling methods for coordinating
-                    robots and vehicles that compete for spatial resources at warehouse
-                    merging zones and traffic intersections. The framework covers both
-                    individual conflict regions and networks of coupled regions with
-                    route-dependent timing constraints.
+                    This project develops online planning and scheduling methods for
+                    coordinating mobile robots and automated vehicles that compete for
+                    spatial resources at warehouse merging zones and traffic intersections.
+                    It covers both individual conflict regions and networks of coupled
+                    regions with route-dependent timing constraints.
                   </p>
                   <p class="project-keywords">
+                    Multi-Agent Coordination <span aria-hidden="true">&middot;</span>
                     Real-Time Scheduling <span aria-hidden="true">&middot;</span>
                     Decision-Tree Search <span aria-hidden="true">&middot;</span>
-                    Contention-Resolving MPC <span aria-hidden="true">&middot;</span>
-                    Distributed Optimization
+                    Warehouse Robotics <span aria-hidden="true">&middot;</span>
+                    Traffic Networks
                   </p>
                   <p class="project-links">
                     <a href="project-2-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
+                    <a href="project-2-poster.png" target="_blank" rel="noopener">Poster <span aria-hidden="true">&nearr;</span></a>
                     <a href="https://youtu.be/YsEci0cIApg?si=ojlgiNI9mZg2UuwD" target="_blank" rel="noopener">YouTube <span aria-hidden="true">&nearr;</span></a>
-                  </p>
-                </div>
-              </div>
-
-            </li>
-          </ul>
-          <!-- Optional project figures can be added below this list. -->
-        </div>
-
-        <!-- ===== Project group 2 ===== -->
-        <div class="project-group">
-          <h3>Joint Resource Allocation, Scheduling, and Control Co-Design</h3>
-          <p class="group-lead">
-            This project studies scheduling and control problems where each
-            system&rsquo;s recurring tasks may select among multiple available
-            resources. Unlike the determined-order setting, the resource
-            occupation sequence is not fixed in advance and must be decided
-            jointly with scheduling and control.
-          </p>
-          <ul class="project-list">
-            <li class="subproject-illustrated numbered-subproject">
-              <p class="project-number-label">Project 1</p>
-              <div class="subproject-layout">
-                <figure class="subproject-media">
-                  <img
-                    src="resue_picture.png"
-                    alt="Multi-human multi-robot rescue scenario with robots requesting assistance from different human operators"
-                  >
-                </figure>
-                <div class="subproject-copy">
-                  <h4>Human Attention Allocation in Multi-Human Multi-Robot Systems</h4>
-                  <p>
-                    Joint allocation and scheduling of limited human attention
-                    in multi-human multi-robot systems, where robots may request
-                    assistance from different human operators.
-                  </p>
-                  <p class="project-keywords">
-                    Contention-Resolving MPC <span aria-hidden="true">&middot;</span>
-                    Decision-Tree Search <span aria-hidden="true">&middot;</span>
-                    Merging Rule <span aria-hidden="true">&middot;</span>
-                    Optimal Resource Allocation <span aria-hidden="true">&middot;</span>
-                    Real-Time Scheduling <span aria-hidden="true">&middot;</span>
-                    Multi-Agent Systems <span aria-hidden="true">&middot;</span>
-                    Human&ndash;Robot Collaboration
-                  </p>
-                  <p class="project-links">
-                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10666642" target="_blank" rel="noopener">Paper <span aria-hidden="true">&nearr;</span></a>
                   </p>
                 </div>
               </div>
             </li>
             <li class="subproject-illustrated numbered-subproject">
               <p class="project-number-label">Project 2</p>
+              <div class="subproject-layout">
+                <figure class="subproject-media">
+                  <img
+                    src="path_planning.png"
+                    alt="Alternative vehicle paths through coupled merging zones with different resource-occupation sequences"
+                  >
+                </figure>
+                <div class="subproject-copy">
+                  <h4>Path Selection and Scheduling Co-Design for Multi-Merging-Zone Systems</h4>
+                  <p>
+                    Joint path selection and resource-access scheduling for agents
+                    traversing multiple merging zones, where each selected path
+                    induces a different resource-occupation sequence. The project
+                    investigates exact, search-based, and learning-guided methods.
+                  </p>
+                  <p class="project-keywords">
+                    Path Planning <span aria-hidden="true">&middot;</span>
+                    Search-Based Methods <span aria-hidden="true">&middot;</span>
+                    Learning-Guided Methods <span aria-hidden="true">&middot;</span>
+                    Resource-Access Scheduling
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="subproject-illustrated numbered-subproject">
+              <p class="project-number-label">Project 3</p>
               <div class="subproject-layout">
                 <figure class="subproject-media">
                   <img
@@ -367,8 +318,125 @@
                 </div>
               </div>
             </li>
+            <li class="subproject-illustrated numbered-subproject supporting-project" id="ece699-unicycle-project">
+              <p class="project-number-label">Supporting Project &middot; ECE 699 &middot; Fall 2022</p>
+              <div class="subproject-layout">
+                <figure class="subproject-media">
+                  <img
+                    src="robotic_1.png"
+                    alt="Mobile robot following a curved path from its starting pose to the goal"
+                  >
+                </figure>
+                <div class="subproject-copy">
+                  <h4>Unicycle Robot Trajectory-Tracking Simulation</h4>
+                  <p>
+                    Unicycle trajectory-tracking project combining error-dynamics
+                    analysis, closed-loop simulation, and numerical evaluation
+                    across multiple initial conditions, including a large-angle test.
+                  </p>
+                  <p class="project-keywords">
+                    Unicycle Model <span aria-hidden="true">&middot;</span>
+                    Trajectory Tracking <span aria-hidden="true">&middot;</span>
+                    Numerical Evaluation
+                  </p>
+                  <p class="project-links">
+                    <a href="ece699-unicycle-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
+                    <a href="https://github.com/lisa061422-afk/ece699-unicycle-simulation" target="_blank" rel="noopener">GitHub Repository <span aria-hidden="true">&nearr;</span></a>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ===== Project group 2 ===== -->
+        <div class="project-group">
+          <h3>2. Scheduling &amp; Resource Allocation</h3>
+          <p class="group-lead">
+            Optimization and scheduling of limited shared or heterogeneous
+            resources, emphasizing allocation and sequencing decisions.
+          </p>
+          <ul class="project-list">
             <li class="subproject-illustrated numbered-subproject">
-              <p class="project-number-label">Project 3</p>
+              <p class="project-number-label">Project 1</p>
+              <div class="subproject-layout">
+                <figure class="subproject-media">
+                  <img
+                    src="resue_picture.png"
+                    alt="Multi-human multi-robot rescue scenario with robots requesting assistance from different human operators"
+                  >
+                </figure>
+                <div class="subproject-copy">
+                  <h4>Human Attention Allocation and Scheduling in Multi-Robot Systems</h4>
+                  <p>
+                    Allocation and real-time scheduling of limited human attention
+                    across multiple robots, where assistance requests compete for
+                    heterogeneous human resources with different availability.
+                  </p>
+                  <p class="project-keywords">
+                    Optimal Resource Allocation <span aria-hidden="true">&middot;</span>
+                    Real-Time Scheduling <span aria-hidden="true">&middot;</span>
+                    Heterogeneous Resources <span aria-hidden="true">&middot;</span>
+                    Decision-Tree Search
+                  </p>
+                  <p class="project-links">
+                    <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10666642" target="_blank" rel="noopener">Paper <span aria-hidden="true">&nearr;</span></a>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ===== Project group 3 ===== -->
+        <div class="project-group">
+          <h3>3. Scheduling &amp; Control Co-Design / Networked Control</h3>
+          <p class="group-lead">
+            Joint scheduling, resource allocation, and feedback control for
+            networked systems with shared sensing, computation, and actuation resources.
+          </p>
+          <ul class="project-list">
+            <li class="project-showcase" id="featured-project-1">
+              <p class="project-number-label">Project 1</p>
+              <div class="project-showcase-layout">
+                <figure class="project-showcase-media">
+                  <div class="project-showcase-thumbnail">
+                    <img
+                      src="manufacturing_fig.png"
+                      alt="Networked manufacturing system with shared communication, computation, sensing, and actuation resources"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </div>
+                  <figcaption>
+                    Shared communication, computation, sensing, and actuation
+                    resources in a networked manufacturing system.
+                  </figcaption>
+                </figure>
+
+                <div class="project-showcase-content">
+                  <h4>Distributed Scheduling and Control Co-Design for Multi-Layer Shared Resources</h4>
+                  <p class="project-summary">
+                    This project studies networked control systems in which multiple
+                    control tasks share sensing, computation, and actuation resources.
+                    A distributed co-design framework combines local contention-resolving
+                    MPC with consensus ADMM to coordinate resource-level decisions and
+                    maintain cross-layer timing consistency.
+                  </p>
+                  <p class="project-keywords">
+                    Networked Control Systems <span aria-hidden="true">&middot;</span>
+                    Distributed Optimization <span aria-hidden="true">&middot;</span>
+                    MPC <span aria-hidden="true">&middot;</span> C-ADMM
+                  </p>
+                  <p class="project-status">Manuscript under review at IEEE TCNS</p>
+                  <p class="project-links">
+                    <a href="project-1-figures.html" target="_blank" rel="noopener">Figures <span aria-hidden="true">&nearr;</span></a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="subproject-illustrated numbered-subproject">
+              <p class="project-number-label">Project 2</p>
               <div class="subproject-layout subproject-layout--standard-media">
                 <figure class="subproject-media">
                   <img
@@ -384,49 +452,24 @@
                     processors with heterogeneous execution efficiencies.
                   </p>
                   <p class="project-keywords">
-                    Heterogeneous Resources
+                    Scheduling-Control Co-Design <span aria-hidden="true">&middot;</span>
+                    Heterogeneous Resources <span aria-hidden="true">&middot;</span>
+                    Motion Control <span aria-hidden="true">&middot;</span>
+                    Robust Control
                   </p>
                   <span class="subproject-status project-status">Manuscript under review at IJRNC</span>
                 </div>
               </div>
             </li>
-            <li class="subproject-illustrated numbered-subproject">
-              <p class="project-number-label">Project 4</p>
-              <div class="subproject-layout">
-                <figure class="subproject-media">
-                  <img
-                    src="path_planning.png"
-                    alt="Alternative vehicle paths through coupled merging zones with different resource-occupation sequences"
-                  >
-                </figure>
-                <div class="subproject-copy">
-                  <h4>Path Selection and Scheduling Co-Design for Multi-Merging-Zone Systems</h4>
-                  <p>
-                    Joint path selection and resource-access scheduling for
-                    controlled agents traversing multiple merging zones, where each
-                    selected path induces a different resource-occupation sequence.
-                    This project investigates exact, search-based, and
-                    learning-guided methods for these coupled decisions.
-                  </p>
-                  <p class="project-keywords">
-                    Search-Based Methods <span aria-hidden="true">&middot;</span>
-                    Learning-Guided Methods
-                  </p>
-                </div>
-              </div>
-            </li>
           </ul>
-          <!-- Optional project figures can be added below this list. -->
         </div>
 
-        <!-- ===== Project group 3 ===== -->
+        <!-- ===== Project group 4 ===== -->
         <div class="project-group">
-          <h3>Robust Control Design under Timing Perturbations</h3>
+          <h3>4. Robust &amp; Nonlinear Control</h3>
           <p class="group-lead">
-            This project studies control systems where the actual
-            control-update time may deviate from the estimated or scheduled
-            update time. The focus is on maintaining stability and performance
-            when timing perturbations affect piecewise-constant control signals.
+            Robust MPC and nonlinear modeling for control systems affected by
+            uncertain update timing, model mismatch, and nonlinear dynamics.
           </p>
           <ul class="project-list">
             <li id="timing-perturbation-lti" class="subproject-illustrated numbered-subproject">
@@ -478,58 +521,6 @@
                     Nonlinear Control <span aria-hidden="true">&middot;</span>
                     Koopman Methods <span aria-hidden="true">&middot;</span>
                     Timing Perturbations
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <!-- Optional project figures can be added below this list. -->
-        </div>
-
-        <!-- ===== Project group 4 ===== -->
-        <div class="project-group" id="course-projects">
-          <h3>Course Project</h3>
-          <p class="group-lead">
-            Selected coursework demonstrating hands-on modeling, simulation,
-            and technical visualization.
-          </p>
-          <ul class="project-list">
-            <li class="project-showcase" id="ece699-unicycle-project">
-              <p class="project-number-label">ECE 699 &middot; Fall 2022</p>
-              <div class="project-showcase-layout">
-                <figure class="project-showcase-media">
-                  <div class="project-showcase-thumbnail">
-                    <img
-                      src="ece699-case-1-result.png"
-                      alt="MATLAB simulation result for a unicycle robot trajectory-tracking case"
-                      loading="lazy"
-                      decoding="async"
-                    >
-                  </div>
-                  <figcaption>
-                    One of four separately evaluated unicycle trajectory-tracking cases.
-                  </figcaption>
-                </figure>
-
-                <div class="project-showcase-content">
-                  <h4>Unicycle Robot Trajectory-Tracking Simulation</h4>
-                  <p class="project-summary">
-                    Implemented MATLAB simulations for trajectory tracking of a
-                    unicycle robot under four initial-position and heading cases.
-                    My contribution focused on simulation implementation,
-                    visualization, numerical validation, and result analysis;
-                    the model and feedback-control formulation followed methods
-                    provided through the course.
-                  </p>
-                  <p class="project-keywords">
-                    MATLAB <span aria-hidden="true">&middot;</span>
-                    Unicycle Model <span aria-hidden="true">&middot;</span>
-                    Trajectory Tracking <span aria-hidden="true">&middot;</span>
-                    Nonlinear Simulation
-                  </p>
-                  <p class="project-links">
-                    <a href="ece699-unicycle-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
-                    <a href="https://github.com/lisa061422-afk/ece699-unicycle-simulation" target="_blank" rel="noopener">GitHub Repository <span aria-hidden="true">&nearr;</span></a>
                   </p>
                 </div>
               </div>

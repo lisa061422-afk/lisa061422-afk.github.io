@@ -11,10 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260804-1" />
+  <link rel="stylesheet" href="styles.css?v=20260824-17" />
 </head>
 <body>
   <header class="site-header">
@@ -24,49 +24,40 @@
     </div>
   </header>
 
-  <main class="project-detail-page poster-detail-page">
-    <div class="poster-page-container">
-      <header class="poster-page-header">
-        <div>
-          <p class="eyebrow">Project 2</p>
-          <h1>Multi-Agent Scheduling in Warehouse and Traffic Networks</h1>
-        </div>
-        <a
-          class="poster-full-link"
-          href="project-2-poster.png"
-          target="_blank"
-          rel="noopener"
-        >
-          Open full-size poster <span aria-hidden="true">&nearr;</span>
-        </a>
+  <main class="project-detail-page project-overview-page">
+    <div class="container project-overview-container">
+      <header class="project-overview-header">
+        <p class="eyebrow">Research Project</p>
+        <h1>Multi-Agent Scheduling in Warehouse and Traffic Networks</h1>
+        <p class="project-overview-lead">
+          A distributed scheduling and control framework for networked systems whose
+          agents must traverse multiple interconnected shared resources safely and on time.
+        </p>
+        <p class="project-overview-topics">
+          Distributed Optimization <span aria-hidden="true">&middot;</span>
+          Model Predictive Control <span aria-hidden="true">&middot;</span>
+          Decision-Tree Search <span aria-hidden="true">&middot;</span>
+          Multi-Agent Coordination
+        </p>
       </header>
 
-      <figure class="poster-viewer">
-        <a
-          href="project-2-poster.png"
-          target="_blank"
-          rel="noopener"
-          aria-label="Open the project poster at full size"
-        >
-          <img
-            src="project-2-poster.png"
-            width="2880"
-            height="2160"
-            alt="Research poster titled Distributed Scheduling for Multi-Intersection Systems, presenting the motivation, problem formulation, distributed scheduling framework, simulation results, and interactive scheduling modes"
-          >
-        </a>
-        <figcaption>Click the poster to open it at full size.</figcaption>
-      </figure>
-
-      <section class="project-visualizations" id="research-visualizations" aria-labelledby="visualizations-heading">
-        <h2 class="demo-heading" id="visualizations-heading">Project Visualizations</h2>
+      <section class="project-overview-section project-visualizations" id="research-visualizations" aria-labelledby="visualizations-heading">
+        <div class="project-visualization-heading">
+          <h2 id="visualizations-heading">Project Visualizations</h2>
+          <p>
+            These animations show the contention-resolution principle and its
+            application to warehouse and traffic scheduling scenarios.
+          </p>
+        </div>
         <div class="demo-grid">
           <figure class="demo">
             <video src="demo_principle.mp4" controls loop muted playsinline preload="metadata"></video>
             <figcaption>
-              <strong>Scheduling Principle Animation</strong>
+              <strong>Contention-resolution and scheduling animation</strong>
             </figcaption>
           </figure>
+        </div>
+        <div class="demo-grid project-application-demo-grid">
           <figure class="demo">
             <video src="demo_warehouse.mp4" controls loop muted playsinline preload="metadata"></video>
             <figcaption>
@@ -81,6 +72,162 @@
           </figure>
         </div>
       </section>
+
+      <section class="project-overview-section" aria-labelledby="overview-heading">
+        <div class="project-overview-copy">
+          <h2 id="overview-heading">Overview</h2>
+          <p>
+            Many cyber-physical systems execute recurring tasks that require a sequence
+            of shared resources. When several agents request the same resource, the
+            resulting contention changes task timing and can directly affect control
+            performance. A centralized scheduling and control formulation can represent
+            these interactions, but it quickly becomes difficult to solve as the number
+            of agents and interconnected resources grows.
+          </p>
+          <p>
+            This project separates the large co-design problem into coordinated local
+            problems. Each resource bundle resolves its own conflicts, while neighboring
+            bundles exchange timing information so that an agent's schedule remains
+            consistent along its complete route. The broader goal is to retain explicit
+            safety and timing constraints without relying on one centralized scheduler.
+          </p>
+        </div>
+        <div class="project-detail-figures">
+          <figure class="project-overview-figure">
+            <img
+              src="project-2-traffic-network-detail.png"
+              alt="Detailed traffic network model showing vehicle routes, interconnected intersections, and five local conflict regions"
+            >
+            <figcaption>
+              <strong>Traffic-network model.</strong> Vehicles follow route-specific
+              sequences of resource bundles; each intersection contains local conflict
+              regions that must be scheduled safely.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="project-overview-section" aria-labelledby="approach-heading">
+        <h2 id="approach-heading">Two-Level Scheduling Architecture</h2>
+        <p class="project-architecture-lead">
+          Macro scheduling aligns every robot's arrival and exit times across the graph.
+          Micro scheduling resolves local conflicts and prevents vehicle collisions.
+        </p>
+        <div class="project-architecture-flow">
+          <figure class="project-architecture-card">
+            <div class="project-architecture-card-header">
+              <p class="project-architecture-level">Macro scheduling</p>
+              <h3>Arrival/Exit-Time Consensus</h3>
+            </div>
+            <img
+              src="project-2-network-graph.png"
+              alt="Graph of connected resource-bundle agents and a route-level task sequence"
+            >
+            <figcaption>
+              <strong>Goal:</strong> achieve timing consensus on every robot's arrival
+              and exit times at each resource bundle along its route.
+            </figcaption>
+          </figure>
+
+          <div class="project-architecture-connector" aria-label="Information exchanged between the network and local scheduling levels">
+            <div class="project-architecture-signal">
+              <span>Consensus arrival<br>and exit times</span>
+              <span class="project-architecture-arrow project-architecture-arrow-forward" aria-hidden="true"></span>
+            </div>
+            <div class="project-architecture-signal">
+              <span class="project-architecture-arrow project-architecture-arrow-return" aria-hidden="true"></span>
+              <span>Collision-free schedule<br>and feasible timing</span>
+            </div>
+          </div>
+
+          <figure class="project-architecture-card">
+            <div class="project-architecture-card-header">
+              <p class="project-architecture-level">Micro scheduling</p>
+              <h3>Collision-Free Scheduling</h3>
+            </div>
+            <img
+              src="project-2-local-decision-tree.png"
+              alt="Local decision tree whose branches encode contention-resolution choices and produce a resource-space schedule"
+            >
+            <figcaption>
+              <strong>Goal:</strong> compute a local passing order so different vehicles
+              never occupy the same conflict region at the same time.
+            </figcaption>
+          </figure>
+        </div>
+        <ol class="project-approach-list">
+          <li>
+            <h3>Coordinate across resource bundles</h3>
+            <p>
+              Consensus ADMM decomposes the network-level problem and coordinates task
+              start and finish times between connected resource bundles.
+            </p>
+          </li>
+          <li>
+            <h3>Resolve local contention</h3>
+            <p>
+              A contention-resolving MPC module uses decision-tree search to generate
+              feasible local schedules instead of solving one large mixed-integer model.
+            </p>
+          </li>
+          <li>
+            <h3>Preserve route-wide timing consistency</h3>
+            <p>
+              Path-specific contention constraints and consensus penalties align local
+              schedules while maintaining mutual exclusion across shared resources.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="project-overview-section project-result-section" aria-labelledby="result-heading">
+        <div class="project-result-copy">
+          <h2 id="result-heading">Example Simulation</h2>
+          <p>
+            In one simulation example with ten vehicles following heterogeneous
+            routes through a 2 &times; 2 traffic network, the distributed method reduced
+            total scheduling delay from 11.20 s under a first-come-first-served policy to
+            3.01 s, a reduction of about 73%. The method converged in 68 coordination
+            iterations for this case.
+          </p>
+          <p>
+            Six additional random cases with 8 to 25 vehicles also produced lower delay
+            than the first-come-first-served baseline. These results demonstrate the
+            practical value of combining local combinatorial scheduling with distributed
+            timing coordination; they do not assume global optimality of the nonconvex
+            distributed problem.
+          </p>
+        </div>
+        <dl class="project-result-facts">
+          <div>
+            <dt>Network</dt>
+            <dd>2 &times; 2 intersections</dd>
+          </div>
+          <div>
+            <dt>Shown example</dt>
+            <dd>10 vehicles</dd>
+          </div>
+          <div>
+            <dt>Total delay</dt>
+            <dd>3.01 s vs. 11.20 s</dd>
+          </div>
+          <div>
+            <dt>Reduction</dt>
+            <dd>About 73%</dd>
+          </div>
+        </dl>
+        <figure class="project-wide-figure project-result-figure">
+          <img
+            src="project-2-local-schedules.png"
+            alt="Local resource-space schedules at four traffic intersections with a comparison against first-come-first-served scheduling"
+          />
+          <figcaption>
+            Local resource-space schedules from the displayed simulation example. The
+            inset compares one contended vehicle group with first-come-first-served scheduling.
+          </figcaption>
+        </figure>
+      </section>
+
     </div>
   </main>
 </body>

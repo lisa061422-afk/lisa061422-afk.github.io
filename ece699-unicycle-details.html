@@ -6,15 +6,15 @@
   <title>ECE 699 Unicycle Simulation | Renke Wang</title>
   <meta
     name="description"
-    content="MATLAB implementation, visualization, and analysis for the unicycle simulation portion of a Fall 2022 ECE 699 course project."
+    content="Implementation, visualization, and analysis for the unicycle simulation portion of a Fall 2022 ECE 699 course project."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260824-ece699-1" />
+  <link rel="stylesheet" href="styles.css?v=20260824-24" />
 </head>
 <body>
   <header class="site-header">
@@ -30,13 +30,13 @@
         <p class="eyebrow">ECE 699 Course Project &middot; Fall 2022</p>
         <h1>Unicycle Robot Trajectory-Tracking Simulation</h1>
         <p class="unicycle-detail-lead">
-          MATLAB implementation and visualization of a course-provided
-          unicycle-model feedback controller, evaluated across four distinct
-          initial-position and heading cases.
+          Unicycle trajectory-tracking project combining error-dynamics
+          analysis, closed-loop simulation, and numerical evaluation across
+          four initial conditions.
         </p>
         <div class="unicycle-detail-actions">
           <a
-            class="btn btn-primary"
+            class="btn btn-ghost"
             href="https://github.com/lisa061422-afk/ece699-unicycle-simulation"
             target="_blank"
             rel="noopener"
@@ -44,61 +44,52 @@
         </div>
       </header>
 
-      <section class="unicycle-scope-grid" aria-label="Project scope and contribution">
-        <div class="unicycle-scope-card">
-          <h2>My Contribution</h2>
+      <section class="unicycle-scope-grid" aria-label="Main task">
+        <div class="unicycle-scope-card unicycle-main-task">
+          <h2>Main Task</h2>
           <ul>
-            <li>Implemented the nonlinear simulation and polar error dynamics in MATLAB.</li>
-            <li>Reproduced four initial-position and heading cases with consistent radian-based dynamics.</li>
-            <li>Generated separate trajectory, convergence, and MATLAB-rendered animation outputs for each case.</li>
-            <li>Checked closed-loop eigenvalues and terminal simulation errors numerically.</li>
+            <li>Developed the error-dynamics formulation and MATLAB simulation for unicycle trajectory tracking.</li>
+            <li>Evaluated closed-loop tracking and convergence across four initial-position and heading cases.</li>
           </ul>
-        </div>
-        <div class="unicycle-scope-card unicycle-attribution-card">
-          <h2>Course and Team Context</h2>
-          <p>
-            The unicycle/differential-drive model and feedback-control theory
-            were provided through ECE 699 course materials and the instructor.
-            They are not presented here as original theoretical contributions.
-          </p>
-          <p>
-            The broader team project also included PyBullet modeling and a
-            physical robot implementation. This page presents only my MATLAB
-            simulation, visualization, and analysis work.
-          </p>
         </div>
       </section>
 
-      <section class="unicycle-results-summary" aria-labelledby="results-summary-heading">
-        <div>
-          <p class="eyebrow">Numerical Validation</p>
-          <h2 id="results-summary-heading">Convergence across all four cases</h2>
-        </div>
-        <dl>
-          <div>
-            <dt>Worst terminal position error, &rho;</dt>
-            <dd>0.000413</dd>
-          </div>
-          <div>
-            <dt>Worst terminal &alpha; error</dt>
-            <dd>0.1406&deg;</dd>
-          </div>
-          <div>
-            <dt>Worst terminal &phi; error</dt>
-            <dd>0.3218&deg;</dd>
-          </div>
-        </dl>
-      </section>
+      <p class="unicycle-validation">
+        <strong>Validation:</strong> All four cases converged toward the target
+        pose with near-zero range error and sub-degree angular errors.
+      </p>
 
       <section class="unicycle-cases" aria-labelledby="simulation-cases-heading">
         <header class="unicycle-cases-header">
-          <p class="eyebrow">MATLAB Results</p>
+          <p class="eyebrow">Simulation Results</p>
           <h2 id="simulation-cases-heading">Four Simulation Cases</h2>
           <p>
             Each case is shown on its own row so that its animation and static
             trajectory-and-error result remain easy to inspect independently.
           </p>
         </header>
+
+        <aside class="unicycle-error-legend" aria-labelledby="error-coordinates-heading">
+          <h3 id="error-coordinates-heading">Polar Error Coordinates</h3>
+          <dl>
+            <div>
+              <dt>&rho;</dt>
+              <dd><strong>Distance to target:</strong> straight-line distance from the robot to the target position.</dd>
+            </div>
+            <div>
+              <dt>&alpha;</dt>
+              <dd><strong>Heading-to-target angle:</strong> signed angle from the robot's forward direction to the line of sight toward the target.</dd>
+            </div>
+            <div>
+              <dt>&phi;</dt>
+              <dd><strong>Approach-angle error:</strong> signed angle from the line of sight to the desired final heading at the target.</dd>
+            </div>
+          </dl>
+          <p>
+            The desired heading error is &alpha; + &phi; = &theta;<sub>d</sub> &minus; &theta;.
+            Subscript 0 denotes an initial value; &theta;<sub>0</sub> is the robot's initial heading. Angular values are in degrees.
+          </p>
+        </aside>
 
         <article class="unicycle-case">
           <header class="unicycle-case-header">
@@ -108,7 +99,7 @@
           <div class="unicycle-case-media">
             <figure>
               <video src="ece699-case-1-animation.mp4" controls loop muted playsinline preload="metadata"></video>
-              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 1 initial pose.</span></figcaption>
+              <figcaption><strong>Trajectory animation</strong><span>Closed-loop motion from the Case 1 initial pose.</span></figcaption>
             </figure>
             <figure>
               <a href="ece699-case-1-result.png" target="_blank" rel="noopener">
@@ -127,7 +118,7 @@
           <div class="unicycle-case-media">
             <figure>
               <video src="ece699-case-2-animation.mp4" controls loop muted playsinline preload="metadata"></video>
-              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 2 initial pose.</span></figcaption>
+              <figcaption><strong>Trajectory animation</strong><span>Closed-loop motion from the Case 2 initial pose.</span></figcaption>
             </figure>
             <figure>
               <a href="ece699-case-2-result.png" target="_blank" rel="noopener">
@@ -146,7 +137,7 @@
           <div class="unicycle-case-media">
             <figure>
               <video src="ece699-case-3-animation.mp4" controls loop muted playsinline preload="metadata"></video>
-              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 3 initial pose.</span></figcaption>
+              <figcaption><strong>Trajectory animation</strong><span>Closed-loop motion from the Case 3 initial pose.</span></figcaption>
             </figure>
             <figure>
               <a href="ece699-case-3-result.png" target="_blank" rel="noopener">
@@ -165,13 +156,49 @@
           <div class="unicycle-case-media">
             <figure>
               <video src="ece699-case-4-animation.mp4" controls loop muted playsinline preload="metadata"></video>
-              <figcaption><strong>MATLAB animation</strong><span>Closed-loop motion from the Case 4 initial pose.</span></figcaption>
+              <figcaption><strong>Trajectory animation</strong><span>Closed-loop motion from the Case 4 initial pose.</span></figcaption>
             </figure>
             <figure>
               <a href="ece699-case-4-result.png" target="_blank" rel="noopener">
                 <img src="ece699-case-4-result.png" alt="Case 4 trajectory and error convergence plots" loading="lazy" decoding="async">
               </a>
               <figcaption><strong>Static simulation result</strong><span>Trajectory and polar-error convergence.</span></figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+
+      <section class="unicycle-extra-test" aria-labelledby="large-angle-test-heading">
+        <header class="unicycle-cases-header">
+          <p class="eyebrow">Additional Numerical Test</p>
+          <h2 id="large-angle-test-heading">Large-Angle Test</h2>
+          <p>
+            A 110&deg; initial heading-to-target angle was evaluated using the
+            same model and controller parameters. This is an additional test,
+            separate from the four initial conditions documented in the course report.
+          </p>
+        </header>
+
+        <article class="unicycle-case unicycle-large-angle-case">
+          <header class="unicycle-case-header">
+            <h3>110&deg; Heading-to-Target Test</h3>
+            <p>&rho;<sub>0</sub> = 30, &alpha;<sub>0</sub> = +110&deg;, &phi;<sub>0</sub> = &minus;80&deg;, &theta;<sub>0</sub> = 60&deg;</p>
+          </header>
+          <p class="unicycle-case-note">
+            <strong>Numerical result at 25 s:</strong>
+            &rho; = 0.000549, |&alpha;| = 0.372&deg;, and |&phi;| = 0.851&deg;.
+            The range briefly increases to 30.137 during the large heading adjustment before decreasing toward zero.
+          </p>
+          <div class="unicycle-case-media">
+            <figure>
+              <video src="ece699-large-angle-110-animation.mp4" controls loop muted playsinline preload="metadata"></video>
+              <figcaption><strong>Large-angle trajectory animation</strong><span>Motion from the 110&deg; heading-to-target initial condition.</span></figcaption>
+            </figure>
+            <figure>
+              <a href="ece699-large-angle-110-result.png" target="_blank" rel="noopener">
+                <img src="ece699-large-angle-110-result.png" alt="Large-angle unicycle trajectory and error plots for the 110-degree numerical test" loading="lazy" decoding="async">
+              </a>
+              <figcaption><strong>Static numerical result</strong><span>Trajectory and error histories over the 25-second simulation.</span></figcaption>
             </figure>
           </div>
         </article>
