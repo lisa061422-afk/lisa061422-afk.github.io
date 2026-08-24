@@ -218,7 +218,9 @@ p { margin: 0 0 1em; }
 .photo-frame {
   width: 180px;
   height: 180px;
-  padding: 12px;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 180px;
+  padding: 4px;
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid var(--color-border);
@@ -229,10 +231,12 @@ p { margin: 0 0 1em; }
   overflow: hidden;
 }
 .photo-frame img {
+  display: block;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: inherit;
   object-fit: cover;
+  object-position: center top;
 }
 
 .photo-placeholder {
@@ -1118,7 +1122,12 @@ p { margin: 0 0 1em; }
     gap: 0.6rem;
   }
   .hero-photo { order: -1; }
-  .photo-frame { width: 120px; height: 120px; padding: 8px; }
+  .photo-frame {
+    width: 120px;
+    height: 120px;
+    flex-basis: 120px;
+    padding: 3px;
+  }
   .photo-placeholder { font-size: 2.6rem; }
 
   .section { padding: 1.5rem 0 1rem; }
