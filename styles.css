@@ -352,7 +352,7 @@ p { margin: 0 0 1em; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.7rem;
 }
 
 /* ---------- Research interests grid ---------- */
@@ -370,7 +370,7 @@ p { margin: 0 0 1em; }
   grid-template-columns: 2.75rem minmax(220px, 0.78fr) minmax(0, 1.35fr);
   gap: 1rem 1.4rem;
   align-items: baseline;
-  padding: 1.15rem 0;
+  padding: 0.72rem 0;
   border-bottom: 1px solid var(--color-border);
 }
 .interest-grid li::before {
@@ -1761,12 +1761,16 @@ p { margin: 0 0 1em; }
   margin-bottom: 1.5rem;
 }
 
+.home-page #research .section-header {
+  margin-bottom: 0.8rem;
+}
+
 .home-page .section-header::after {
   display: none;
 }
 
 .home-page .research-subsection + .research-subsection {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   padding-top: 0;
   border-top: 0;
 }
@@ -1798,7 +1802,7 @@ p { margin: 0 0 1em; }
 
 .home-page .skill-block {
   gap: 0.8rem 1.4rem;
-  padding: 0.8rem 0;
+  padding: 0.65rem 0;
 }
 
 .home-page .skill-block ul {
