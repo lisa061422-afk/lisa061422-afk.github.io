@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Path Planning and Scheduling Co-Design | Renke Wang</title>
+  <meta
+    name="description"
+    content="Cost function and constraints for joint path planning and intersection scheduling in a warehouse traffic network."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260825-38" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { scale: 0.98 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#path-planning-project" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="hri-detail-page path-planning-detail-page">
+    <div class="container">
+      <header class="hri-detail-header">
+        <p class="eyebrow">Project Details</p>
+        <h1>Joint Path Selection and Intersection Scheduling</h1>
+        <p class="hri-detail-lead">
+          Joint route selection and shared-intersection scheduling for multiple
+          robots in a warehouse traffic network.
+        </p>
+      </header>
+
+      <section class="hri-section" aria-label="Network and Candidate Paths">
+        <header class="hri-section-header">
+          <p class="eyebrow">Network and Candidate Paths</p>
+        </header>
+
+        <figure class="hri-wide-figure">
+          <a href="assets/projects/path-planning/topview.png" target="_blank" rel="noopener">
+            <img
+              src="assets/projects/path-planning/topview.png"
+              alt="Top-view warehouse traffic network and graph representation with two candidate routes"
+              loading="eager"
+              decoding="async"
+            >
+          </a>
+          <figcaption>
+            <strong>Example network.</strong>
+            Nine intersections and twelve boundary ports.
+            The blue path \(\pi_{n,1}=(2,5,4)\) and the green dashed path
+            \(\pi_{n,2}=(2,1,4)\) are two candidate routes from \(B_3\) to \(B_{12}\).
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="hri-section" aria-label="Cost Function">
+        <header class="hri-section-header">
+          <p class="eyebrow">Cost Function</p>
+          <p>Decision variables: route choice \(Z\) and intersection schedule \(U\).</p>
+        </header>
+
+        <div class="hri-formula-stack">
+          <article class="hri-formula-card">
+            <h3>Objective</h3>
+            <div class="hri-equation">
+              \[
+                \min_{Z,U}\; J
+                =\sum_{n=1}^{N}
+                \left\{
+                  \sum_{k=1}^{K_n(Z_n)}\delta_{n,k}(U)
+                  +\left(T_n^{\mathrm{sel}}(Z_n)-T_n^{\mathrm{sp}}\right)
+                \right\}.
+              \]
+            </div>
+            <p>Total contention delay + extra free-flow travel time relative to the shortest candidate path.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="hri-section" aria-label="Constraints">
+        <header class="hri-section-header">
+          <p class="eyebrow">Constraints</p>
+        </header>
+
+        <div class="hri-formula-stack path-planning-constraints-grid">
+          <article class="hri-formula-card">
+            <h3>Robot motion and operating limits</h3>
+            <div class="hri-equation">
+              \[
+                \dot{x}_n(t)=v_n(t),\qquad \dot{v}_n(t)=a_n(t),
+              \]
+              \[
+                0\le v_n(t)\le v_{\max},\qquad
+                -a_{\max}\le a_n(t)\le a_{\max}.
+              \]
+            </div>
+          </article>
+
+          <article class="hri-formula-card">
+            <h3>Select exactly one next intersection</h3>
+            <div class="hri-equation">
+              \[
+                \sum_{j\in\mathcal S_n(t)}z_{n,(i,j)}(t)=1,
+                \qquad z_{n,(i,j)}(t)\in\{0,1\}.
+              \]
+            </div>
+          </article>
+
+          <article class="hri-formula-card">
+            <h3>Task timing along the selected route</h3>
+            <div class="hri-equation">
+              \[
+                \gamma_{n,k}=\beta_{n,k}+C_{n,k},
+              \]
+              \[
+                \alpha_{n,k}=\gamma_{n,k-1}+\Delta_{n,k-1},
+                \qquad k\in\{2,\ldots,K_n(Z_n)\},
+              \]
+              \[
+                \delta_{n,k}=\beta_{n,k}-\alpha_{n,k}\ge 0.
+              \]
+            </div>
+            <p>
+              Here \(\alpha_{n,k}\), \(\beta_{n,k}\), and \(\gamma_{n,k}\)
+              are the task-generation, actual-start, and completion times;
+              \(C_{n,k}\) is the intersection traversal time, and
+              \(\Delta_{n,k-1}\) is the minimum feasible travel time between
+              consecutive intersections.
+            </p>
+          </article>
+
+          <article class="hri-formula-card">
+            <h3>Mutual-exclusion scheduling</h3>
+            <div class="hri-equation">
+              \[
+                u_{n,i}(t)\in\{0,1\},\qquad
+                \sum_{n=1}^{N}u_{n,i}(t)\le 1,\qquad
+                \sum_{i=1}^{I}u_{n,i}(t)\le 1.
+              \]
+            </div>
+            <p>
+              Each intersection is occupied by at most one robot at a time, and
+              each robot occupies at most one intersection at a time.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="hri-section path-planning-example" aria-label="Co-Design Example">
+        <header class="hri-section-header">
+          <p class="eyebrow">Co-Design Example</p>
+          <p>5 vehicles · 9–12 candidate routes per vehicle · 19 scheduled intersection tasks.</p>
+        </header>
+
+        <div class="path-planning-example-frame">
+          <iframe
+            src="assets/projects/path-planning/codesign-interactive-solution.html"
+            title="Interactive path-selection and intersection-scheduling co-design example"
+            loading="lazy"
+          ></iframe>
+        </div>
+        <p class="path-planning-example-actions">
+          <a
+            class="btn btn-secondary"
+            href="assets/projects/path-planning/codesign-interactive-solution.html"
+            target="_blank"
+            rel="noopener"
+          >Open Full Interactive Example ↗</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

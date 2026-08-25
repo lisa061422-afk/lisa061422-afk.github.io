@@ -18,7 +18,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="styles.css?v=20260824-22" />
+  <link rel="stylesheet" href="styles.css?v=20260825-33" />
 </head>
 <body class="home-page">
   <!-- ============================================================
@@ -40,7 +40,7 @@
           <li><a href="#research">Research</a></li>
           <li><a href="#projects">Selected Projects</a></li>
           <li><a href="#publications">Publications</a></li>
-          <li><a href="RenkeWang_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+          <li><a href="assets/site/RenkeWang_CV.pdf" target="_blank" rel="noopener">CV</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -73,7 +73,7 @@
             human&ndash;robot collaboration.
           </p>
           <div class="hero-actions" aria-label="Profile links">
-            <a href="RenkeWang_CV.pdf" class="btn btn-primary" target="_blank" rel="noopener">View CV</a>
+            <a href="assets/site/RenkeWang_CV.pdf" class="btn btn-primary" target="_blank" rel="noopener">View CV</a>
             <a href="https://scholar.google.com/citations?user=q_1CykwAAAAJ&amp;hl=en" class="btn btn-ghost" target="_blank" rel="noopener">Google Scholar</a>
             <a href="https://github.com/lisa061422-afk" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:rwang26@gmu.edu" class="btn btn-ghost">Email</a>
@@ -85,7 +85,7 @@
             <!-- Profile photo. Currently points to me.jpg already on
                  the GMU server. Replace with a different filename if
                  you upload a new photo. -->
-            <img src="me.jpg" alt="Renke Wang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <img src="assets/site/me.jpg" alt="Renke Wang" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <span class="photo-placeholder" aria-hidden="true" style="display:none;">RW</span>
           </div>
         </div>
@@ -201,16 +201,6 @@
           <h2>Selected Projects</h2>
         </header>
 
-        <p class="projects-pathway">
-          <span>Robotics &amp; Planning</span>
-          <span aria-hidden="true">&rarr;</span>
-          <span>Optimization &amp; Scheduling</span>
-          <span aria-hidden="true">&rarr;</span>
-          <span>Networked Control &amp; Co-Design</span>
-          <span aria-hidden="true">&rarr;</span>
-          <span>Control &amp; Robustness</span>
-        </p>
-
         <!-- ===== Project group 1 ===== -->
         <div class="project-group">
           <h3>1. Robotics Planning &amp; Multi-Agent Coordination</h3>
@@ -225,7 +215,7 @@
                 <figure class="project-showcase-media">
                   <div class="project-showcase-thumbnail">
                     <img
-                      src="Traffic_in_poster.png"
+                      src="assets/projects/multi-intersection/Traffic_in_poster.png"
                       alt="Coupled traffic intersections with vehicle routes and a zoomed local conflict-zone model"
                       loading="lazy"
                       decoding="async"
@@ -255,18 +245,18 @@
                   </p>
                   <p class="project-links">
                     <a href="project-2-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
-                    <a href="project-2-poster.png" target="_blank" rel="noopener">Poster <span aria-hidden="true">&nearr;</span></a>
+                    <a href="assets/projects/multi-intersection/project-2-poster.png" target="_blank" rel="noopener">Poster <span aria-hidden="true">&nearr;</span></a>
                     <a href="https://youtu.be/YsEci0cIApg?si=ojlgiNI9mZg2UuwD" target="_blank" rel="noopener">YouTube <span aria-hidden="true">&nearr;</span></a>
                   </p>
                 </div>
               </div>
             </li>
-            <li class="subproject-illustrated numbered-subproject">
+            <li class="subproject-illustrated numbered-subproject" id="path-planning-project">
               <p class="project-number-label">Project 2</p>
               <div class="subproject-layout">
                 <figure class="subproject-media">
                   <img
-                    src="path_planning.png"
+                    src="assets/projects/path-planning/path_planning.png"
                     alt="Alternative vehicle paths through coupled merging zones with different resource-occupation sequences"
                   >
                 </figure>
@@ -284,6 +274,9 @@
                     Learning-Guided Methods <span aria-hidden="true">&middot;</span>
                     Resource-Access Scheduling
                   </p>
+                  <p class="project-links">
+                    <a href="path-planning-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
+                  </p>
                 </div>
               </div>
             </li>
@@ -292,7 +285,7 @@
               <div class="subproject-layout">
                 <figure class="subproject-media">
                   <img
-                    src="robotic_1.png"
+                    src="assets/projects/ece699-unicycle/robotic_1.png"
                     alt="Mobile robot following a curved path from its starting pose to the goal"
                   >
                 </figure>
@@ -310,7 +303,6 @@
                   </p>
                   <p class="project-links">
                     <a href="ece699-unicycle-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
-                    <a href="https://github.com/lisa061422-afk/ece699-unicycle-simulation" target="_blank" rel="noopener">GitHub Repository <span aria-hidden="true">&nearr;</span></a>
                   </p>
                 </div>
               </div>
@@ -331,7 +323,7 @@
               <div class="subproject-layout">
                 <figure class="subproject-media">
                   <img
-                    src="resue_picture.png"
+                    src="assets/projects/heterogeneous-resource/resue_picture.png"
                     alt="Multi-human multi-robot rescue scenario with robots requesting assistance from different human operators"
                   >
                 </figure>
@@ -354,33 +346,34 @@
                 </div>
               </div>
             </li>
-            <li class="subproject-illustrated numbered-subproject">
+            <li class="subproject-illustrated numbered-subproject" id="hri-attention-project">
               <p class="project-number-label">Project 2</p>
-              <div class="subproject-layout">
+              <div class="subproject-layout subproject-layout--standard-media">
                 <figure class="subproject-media">
                   <img
-                    src="tank.png"
-                    alt="Human-operated multi-robot game used to evaluate an attention-guided recommendation system"
+                    src="assets/projects/hri-attention/tank.png"
+                    alt="Conceptual illustration of four robots sharing one human operator for obstacle-avoidance tasks"
                   >
                 </figure>
                 <div class="subproject-copy">
                   <h4>Attention-Guided Recommendations for Human&ndash;Multi-Robot Collaboration</h4>
                   <p>
-                    This project evaluates a human-operated multi-robot game with
-                    and without an attention-guided recommendation system. The
-                    system provides on-screen action recommendations, enabling
-                    comparison of human multitasking efficiency, cognitive load,
-                    and trust across the two operating conditions.
+                    This project combines receding-horizon human-attention
+                    scheduling with an on-screen recommendation system for a
+                    four-robot game. The scheduler resolves simultaneous
+                    obstacle-avoidance requests and converts each selected task
+                    into a timed recommendation for the operator.
                   </p>
                   <p class="project-keywords">
-                    Recommendation System <span aria-hidden="true">&middot;</span>
+                    Predictive Attention Scheduling <span aria-hidden="true">&middot;</span>
                     Human&ndash;Robot Collaboration <span aria-hidden="true">&middot;</span>
-                    User Study <span aria-hidden="true">&middot;</span>
-                    Cognitive Load
+                    Receding-Horizon Search <span aria-hidden="true">&middot;</span>
+                    Shared Human Attention
                   </p>
                   <p class="project-links">
+                    <a href="hri-attention-scheduling-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
                     <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11217805" target="_blank" rel="noopener">Paper <span aria-hidden="true">&nearr;</span></a>
-                    <a href="hri_project_poster.pdf" target="_blank" rel="noopener">Poster <span aria-hidden="true">&nearr;</span></a>
+                    <a href="assets/projects/hri-attention/hri_project_poster.pdf" target="_blank" rel="noopener">Poster <span aria-hidden="true">&nearr;</span></a>
                   </p>
                 </div>
               </div>
@@ -390,23 +383,23 @@
               <div class="subproject-layout">
                 <figure class="subproject-media">
                   <img
-                    src="ece623-scenario-1-position.png"
-                    alt="Position trajectories for four vehicles scheduled through a shared traffic intersection"
+                    src="assets/projects/ece623-intersection/intersection_scenario.png"
+                    alt="Intersection coordination scenario with safe-distance and conflict-region constraints"
                   >
                 </figure>
                 <div class="subproject-copy">
-                  <h4>Safe Intersection Scheduling &mdash; Paper Reproduction</h4>
+                  <h4>Safe Intersection Scheduling</h4>
                   <p>
-                    Reproduced a fixed-precedence intersection-scheduling
-                    formulation from a 2018 ECC paper. The nonlinear program
-                    schedules vehicle entry and exit times while enforcing
-                    intersection occupancy, rear-end separation, and operating bounds.
+                    Studied and implemented a fixed-precedence intersection-scheduling
+                    formulation. The nonlinear program schedules vehicle entry and exit
+                    times while enforcing intersection occupancy, rear-end separation,
+                    and operating bounds.
                   </p>
                   <p class="project-keywords">
                     Intersection Scheduling <span aria-hidden="true">&middot;</span>
                     Nonlinear Optimization <span aria-hidden="true">&middot;</span>
                     Collision Avoidance <span aria-hidden="true">&middot;</span>
-                    Paper Reproduction
+                    Fixed-Precedence Scheduling
                   </p>
                   <p class="project-links">
                     <a href="ece623-intersection-scheduling-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
@@ -431,7 +424,7 @@
                 <figure class="project-showcase-media">
                   <div class="project-showcase-thumbnail">
                     <img
-                      src="manufacturing_fig.png"
+                      src="assets/projects/manufacturing-scheduling/manufacturing_fig.png"
                       alt="Networked manufacturing system with shared communication, computation, sensing, and actuation resources"
                       loading="lazy"
                       decoding="async"
@@ -464,13 +457,13 @@
                 </div>
               </div>
             </li>
-            <li class="subproject-illustrated numbered-subproject">
+            <li id="blimp-codesign-project" class="subproject-illustrated numbered-subproject">
               <p class="project-number-label">Project 2</p>
               <div class="subproject-layout subproject-layout--standard-media">
                 <figure class="subproject-media">
                   <img
-                    src="blimp_fig1.png"
-                    alt="Multiple blimps sharing heterogeneous computational resources in a warehouse environment with a motion-control trajectory diagram"
+                    src="assets/projects/blimp-codesign/blimp_1.png"
+                    alt="Conceptual diagram of multiple blimps sharing heterogeneous processors for wind estimation and control updates"
                   >
                 </figure>
                 <div class="subproject-copy">
@@ -485,6 +478,9 @@
                     Heterogeneous Resources <span aria-hidden="true">&middot;</span>
                     Motion Control <span aria-hidden="true">&middot;</span>
                     Robust Control
+                  </p>
+                  <p class="project-links">
+                    <a href="blimp-codesign-details.html" target="_blank" rel="noopener">Project Details <span aria-hidden="true">&nearr;</span></a>
                   </p>
                   <span class="subproject-status project-status">Manuscript under review at IJRNC</span>
                 </div>
@@ -506,7 +502,7 @@
               <div class="subproject-layout subproject-layout--standard-media subproject-layout--media-large">
                 <figure class="subproject-media">
                   <img
-                    src="tube_based_mpc.png"
+                    src="assets/projects/timing-perturbation/tube_based_mpc.png"
                     alt="Tube-based model predictive control with nominal and timing-perturbed system trajectories under state constraints"
                   >
                 </figure>
@@ -535,7 +531,7 @@
               <div class="subproject-layout subproject-layout--standard-media subproject-layout--media-small">
                 <figure class="subproject-media">
                   <img
-                    src="nonlinear_tube_based_mpc.png"
+                    src="assets/projects/nonlinear-control/nonlinear_tube_based_mpc.png"
                     alt="Nonlinear tube-based model predictive control trajectories under timing perturbations"
                   >
                 </figure>

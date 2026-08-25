@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attention-Guided Human–Multi-Robot Collaboration | Renke Wang</title>
+  <meta
+    name="description"
+    content="Predictive scheduling and recommendation generation for a human-operated multi-robot system with time-critical obstacle-avoidance tasks."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260825-33" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { scale: 0.98 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#hri-attention-project" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="hri-detail-page">
+    <div class="container">
+      <header class="hri-detail-header">
+        <p class="eyebrow">Human&ndash;Multi-Robot Collaboration</p>
+        <h1>Attention-Guided Recommendations for Human&ndash;Multi-Robot Collaboration</h1>
+        <p class="hri-detail-lead">
+          A receding-horizon scheduler allocates one human operator among four
+          robots facing time-critical obstacle-avoidance tasks. The resulting
+          service decisions are converted into on-screen recommendations that
+          identify which robot needs attention and when.
+        </p>
+        <div class="hri-detail-actions">
+          <a class="btn btn-ghost" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11217805" target="_blank" rel="noopener">Paper</a>
+          <a class="btn btn-ghost" href="assets/projects/hri-attention/hri_project_poster.pdf" target="_blank" rel="noopener">Poster</a>
+        </div>
+      </header>
+
+      <section class="hri-summary-grid" aria-label="Project summary">
+        <div>
+          <h2>Task sources</h2>
+          <p>Four robots generate obstacle-avoidance tasks with release times, service times, and deadlines.</p>
+        </div>
+        <div>
+          <h2>Shared resource</h2>
+          <p>One human operator can assist at most one robot at a time.</p>
+        </div>
+        <div>
+          <h2>Decision output</h2>
+          <p>The scheduler selects the robot to assist and converts that decision into a timed recommendation.</p>
+        </div>
+      </section>
+
+      <section class="hri-section" aria-labelledby="system-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">System Model</p>
+          <h2 id="system-heading">From Obstacle Encounters to Attention Tasks</h2>
+          <p>
+            An approaching obstacle creates a task for its robot. The task must
+            receive a short interval of human control before the obstacle reaches
+            the collision point; simultaneous requests create contention for the
+            operator's attention.
+          </p>
+        </header>
+
+        <div class="hri-system-grid">
+          <div class="hri-system-figures">
+            <figure>
+              <a href="assets/projects/hri-attention/hri_1.png" target="_blank" rel="noopener">
+                <img
+                  src="assets/projects/hri-attention/hri_1.png"
+                  alt="Four robots facing different obstacles and deadlines while sharing one human operator"
+                  loading="eager"
+                  decoding="async"
+                >
+              </a>
+              <figcaption>
+                <strong>Shared-attention scheduling scenario</strong>
+                Four robots generate obstacle-avoidance requests, while one operator can assist only one robot at a time.
+              </figcaption>
+            </figure>
+          </div>
+
+          <dl class="hri-model-list">
+            <div>
+              <dt>Release time</dt>
+              <dd>\(\alpha_{n,j}\): the instant obstacle task \(j\) becomes active for robot \(n\).</dd>
+            </div>
+            <div>
+              <dt>Deadline</dt>
+              <dd>\(d_{n,j}=\alpha_{n,j}+\Delta\): the latest completion time that avoids the collision.</dd>
+            </div>
+            <div>
+              <dt>Service time</dt>
+              <dd>\(c_{n,j}\): the required human-control time; the evaluated scheduling scenario uses 2 seconds per task.</dd>
+            </div>
+            <div>
+              <dt>Priority cost</dt>
+              <dd>Missed stone, tree, and pond tasks incur costs 10, 5, and 2, respectively.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="hri-section" aria-labelledby="formulation-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">Cost Function and Constraints</p>
+          <h2 id="formulation-heading">Prioritize the Most Consequential Tasks</h2>
+          <p>
+            The implementation stores collision scores
+            \((-10,-5,-2)\) for stone, tree, and pond tasks and maximizes the
+            accumulated score. The positive-cost expression below is the
+            equivalent minimization form used to explain the schedule.
+          </p>
+        </header>
+
+        <div class="hri-formula-stack">
+          <article class="hri-formula-card">
+            <h3>Collision-weighted scheduling objective</h3>
+            <div class="hri-equation">
+              \[
+                \min_{\pi\in\mathcal{F}}
+                J(\pi)=\sum_{n=1}^{N}\sum_j
+                w_{q_{n,j}}\,\delta_{n,j}(\pi),
+                \qquad (w_{\mathrm{stone}},w_{\mathrm{tree}},w_{\mathrm{pond}})=(10,5,2).
+              \]
+            </div>
+            <p>
+              Here \(\delta_{n,j}(\pi)=1\) when schedule \(\pi\) misses the
+              task deadline and is zero otherwise. When all requests cannot be
+              served, the schedule favors decisions that avoid the largest collision penalties.
+            </p>
+          </article>
+        </div>
+
+        <dl class="hri-constraints" aria-label="Scheduling constraints">
+          <div>
+            <dt>Single shared resource</dt>
+            <dd>
+              \(u_n(t)\in\{0,1\}\) and
+              \(\sum_{n=1}^{N}u_n(t)\leq 1\): the operator controls at most one robot at a time.
+            </dd>
+          </div>
+          <div>
+            <dt>Release-time feasibility</dt>
+            <dd>
+              \(\beta_{n,j}\geq\alpha_{n,j}\): service cannot begin before the obstacle task appears.
+            </dd>
+          </div>
+          <div>
+            <dt>Deadline feasibility</dt>
+            <dd>
+              \(\beta_{n,j}+c_{n,j}\leq d_{n,j}\): a selected intervention must finish before collision.
+            </dd>
+          </div>
+          <div>
+            <dt>Available-task test</dt>
+            <dd>
+              At decision time \(t\), robot \(n\) is a feasible choice only when
+              \(t+r_{n,j}(t)\leq d_{n,j}\), where \(r_{n,j}\) is the remaining service time.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="hri-section" aria-labelledby="priority-example-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">Scheduling Example</p>
+          <h2 id="priority-example-heading">Why the Attention Order Matters</h2>
+          <p>
+            Simultaneous tasks can have different deadlines and collision costs.
+            Serving requests in arrival order can miss a high-cost task, whereas
+            cost-aware scheduling chooses an order that limits the total penalty.
+          </p>
+        </header>
+
+        <figure class="hri-wide-figure">
+          <a href="assets/projects/hri-attention/hri-attention-allocation-comparison.png" target="_blank" rel="noopener">
+            <img
+              src="assets/projects/hri-attention/hri-attention-allocation-comparison.png"
+              alt="Comparison of attention-allocation orders for tree, stone, and pond tasks"
+              loading="lazy"
+              decoding="async"
+            >
+          </a>
+          <figcaption>
+            <strong>Attention-allocation comparison</strong>
+            Blue dashed lines mark task releases, yellow dashed lines mark service boundaries, and red dashed lines mark deadlines. Prioritizing the stone task avoids the largest collision cost.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="hri-section" aria-labelledby="prediction-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">Receding-Horizon Prediction</p>
+          <h2 id="prediction-heading">Search Ahead, Apply One Decision, Then Replan</h2>
+          <p>
+            Contending tasks are evaluated over a finite future window. The
+            implementation searches the feasible decision tree over a 100-second
+            prediction horizon, applies only the first action from the best branch,
+            and repeats the process at the next contention event.
+          </p>
+        </header>
+
+        <ol class="hri-flow">
+          <li>
+            <span class="step-number">Step 1</span>
+            <strong>Release tasks</strong>
+            <p>Obstacle encounters activate attention requests for one or more robots.</p>
+          </li>
+          <li>
+            <span class="step-number">Step 2</span>
+            <strong>Detect contention</strong>
+            <p>Prediction is triggered when at least two active tasks compete for the operator.</p>
+          </li>
+          <li>
+            <span class="step-number">Step 3</span>
+            <strong>Expand decisions</strong>
+            <p>Feasible robot choices are branched forward while tracking service and deadline states.</p>
+          </li>
+          <li>
+            <span class="step-number">Step 4</span>
+            <strong>Score branches</strong>
+            <p>Candidate schedules are ranked by their accumulated collision penalties.</p>
+          </li>
+          <li>
+            <span class="step-number">Step 5</span>
+            <strong>Apply and replan</strong>
+            <p>Only the first selected assignment is executed before the horizon is rebuilt.</p>
+          </li>
+        </ol>
+
+        <div class="hri-formula-stack hri-rolling-formula">
+          <article class="hri-formula-card">
+            <h3>Rolling decision</h3>
+            <div class="hri-equation">
+              \[
+                \pi^{\star}(t)=\arg\min_{\pi\in\mathcal{F}(t,t+T_p)}J_{t:t+T_p}(\pi),
+                \qquad
+                u(t)=\operatorname{first}\!\left(\pi^{\star}(t)\right).
+              \]
+            </div>
+            <p>This is model-predictive task scheduling: the optimized object is the attention assignment, not a continuous-state motion controller.</p>
+          </article>
+        </div>
+
+        <figure class="hri-tree-figure">
+          <a href="assets/projects/hri-attention/hri-attention-decision-tree.png" target="_blank" rel="noopener">
+            <img
+              src="assets/projects/hri-attention/hri-attention-decision-tree.png"
+              alt="Finite-horizon attention-allocation decision tree with the selected branch highlighted"
+              loading="lazy"
+              decoding="async"
+            >
+          </a>
+          <figcaption>
+            <strong>Prediction-tree example</strong>
+            Each branch assigns the operator to a robot at the next significant event. Leaf scores accumulate missed-task penalties; the highlighted branch reaches the best score in this example.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="hri-section" aria-labelledby="recommendation-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">Recommendation Generation</p>
+          <h2 id="recommendation-heading">Convert the Schedule into Timed Prompts</h2>
+          <p>
+            The selected operator-usage trace is transformed into recommendation
+            pairs \((t_k,n_k)\), where \(t_k\) is the reminder time and \(n_k\)
+            identifies the robot that should receive attention. Idle entries are
+            removed, repeated assignments close in time are merged, and incomplete
+            service intervals are filtered before the recommendation sequence is
+            sent to the interface.
+          </p>
+        </header>
+      </section>
+
+      <section class="hri-section" aria-labelledby="result-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">Example Simulation Result</p>
+          <h2 id="result-heading">Four Robots Sharing One Human Operator</h2>
+          <p>
+            The upper four rows show obstacle tasks and their service status; the
+            lower row shows which robot receives the human operator at each
+            scheduled interval. T, S, and P denote tree, stone, and pond tasks.
+          </p>
+        </header>
+
+        <div class="hri-result-layout">
+          <figure class="hri-result-figure">
+            <a href="assets/projects/hri-attention/hri-attention-simulation.png" target="_blank" rel="noopener">
+              <img
+                src="assets/projects/hri-attention/hri-attention-simulation.png"
+                alt="Annotated simulation result for four robots sharing one human-attention resource"
+                loading="lazy"
+                decoding="async"
+              >
+            </a>
+            <figcaption>
+              <strong>Attention schedule</strong>
+              The operator assignment changes at event times so that selected tasks receive a complete intervention before their deadlines.
+            </figcaption>
+          </figure>
+
+          <aside class="hri-plot-key" aria-label="Scheduling plot key">
+            <h3>How to read the plot</h3>
+            <ul>
+              <li>Robot value 1 indicates an interval served by the human operator.</li>
+              <li>Robot value 0.5 indicates an active task waiting without operator service.</li>
+              <li>Blue dashed lines mark realized task-release times.</li>
+              <li>Yellow and red dashed lines mark nominal and updated deadlines.</li>
+              <li>The Human row uses the corresponding robot color to identify the active assignment.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Renke Wang</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

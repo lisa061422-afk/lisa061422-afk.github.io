@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Safe Intersection Scheduling Reproduction | Renke Wang</title>
+  <title>Safe Intersection Scheduling | Renke Wang</title>
   <meta
     name="description"
-    content="ECE 623 paper-reproduction project on fixed-precedence scheduling for autonomous vehicles at a traffic intersection."
+    content="ECE 623 course project on fixed-precedence scheduling for autonomous vehicles at a traffic intersection."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +14,19 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260824-21" />
+  <link rel="stylesheet" href="styles.css?v=20260824-30" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: {
+        scale: 0.98
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -28,35 +40,36 @@
     <div class="container">
       <header class="course-repro-header">
         <p class="eyebrow">ECE 623 Course Project &middot; Spring 2024</p>
-        <h1>Safe Intersection Scheduling &mdash; Paper Reproduction</h1>
-        <p class="course-repro-lead">
-          Reproduction of a fixed-precedence vehicle-coordination formulation
-          from a 2018 European Control Conference paper, focusing on nonlinear
-          scheduling, safety constraints, and a four-vehicle numerical case.
+        <h1>Safe Intersection Scheduling</h1>
+        <p class="course-repro-citation">
+          <strong>Reference:</strong>
+          <a href="https://doi.org/10.23919/ECC.2018.8550558" target="_blank" rel="noopener">
+            J. Shi, Y. Zheng, Y. Jiang, M. Zanon, R. Hult, and B. Houska,
+            &ldquo;Distributed Control Algorithm for Vehicle Coordination at Traffic
+            Intersections,&rdquo; 2018 European Control Conference (ECC),
+            pp. 1166&ndash;1171.
+          </a>
         </p>
-        <div class="course-repro-actions">
-          <a
-            class="btn btn-ghost"
-            href="https://doi.org/10.23919/ECC.2018.8550558"
-            target="_blank"
-            rel="noopener"
-          >Reference Paper</a>
-        </div>
+        <p class="course-repro-lead">
+          Fixed-precedence vehicle coordination at traffic intersections,
+          focusing on nonlinear scheduling, safety constraints, and two
+          four-vehicle numerical cases.
+        </p>
       </header>
 
-      <section class="course-repro-scope" aria-labelledby="reproduction-scope-heading">
-        <h2 id="reproduction-scope-heading">Reproduction Scope</h2>
+      <section class="course-repro-scope" aria-labelledby="project-scope-heading">
+        <h2 id="project-scope-heading">Project Scope</h2>
         <ul>
           <li>Reconstructed the paper's time discretization, objective, and feasibility constraints.</li>
           <li>Implemented the nonlinear program for a fixed vehicle-crossing order.</li>
-          <li>Evaluated a four-vehicle, two-lane case using position trajectories and piecewise-constant acceleration profiles.</li>
+          <li>Evaluated two four-vehicle intersection cases using vehicle animations and position, velocity, and piecewise-constant acceleration profiles.</li>
         </ul>
       </section>
 
       <p class="course-repro-note">
-        <strong>Scope note:</strong> This is a course reproduction of a published
-        formulation. It does not claim a new scheduling method or a full
-        reimplementation of the paper's distributed ALADIN architecture.
+        <strong>Scope note:</strong> This course project follows a published
+        formulation; it does not claim a new scheduling method or a full
+        implementation of the paper's distributed ALADIN architecture.
       </p>
 
       <section class="course-repro-section" aria-labelledby="formulation-heading">
@@ -74,11 +87,11 @@
         <div class="course-repro-decision-row">
           <div>
             <h3>Timing variables</h3>
-            <p>Entry and exit times, <em>t</em><sub>i</sub><sup>in</sup> and <em>t</em><sub>i</sub><sup>out</sup>, for each vehicle.</p>
+            <p>Entry and exit times, \(t_i^{\mathrm{in}}\) and \(t_i^{\mathrm{out}}\), for each vehicle.</p>
           </div>
           <div>
             <h3>Feasibility variables</h3>
-            <p>Piecewise-constant accelerations <em>a</em><sub>i,k</sub> and auxiliary variables for rear-end separation.</p>
+            <p>Piecewise-constant accelerations \(a_{i,k}\) and auxiliary variables for rear-end separation.</p>
           </div>
         </div>
       </section>
@@ -90,12 +103,15 @@
         </header>
 
         <div class="course-repro-formula" aria-label="Optimization objective">
-          <p>
-            min&nbsp; <em>J</em> = &Sigma;<sub>i</sub> [
-            <em>Q</em><sub>i</sub>&Sigma;<sub>k</sub>(<em>v</em><sub>i,k</sub> &minus; <em>v</em><sub>i</sub><sup>ref</sup>)<sup>2</sup>
-            + <em>R</em><sub>i</sub>&Sigma;<sub>k</sub><em>a</em><sub>i,k</sub><sup>2</sup>
-            + <em>S</em><sub>i</sub>&Sigma;<sub>k</sub>(<em>a</em><sub>i,k</sub> &minus; <em>a</em><sub>i,k&minus;1</sub>)<sup>2</sup> ]
-          </p>
+          <div class="course-repro-equation">
+            \[
+            \min \; J = \sum_i \Bigg[
+              Q_i \sum_k \left(v_{i,k} - v_i^{\mathrm{ref}}\right)^2
+              + R_i \sum_k a_{i,k}^2
+              + S_i \sum_k \left(a_{i,k} - a_{i,k-1}\right)^2
+            \Bigg].
+            \]
+          </div>
         </div>
 
         <div class="course-repro-objective-list">
@@ -150,61 +166,151 @@
 
       <section class="course-repro-section course-repro-results" aria-labelledby="results-heading">
         <header class="course-repro-section-header">
-          <p class="eyebrow">Reproduced Numerical Case</p>
-          <h2 id="results-heading">Four Vehicles on Two Lanes</h2>
+          <p class="eyebrow">Simulation Examples</p>
+          <h2 id="results-heading">Two Intersection-Scheduling Cases</h2>
           <p>
-            The selected case evaluates four vehicles approaching from two
-            directions under a fixed crossing order and a shared intersection
-            occupancy constraint.
+            Each example pairs the vehicle animation with the corresponding
+            position, velocity, and piecewise-constant acceleration profiles.
+          </p>
+          <p>
+            Each colored curve ends at that vehicle's scheduled intersection-exit
+            time, marked by the matching vertical dashed line. The position inset
+            plots deviation from a straight-line baseline to make trajectory
+            curvature visible at this scale.
           </p>
         </header>
 
-        <div class="course-repro-figures">
-          <figure>
-            <a href="ece623-scenario-1-position.png" target="_blank" rel="noopener">
-              <img
-                src="ece623-scenario-1-position.png"
-                alt="Reproduced position trajectories for four vehicles in the two-lane intersection scenario"
-                loading="lazy"
-                decoding="async"
-              >
-            </a>
-            <figcaption>
-              <strong>Position trajectories</strong>
-              <span>Scheduled arrivals at and departures from the shared intersection region.</span>
-            </figcaption>
-          </figure>
-          <figure>
-            <a href="ece623-scenario-1-acceleration.png" target="_blank" rel="noopener">
-              <img
-                src="ece623-scenario-1-acceleration.png"
-                alt="Piecewise-constant acceleration profiles for the reproduced four-vehicle scenario"
-                loading="lazy"
-                decoding="async"
-              >
-            </a>
-            <figcaption>
-              <strong>Feasible acceleration profiles</strong>
-              <span>Piecewise-constant decisions associated with the optimized timing schedule.</span>
-            </figcaption>
-          </figure>
+        <div class="course-repro-examples">
+          <article class="course-repro-example">
+            <header class="course-repro-example-header">
+              <h3>Example 1: Four Vehicles from Two Directions</h3>
+              <p>Four vehicles approach the intersection from two directions under a fixed crossing order.</p>
+            </header>
+            <div class="course-repro-example-grid">
+              <figure>
+                <video controls muted playsinline preload="metadata" aria-label="Animation of four vehicles approaching from two directions">
+                  <source src="assets/projects/ece623-intersection/ece623-example-1-animation.mp4" type="video/mp4">
+                  Your browser does not support embedded video.
+                </video>
+                <figcaption>
+                  <strong>Vehicle animation</strong>
+                  <span>Scheduled vehicle motion through the shared intersection.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-1-position.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-1-position.png"
+                    alt="Position trajectories for four vehicles approaching from two directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Position trajectories</strong>
+                  <span>Horizontal guides mark intersection boundaries; dashed lines mark exit times; the inset shows deviation from a straight-line profile.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-1-velocity.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-1-velocity.png"
+                    alt="Velocity profiles for four vehicles approaching from two directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Velocity profiles</strong>
+                  <span>Dashed lines mark vehicle exit times; dotted horizontal lines indicate the reported reference speeds.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-1-acceleration.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-1-acceleration.png"
+                    alt="Piecewise-constant acceleration inputs for four vehicles approaching from two directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Acceleration inputs</strong>
+                  <span>Color-matched dashed lines mark each vehicle's intersection-exit time.</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <article class="course-repro-example">
+            <header class="course-repro-example-header">
+              <h3>Example 2: Four Vehicles from Four Directions</h3>
+              <p>Four vehicles approach from four directions, producing a distinct sequence of conflict-region access.</p>
+            </header>
+            <div class="course-repro-example-grid">
+              <figure>
+                <video controls muted playsinline preload="metadata" aria-label="Animation of four vehicles approaching from four directions">
+                  <source src="assets/projects/ece623-intersection/ece623-example-2-animation.mp4" type="video/mp4">
+                  Your browser does not support embedded video.
+                </video>
+                <figcaption>
+                  <strong>Vehicle animation</strong>
+                  <span>Scheduled vehicle motion for the four-direction intersection case.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-2-position.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-2-position.png"
+                    alt="Position trajectories for four vehicles approaching from four directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Position trajectories</strong>
+                  <span>Horizontal guides mark intersection boundaries; dashed lines mark exit times; the inset shows deviation from a straight-line profile.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-2-velocity.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-2-velocity.png"
+                    alt="Velocity profiles for four vehicles approaching from four directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Velocity profiles</strong>
+                  <span>Dashed lines mark vehicle exit times; dotted horizontal lines indicate the reported reference speeds.</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <a href="assets/projects/ece623-intersection/ece623-example-2-acceleration.png" target="_blank" rel="noopener">
+                  <img
+                    src="assets/projects/ece623-intersection/ece623-example-2-acceleration.png"
+                    alt="Piecewise-constant acceleration inputs for four vehicles approaching from four directions"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </a>
+                <figcaption>
+                  <strong>Acceleration inputs</strong>
+                  <span>Color-matched dashed lines mark each vehicle's intersection-exit time.</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
         </div>
 
         <p class="course-repro-validation">
-          <strong>Validation:</strong> The reproduced case satisfies the
-          one-vehicle-at-a-time intersection schedule, prescribed entry and
-          exit positions, rear-end separation, and bounded acceleration requirements.
+          <strong>Result:</strong> Both examples illustrate fixed-precedence
+          coordination of conflict-region access together with the associated
+          vehicle trajectories and control inputs.
         </p>
       </section>
 
-      <footer class="course-repro-reference">
-        <p>
-          <strong>Reference:</strong> J. Shi, Y. Zheng, Y. Jiang, M. Zanon,
-          R. Hult, and B. Houska, &ldquo;Distributed Control Algorithm for Vehicle
-          Coordination at Traffic Intersections,&rdquo; 2018 European Control
-          Conference (ECC), pp. 1166&ndash;1171.
-        </p>
-      </footer>
     </div>
   </main>
 </body>

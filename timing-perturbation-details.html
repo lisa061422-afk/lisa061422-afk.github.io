@@ -6,7 +6,7 @@
   <title>Timing Perturbations in Linear Systems | Renke Wang</title>
   <meta
     name="description"
-    content="Project details and a MATLAB two-tank demonstration for robust control of linear systems under nonnegative timing perturbations."
+    content="Dynamics and tube-based MPC control law for linear systems affected by nonnegative timing perturbations."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,9 +14,20 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260808-1" />
+  <link rel="stylesheet" href="styles.css?v=20260825-01" />
+  <link rel="stylesheet" href="assets/projects/timing-perturbation/timing-perturbation.css?v=20260825-09" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { scale: 0.98 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<body>
+<body class="timing-project-page">
   <header class="site-header">
     <div class="container nav-container">
       <a href="index.html#home" class="brand">Renke Wang</a>
@@ -24,84 +35,106 @@
     </div>
   </header>
 
-  <main class="timing-detail-page">
+  <main class="timing-project-detail">
     <div class="container">
-      <header class="timing-detail-header">
-        <p class="eyebrow">Timing Perturbations &middot; Project 1</p>
+      <header class="timing-project-header">
+        <p class="eyebrow">Timing Perturbations &middot; Tube-Based MPC</p>
         <h1>Linear Systems with Timing Perturbations</h1>
-        <p class="timing-detail-lead">
-          A two-tank MATLAB reproduction illustrating how dynamic feedback
-          compensates for delayed control updates while preserving the nominal
-          state at scheduled update times.
+        <p class="timing-project-citation">
+          <strong>Paper:</strong>
+          <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10644675" target="_blank" rel="noopener">
+            R. Wang and N. Yao, &ldquo;Robust Model Predictive Control for Networked Control Systems with Timing Perturbations,&rdquo; ACC 2024.
+          </a>
+        </p>
+        <p class="timing-project-lead">
+          A tube-based MPC architecture compensates for delayed control updates by combining a nominal trajectory with a timing-dependent feedback correction.
         </p>
       </header>
 
-      <figure class="timing-video-figure">
-        <div class="timing-video-frame">
-          <video
-            controls
-            muted
-            playsinline
-            preload="metadata"
-            poster="timing_perturbation_hydrotank_2d.png"
-            aria-label="MATLAB animation of two coupled water tanks under timing-perturbed control updates"
-          >
-            <source src="timing_perturbation_hydrotank_2d.mp4" type="video/mp4" />
-            Your browser does not support embedded MP4 video.
-          </video>
+      <section class="timing-project-section" aria-labelledby="timing-dynamics-heading">
+        <header class="timing-project-section-header">
+          <p class="eyebrow">Dynamics</p>
+          <h2 id="timing-dynamics-heading">Plant, nominal center, and timing mismatch</h2>
+          <p>
+            The nominal model defines the center of the tube. A delayed task completion creates a measurable timing perturbation and a deviation from that center.
+          </p>
+        </header>
+
+        <div class="timing-project-formula timing-project-formula--wide" aria-label="Actual and nominal system dynamics with timing perturbation">
+          <div class="timing-project-equation">
+            \[
+            \dot{x}_i(t)=A_i x_i(t)+B_i u_i(t),\qquad
+            \dot{x}_i^{n}(t)=A_i x_i^{n}(t)+B_i u_i^{n}(t),
+            \]
+            \[
+            \Delta_i[k]=\gamma_i[k]-\tilde{\gamma}_i[k]\geq 0.
+            \]
+          </div>
         </div>
-        <figcaption>
-          Two coupled tanks over a 240 s simulation. The animation shows water
-          levels, nominal and timing-perturbed trajectories, pump inputs, and
-          each scheduled and actual control-update time.
-        </figcaption>
-      </figure>
 
-      <div class="timing-detail-grid">
-        <section class="timing-detail-section" aria-labelledby="model-heading">
-          <h2 id="model-heading">Hydro-tank model</h2>
-          <p>
-            The state vector is <em>x</em> = [<em>h</em><sub>1</sub>,
-            <em>h</em><sub>2</sub>]<sup>T</sup>, where each state is a physical
-            water level and must remain nonnegative. The pump commands form the
-            input vector <em>u</em>. Between control updates, the continuous-time
-            LTI model is propagated with an exact zero-order-hold transition.
-          </p>
-          <div class="model-equation" aria-label="Continuous-time state-space model">
-            x&#775;(t) = Ax(t) + Bu(t)<br>
-            A = [&minus;0.0146&nbsp;&nbsp; 0.0146; &nbsp;0.0146&nbsp;&nbsp;&minus;0.0272]<br>
-            B = [64.9351&nbsp;&nbsp;0; &nbsp;0&nbsp;&nbsp;64.9351]
-          </div>
-          <p>
-            The experiment starts from [0.10, 0.10] m and tracks the target
-            levels [0.40, 0.23] m. Dynamic input corrections are computed after
-            each delayed update so that the perturbed trajectory returns to the
-            nominal trajectory at the scheduled synchronization instants.
-          </p>
-          <p class="pub-citation">
-            <strong>Model source.</strong> The hydraulic structure and parameter
-            values used in this two-tank adaptation are based on J. Kortela,
-            &ldquo;Model-Predictive Control for the Three-Tank System Utilizing an
-            Industrial Automation System,&rdquo; <em>ACS Omega</em>, vol. 7, no. 22,
-            pp. 18605&ndash;18611, 2022.
-            <a href="https://doi.org/10.1021/acsomega.2c01275" target="_blank" rel="noopener">doi:10.1021/acsomega.2c01275 <span aria-hidden="true">&nearr;</span></a>
-          </p>
-        </section>
+      </section>
 
-        <aside class="timing-detail-section" aria-labelledby="verification-heading">
-          <h2 id="verification-heading">Verified setup</h2>
-          <dl class="timing-facts">
-            <div><dt>Simulation horizon</dt><dd>240 s</dd></div>
-            <div><dt>Timing perturbations</dt><dd>3&ndash;4 s</dd></div>
-            <div><dt>Required sign</dt><dd>&Delta;(k) &ge; 0</dd></div>
-            <div><dt>Admissible bound</dt><dd>&Delta;(k) &lt; 7.5 s</dd></div>
-            <div><dt>Maximum mismatch</dt><dd>2.22 &times; 10<sup>&minus;16</sup> m</dd></div>
-          </dl>
-          <div class="timing-detail-actions" aria-label="Project resources">
-            <a class="btn btn-secondary" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10644675" target="_blank" rel="noopener">Read paper <span aria-hidden="true">&nearr;</span></a>
+      <section class="timing-project-section" aria-labelledby="timing-law-heading">
+        <header class="timing-project-section-header">
+          <p class="eyebrow">Tube-Based MPC Control Law</p>
+          <h2 id="timing-law-heading">Tube-Based MPC Controller</h2>
+        </header>
+
+        <div class="timing-controller-focus" aria-label="Tube-based MPC controller with expanded timing-dependent gain">
+          <div class="timing-controller-main-law">
+            <span>\(u_i[k]=u_i^n[k]-\)</span>
+            <span class="timing-controller-gain-focus">
+              <strong>\(K(\Delta_i[k])\)</strong>
+              <small>\(\Delta_i[k]\): timing perturbation</small>
+              <i aria-hidden="true"></i>
+            </span>
+            <span>\(\underbrace{\left[x_i\!\left(\gamma_i[k]\right)-x_i^n\!\left(\gamma_i[k]\right)\right]}_{e_i[k]\,\text{: state error}}\)</span>
           </div>
-        </aside>
-      </div>
+
+          <div class="timing-controller-gain-expansion">
+            <p>\(K(\Delta_i[k])\)</p>
+            <div class="timing-controller-gain-equation">
+              \[
+              K\!\left(\Delta_i[k]\right)
+              =B_i^{\dagger}A_i
+              \left[
+              e^{A_i\left(\tilde{\gamma}_i[k+1]-\tilde{\gamma}_i[k]-\Delta_i[k]\right)}-I
+              \right]^{-1}
+              e^{A_i\left(\tilde{\gamma}_i[k+1]-\tilde{\gamma}_i[k]-\Delta_i[k]\right)}.
+              \]
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="timing-project-section timing-project-demo" aria-labelledby="timing-demo-heading">
+        <header class="timing-project-section-header">
+          <p class="eyebrow">Demonstration</p>
+          <h2 id="timing-demo-heading">Two-tank timing-perturbation example</h2>
+          <p>
+            The animation compares the nominal and timing-perturbed trajectories, pump inputs, and predicted versus actual control-update times.
+          </p>
+        </header>
+
+        <figure class="timing-project-video-figure">
+          <div class="timing-project-video-frame">
+            <video
+              controls
+              muted
+              playsinline
+              preload="metadata"
+              poster="assets/projects/timing-perturbation/timing_perturbation_hydrotank_2d.png"
+              aria-label="MATLAB animation of two coupled water tanks under timing-perturbed control updates"
+            >
+              <source src="assets/projects/timing-perturbation/timing_perturbation_hydrotank_2d.mp4" type="video/mp4" />
+              Your browser does not support embedded MP4 video.
+            </video>
+          </div>
+          <figcaption>
+            Two coupled tanks under nominal and delayed control updates. The video is presented as a compact supporting example rather than the primary project content.
+          </figcaption>
+        </figure>
+      </section>
     </div>
   </main>
 </body>

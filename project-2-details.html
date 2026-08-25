@@ -14,7 +14,20 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260824-21" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+        processEscapes: true
+      },
+      chtml: {
+        scale: 0.96
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20260824-34" />
 </head>
 <body>
   <header class="site-header">
@@ -50,14 +63,15 @@
           </p>
         </div>
         <div class="demo-grid project-application-demo-grid">
-          <figure class="demo">
-            <video src="demo_warehouse.mp4" controls loop muted playsinline preload="metadata"></video>
+          <figure class="demo project-example-target" id="warehouse-scheduling-example">
+            <video src="assets/projects/multi-intersection/demo_warehouse.mp4" controls loop muted playsinline preload="metadata"></video>
             <figcaption>
               <strong>Warehouse Scheduling</strong>
+              <span>This is the 10-vehicle example summarized in the Example Simulation section below.</span>
             </figcaption>
           </figure>
           <figure class="demo">
-            <video src="demo_traffic.mp4" controls loop muted playsinline preload="metadata"></video>
+            <video src="assets/projects/multi-intersection/demo_traffic.mp4" controls loop muted playsinline preload="metadata"></video>
             <figcaption>
               <strong>Traffic Scheduling</strong>
             </figcaption>
@@ -87,7 +101,7 @@
         <div class="project-detail-figures">
           <figure class="project-overview-figure">
             <img
-              src="project-2-traffic-network-detail.png"
+              src="assets/projects/multi-intersection/project-2-traffic-network-detail.png"
               alt="Detailed traffic network model showing vehicle routes, interconnected intersections, and five local conflict regions"
             >
             <figcaption>
@@ -97,6 +111,64 @@
             </figcaption>
           </figure>
         </div>
+      </section>
+
+      <section class="project-overview-section project-formulation-section" aria-labelledby="formulation-heading">
+        <div class="project-formulation-heading">
+          <p class="project-formulation-kicker">Centralized finite-horizon problem</p>
+          <h2 id="formulation-heading">Optimal-Control Formulation</h2>
+          <p>
+            Over the horizon \([t_0,t_f]\), the optimizer chooses the binary
+            resource-occupancy schedules \(\{U_p(t)\}_{p\in\mathcal P}\). The resulting
+            task start and completion times determine the system-level objective:
+          </p>
+        </div>
+
+        <div class="project-optimization-card" aria-label="Finite-horizon scheduling and control co-design problem">
+          <div class="project-optimization-equation">
+            \[
+            \begin{aligned}
+            \underset{\{U_p(t)\}_{p\in\mathcal P}}{\operatorname{minimize}}\quad
+              & J\!\left(\{\beta_n[k],\gamma_n[k]\}_{n,k}\right)
+                = \sum_{n=1}^{N} J_n(\cdot) \\[0.45em]
+            \text{subject to}\quad
+              & U_p(t)=\left[u_{p,m,n}(t)\right]\in\{0,1\}^{M\times N},
+                && \forall p\in\mathcal P,\; t\in[t_0,t_f], \\
+              & C_n[k]=\sum_{q=1}^{Q_{n,k}} C_n^q[k],
+                && \forall n\in\mathcal N,\; k=1,\ldots,K_n, \\
+              & \gamma_n[k]=\beta_n[k]+C_n[k],
+                && \forall n\in\mathcal N,\; k=1,\ldots,K_n, \\
+              & \alpha_n[k]=\gamma_n[k-1]+\Delta t_n[k-1],
+                && \forall n\in\mathcal N,\; k=2,\ldots,K_n, \\
+              & \sum_{n=1}^{N}u_{p,m,n}(t)\le 1,
+                && \forall p\in\mathcal P,\; m\in\mathcal M,\; t\in[t_0,t_f], \\
+              & \sum_{p=1}^{P}\sum_{m=1}^{M}u_{p,m,n}(t)\le 1,
+                && \forall n\in\mathcal N,\; t\in[t_0,t_f], \\
+              & \delta_n[k]=\beta_n[k]-\alpha_n[k],
+                && \forall n\in\mathcal N,\; k=1,\ldots,K_n.
+            \end{aligned}
+            \]
+          </div>
+        </div>
+
+        <div class="project-objective-note">
+          <p>
+            <strong>Traffic-study objective.</strong> In the reported simulations, the
+            general cost above is instantiated as total scheduling delay.
+          </p>
+          <div class="project-objective-equation">
+            \[
+              J_{\mathrm{delay}}=
+              \sum_{n=1}^{N}\sum_{k=1}^{K_n}\delta_n[k]
+            \]
+          </div>
+        </div>
+        <p class="project-formulation-note">
+          Here \(\alpha_n[k]\), \(\beta_n[k]\), and \(\gamma_n[k]\) denote task
+          generation, scheduled start, and completion times. More generally, each
+          \(J_n\) can encode delay or a quadratic penalty on state deviation and
+          control effort.
+        </p>
       </section>
 
       <section class="project-overview-section" aria-labelledby="approach-heading">
@@ -112,7 +184,7 @@
               <h3>Arrival/Exit-Time Consensus</h3>
             </div>
             <img
-              src="project-2-network-graph.png"
+              src="assets/projects/multi-intersection/project-2-network-graph.png"
               alt="Graph of connected resource-bundle agents and a route-level task sequence"
             >
             <figcaption>
@@ -123,12 +195,12 @@
 
           <div class="project-architecture-connector" aria-label="Information exchanged between the network and local scheduling levels">
             <div class="project-architecture-signal">
+              <span class="project-architecture-arrow project-architecture-arrow-return" aria-hidden="true"></span>
               <span>Consensus arrival<br>and exit times</span>
-              <span class="project-architecture-arrow project-architecture-arrow-forward" aria-hidden="true"></span>
             </div>
             <div class="project-architecture-signal">
-              <span class="project-architecture-arrow project-architecture-arrow-return" aria-hidden="true"></span>
               <span>Collision-free schedule<br>and feasible timing</span>
+              <span class="project-architecture-arrow project-architecture-arrow-forward" aria-hidden="true"></span>
             </div>
           </div>
 
@@ -138,7 +210,7 @@
               <h3>Collision-Free Scheduling</h3>
             </div>
             <img
-              src="project-2-local-decision-tree.png"
+              src="assets/projects/multi-intersection/project-2-local-decision-tree.png"
               alt="Local decision tree whose branches encode contention-resolution choices and produce a resource-space schedule"
             >
             <figcaption>
@@ -182,6 +254,11 @@
             3.01 s, a reduction of about 73%. The method converged in 68 coordination
             iterations for this case.
           </p>
+          <p class="project-example-jump-row">
+            <a class="project-example-jump" href="#warehouse-scheduling-example">
+              View this example in the Warehouse Scheduling animation <span aria-hidden="true">&uarr;</span>
+            </a>
+          </p>
           <p>
             Six additional random cases with 8 to 25 vehicles also produced lower delay
             than the first-come-first-served baseline. These results demonstrate the
@@ -210,7 +287,7 @@
         </dl>
         <figure class="project-wide-figure project-result-figure">
           <img
-            src="project-2-local-schedules.png"
+            src="assets/projects/multi-intersection/project-2-local-schedules.png"
             alt="Local resource-space schedules at four traffic intersections with a comparison against first-come-first-served scheduling"
           />
           <figcaption>
@@ -230,7 +307,7 @@
         </div>
         <div class="demo-grid project-principle-demo-grid">
           <figure class="demo">
-            <video src="demo_principle.mp4" controls loop muted playsinline preload="metadata"></video>
+            <video src="assets/projects/multi-intersection/demo_principle.mp4" controls loop muted playsinline preload="metadata"></video>
             <figcaption>
               <strong>Contention-resolution and scheduling principle</strong>
             </figcaption>

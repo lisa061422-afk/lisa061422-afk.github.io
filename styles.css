@@ -853,6 +853,67 @@ p { margin: 0 0 1em; }
 .project-detail-figures .project-overview-figure img {
   background: #fff;
 }
+.project-formulation-heading {
+  max-width: 780px;
+}
+.project-formulation-kicker {
+  margin-bottom: 0.4rem;
+  color: var(--color-accent) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.project-optimization-card {
+  margin-top: 1.35rem;
+  padding: 1.25rem 1.35rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent-soft);
+  box-shadow: var(--shadow-sm);
+}
+.project-optimization-equation {
+  min-width: 780px;
+  color: var(--color-text);
+  font-size: 0.94rem;
+}
+.project-optimization-equation mjx-container[jax="CHTML"][display="true"] {
+  margin: 0 !important;
+  text-align: left !important;
+}
+.project-objective-note {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  background: #fff;
+}
+.project-objective-note p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+.project-objective-note strong {
+  color: var(--color-text);
+}
+.project-objective-equation {
+  color: var(--color-accent);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+.project-objective-equation mjx-container[jax="CHTML"][display="true"] {
+  margin: 0 !important;
+}
+.project-formulation-note {
+  max-width: 840px;
+  margin: 0.8rem 0 0;
+  color: var(--color-text-muted) !important;
+  font-size: 0.79rem !important;
+}
 .project-architecture-lead {
   max-width: 760px;
   margin-bottom: 1.25rem;
@@ -879,7 +940,7 @@ p { margin: 0 0 1em; }
 .project-architecture-card .project-architecture-level {
   margin: 0;
   color: var(--color-accent);
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.3;
@@ -889,7 +950,7 @@ p { margin: 0 0 1em; }
 .project-architecture-card h3 {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 0.88rem;
+  font-size: 1.04rem;
   text-align: right;
 }
 .project-architecture-card img {
@@ -899,8 +960,8 @@ p { margin: 0 0 1em; }
 }
 .project-architecture-card figcaption {
   color: var(--color-text-muted);
-  font-size: 0.76rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 .project-architecture-card figcaption strong {
   color: var(--color-text-soft);
@@ -911,8 +972,8 @@ p { margin: 0 0 1em; }
   justify-content: center;
   gap: 1.1rem;
   color: var(--color-text-muted);
-  font-size: 0.72rem;
-  line-height: 1.4;
+  font-size: 0.88rem;
+  line-height: 1.48;
   text-align: center;
 }
 .project-architecture-signal {
@@ -923,7 +984,7 @@ p { margin: 0 0 1em; }
 }
 .project-architecture-arrow {
   color: var(--color-accent);
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 700;
 }
 .project-architecture-arrow-forward::before {
@@ -1015,6 +1076,23 @@ p { margin: 0 0 1em; }
 .project-result-figure {
   grid-column: 1 / -1;
 }
+.project-example-jump-row {
+  margin: 0.7rem 0 1rem;
+}
+.project-example-jump {
+  color: var(--color-accent);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.project-example-target {
+  scroll-margin-top: 5.5rem;
+}
+.project-example-target:target video {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
 .project-overview-page .project-visualizations {
   margin-top: 0;
 }
@@ -1070,6 +1148,16 @@ p { margin: 0 0 1em; }
   .project-overview-page .project-application-demo-grid {
     grid-template-columns: 1fr;
   }
+  .project-optimization-card {
+    padding: 1rem;
+  }
+  .project-optimization-equation {
+    font-size: 0.86rem;
+  }
+  .project-objective-note {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
 }
 
 /* ---------- Timing-perturbation project detail page ---------- */
@@ -1107,6 +1195,82 @@ p { margin: 0 0 1em; }
   margin-top: 0.65rem;
   color: var(--color-text-muted);
   font-size: 0.8rem;
+}
+.timing-controller-section {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+.timing-controller-header {
+  max-width: 900px;
+  margin-bottom: 1rem;
+}
+.timing-controller-header h2 {
+  margin-bottom: 0.55rem;
+  font-size: 1.4rem;
+}
+.timing-controller-header > p:last-child,
+.timing-controller-block > p,
+.timing-design-target > p {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.timing-controller-block + .timing-controller-block { margin-top: 1rem; }
+.timing-controller-block h3,
+.timing-design-target h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.timing-math-block {
+  margin: 0.7rem 0 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  color: var(--color-text);
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 2px;
+}
+.timing-math-block mjx-container[jax="CHTML"][display="true"] {
+  margin: 0 !important;
+  text-align: left !important;
+}
+.timing-math-wide mjx-container[jax="CHTML"][display="true"] {
+  min-width: 820px;
+}
+.timing-symbols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 1rem 0 0;
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+}
+.timing-symbols > div {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.34fr) minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.timing-symbols dt {
+  color: var(--color-text);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.timing-symbols dd {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.timing-design-target {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
 }
 .timing-detail-grid {
   display: grid;
@@ -1521,6 +1685,18 @@ p { margin: 0 0 1em; }
   font-size: 0.92rem;
   line-height: 1.8;
 }
+.course-repro-equation {
+  min-width: 680px;
+  color: var(--color-text);
+  font-size: 0.92rem;
+}
+.course-repro-equation mjx-container[jax="CHTML"][display="true"] {
+  margin: 0 !important;
+  text-align: left !important;
+}
+.course-repro-detail-page mjx-container[jax="CHTML"] {
+  color: var(--color-text);
+}
 .course-repro-objective-list {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1572,6 +1748,66 @@ p { margin: 0 0 1em; }
   color: var(--color-text-soft);
   font-size: 0.8rem;
 }
+.course-repro-examples {
+  display: grid;
+  gap: 1.35rem;
+}
+.course-repro-example {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+.course-repro-example:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.course-repro-example-header { margin-bottom: 0.8rem; }
+.course-repro-example-header h3 {
+  margin: 0 0 0.3rem;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.course-repro-example-header p {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+.course-repro-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+.course-repro-example figure { margin: 0; }
+.course-repro-example a { display: block; }
+.course-repro-example video,
+.course-repro-example img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.course-repro-example video {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #111111;
+}
+.course-repro-example img {
+  height: auto;
+  background: #ffffff;
+}
+.course-repro-example figcaption { margin-top: 0.55rem; }
+.course-repro-example figcaption strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 0.86rem;
+}
+.course-repro-example figcaption span {
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
 .course-repro-reference {
   margin-top: 3rem;
   padding-top: 1.25rem;
@@ -1585,6 +1821,360 @@ p { margin: 0 0 1em; }
   line-height: 1.6;
 }
 .course-repro-reference strong { color: var(--color-text-soft); }
+.course-repro-reference a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-strong);
+  text-underline-offset: 0.18em;
+}
+.course-repro-reference a:hover {
+  color: var(--color-accent);
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Predictive human-attention scheduling detail page ---------- */
+.hri-detail-page { padding: 1.5rem 0 2rem; }
+.hri-detail-header {
+  max-width: 940px;
+  margin-bottom: 1.15rem;
+}
+.hri-detail-header h1 {
+  margin-bottom: 0.65rem;
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+}
+.hri-detail-lead {
+  max-width: 880px;
+  color: var(--color-text-soft);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.hri-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+}
+.hri-detail-actions .btn { font-size: 0.85rem; }
+.hri-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--color-border);
+  background: #ffffff;
+}
+.hri-summary-grid > div { padding: 1rem 1.15rem; }
+.hri-summary-grid > div + div { border-left: 1px solid var(--color-border); }
+.hri-summary-grid h2 {
+  margin: 0 0 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.hri-summary-grid p {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.hri-section {
+  margin-top: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+.hri-section-header {
+  max-width: 880px;
+  margin-bottom: 1rem;
+}
+.hri-section-header h2 {
+  margin-bottom: 0.55rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.hri-section-header > p:last-child {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.hri-system-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.75fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+.hri-system-figures {
+  display: grid;
+  gap: 1rem;
+}
+.hri-system-grid figure,
+.hri-result-figure { margin: 0; }
+.hri-system-grid img,
+.hri-result-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.hri-system-grid figcaption,
+.hri-result-figure figcaption {
+  margin-top: 0.55rem;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.hri-system-grid figcaption strong,
+.hri-result-figure figcaption strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 0.86rem;
+}
+.hri-model-list {
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+}
+.hri-model-list > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.3fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.72rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.hri-model-list dt {
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.hri-model-list dd {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+.hri-constraints {
+  margin: 0.8rem 0 0;
+  border-top: 1px solid var(--color-border);
+}
+.hri-constraints > div {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.3fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 0.78rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.hri-constraints dt {
+  color: var(--color-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.hri-constraints dd {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+.hri-formula-stack {
+  display: grid;
+  gap: 0.8rem;
+}
+.hri-formula-card {
+  overflow-x: auto;
+  padding: 1rem 1.15rem;
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.hri-formula-card h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.hri-formula-card p {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.83rem;
+  line-height: 1.55;
+}
+.hri-equation {
+  min-width: 650px;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+.hri-equation mjx-container[jax="CHTML"][display="true"] {
+  margin: 0.45rem 0 !important;
+  text-align: left !important;
+}
+.hri-detail-page mjx-container[jax="CHTML"] { color: var(--color-text); }
+.hri-rolling-formula { margin-top: 0.8rem; }
+.hri-wide-figure,
+.hri-tree-figure {
+  margin: 0;
+}
+.hri-tree-figure {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.65fr) minmax(240px, 0.35fr);
+  gap: 1.2rem;
+  align-items: center;
+  margin-top: 0.9rem;
+}
+.hri-wide-figure a,
+.hri-tree-figure a { display: block; }
+.hri-wide-figure img,
+.hri-tree-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.hri-wide-figure figcaption,
+.hri-tree-figure figcaption {
+  color: var(--color-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.hri-wide-figure figcaption { margin-top: 0.55rem; }
+.hri-wide-figure figcaption strong,
+.hri-tree-figure figcaption strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--color-text);
+  font-size: 0.88rem;
+}
+.hri-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--color-border);
+}
+.hri-flow li {
+  position: relative;
+  min-height: 138px;
+  padding: 1rem 1.1rem;
+}
+.hri-flow li + li { border-left: 1px solid var(--color-border); }
+.hri-flow .step-number {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hri-flow strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.88rem;
+}
+.hri-flow p {
+  margin: 0;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.hri-result-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  align-items: start;
+}
+.hri-plot-key {
+  padding: 1rem 1.1rem;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+}
+.hri-plot-key h3 {
+  margin: 0 0 0.65rem;
+  font-size: 0.92rem;
+}
+.hri-plot-key ul {
+  column-count: 2;
+  column-gap: 2.5rem;
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.hri-plot-key li {
+  break-inside: avoid;
+  color: var(--color-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.hri-plot-key li + li { margin-top: 0.4rem; }
+.hri-study-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+.hri-study-grid figure { margin: 0; }
+.hri-study-grid a { display: block; }
+.hri-study-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.hri-study-grid figcaption {
+  margin-top: 0.55rem;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.hri-study-grid figcaption strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 0.86rem;
+}
+.hri-feedback-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  align-items: baseline;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-soft);
+  font-size: 0.86rem;
+}
+.hri-feedback-summary > strong { color: var(--color-text); }
+.hri-feedback-summary b {
+  color: var(--color-accent);
+  font-size: 1rem;
+}
+
+@media (max-width: 900px) {
+  .hri-flow { grid-template-columns: 1fr; }
+  .hri-flow li { min-height: 0; }
+  .hri-flow li + li {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+  .hri-study-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  .hri-summary-grid,
+  .hri-system-grid,
+  .hri-result-layout { grid-template-columns: 1fr; }
+  .hri-summary-grid > div + div {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+  .hri-model-list > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .hri-constraints > div,
+  .hri-tree-figure { grid-template-columns: 1fr; }
+  .hri-study-grid { grid-template-columns: 1fr; }
+  .hri-plot-key ul { column-count: 1; }
+}
 
 /* ---------- Visual demonstrations ---------- */
 .project-visualizations {
@@ -1747,6 +2337,39 @@ p { margin: 0 0 1em; }
   .skill-block {
     grid-template-columns: 1fr;
     gap: 0.7rem;
+  }
+}
+
+.path-planning-detail-page .path-planning-example-frame {
+  max-width: 1200px;
+  margin-inline: auto;
+  overflow: hidden;
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+
+.path-planning-detail-page .path-planning-example-frame iframe {
+  display: block;
+  width: 100%;
+  height: min(760px, 80vh);
+  min-height: 620px;
+  border: 0;
+}
+
+.path-planning-detail-page .path-planning-example-actions {
+  max-width: 1200px;
+  margin: 0.7rem auto 0;
+}
+
+.path-planning-detail-page .path-planning-example-actions .btn {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 700px) {
+  .path-planning-detail-page .path-planning-example-frame iframe {
+    height: 660px;
+    min-height: 0;
   }
 }
 
@@ -2042,6 +2665,7 @@ p { margin: 0 0 1em; }
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
+  .timing-symbols { grid-template-columns: 1fr; }
   .unicycle-scope-grid,
   .unicycle-results-summary,
   .unicycle-case-media,
@@ -2057,12 +2681,144 @@ p { margin: 0 0 1em; }
   .unicycle-case-header p { text-align: left; }
   .course-repro-decision-row,
   .course-repro-objective-list,
-  .course-repro-figures {
+  .course-repro-figures,
+  .course-repro-example-grid {
     grid-template-columns: 1fr;
   }
   .course-repro-constraints > div {
     grid-template-columns: 1fr;
     gap: 0.35rem;
+  }
+}
+
+/* ---------- Compact vertical rhythm ---------- */
+/* Keep related content visually connected across the homepage and detail pages. */
+.home-page .section {
+  padding: 1rem 0;
+}
+
+.home-page .section-header {
+  margin-bottom: 0.9rem;
+}
+
+.home-page #research .section-header {
+  margin-bottom: 0.65rem;
+}
+
+.home-page .research-subsection + .research-subsection {
+  margin-top: 0.75rem;
+}
+
+.home-page .project-list li.numbered-subproject,
+.home-page .project-list li.project-showcase {
+  padding: 1rem 0;
+}
+
+.home-page .contact-grid {
+  gap: 1.25rem;
+}
+
+.figure-gallery-page,
+.project-detail-page,
+.project-overview-page,
+.timing-detail-page,
+.unicycle-detail-page,
+.course-repro-detail-page {
+  padding: 1.5rem 0 2rem;
+}
+
+.figure-gallery-header,
+.project-overview-header,
+.timing-detail-header,
+.unicycle-detail-header,
+.course-repro-header {
+  margin-bottom: 1.15rem;
+}
+
+.project-overview-header {
+  padding-bottom: 0.65rem;
+}
+
+.project-overview-section {
+  padding: 1.1rem 0;
+}
+
+.timing-detail-grid {
+  gap: 1.5rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+}
+
+.unicycle-validation,
+.course-repro-note,
+.course-repro-validation {
+  margin-top: 0.8rem;
+}
+
+.unicycle-cases,
+.unicycle-extra-test,
+.course-repro-section,
+.project-visualizations {
+  margin-top: 0.85rem;
+  padding-top: 1rem;
+}
+
+.unicycle-case {
+  padding: 1.1rem 0 1.25rem;
+}
+
+.unicycle-error-legend,
+.course-repro-reference,
+.demo-block {
+  margin-top: 1rem;
+}
+
+.course-repro-section-header,
+.project-visualization-heading {
+  margin-bottom: 0.85rem;
+}
+
+/* ---------- Path-planning project detail ---------- */
+.path-planning-detail-page .hri-detail-header {
+  margin-bottom: 0.85rem;
+}
+
+.path-planning-detail-page .hri-detail-lead {
+  max-width: 760px;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.path-planning-detail-page .hri-section-header {
+  margin-bottom: 0.65rem;
+}
+
+.path-planning-detail-page .hri-wide-figure {
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.path-planning-detail-page .hri-wide-figure figcaption strong {
+  display: inline;
+  margin: 0 0.25rem 0 0;
+}
+
+.path-planning-detail-page .path-planning-constraints-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.path-planning-detail-page .path-planning-constraints-grid .hri-equation {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .path-planning-detail-page .path-planning-constraints-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-planning-detail-page .path-planning-constraints-grid .hri-equation {
+    min-width: 580px;
   }
 }
 

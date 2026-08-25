@@ -18,6 +18,9 @@ Then open `http://localhost:8000/`.
 - Edit `index.html` for page content.
 - Edit `styles.css` for styling.
 - Edit `script.js` for navigation behavior.
-- Replace the image, videos, or CV using the existing filenames to update
-  those assets without changing the HTML.
+- Store shared profile assets in `assets/site/`.
+- Store project images, videos, project-specific styles, scripts, and documents
+  in `assets/projects/<project-name>/`.
+- Keep public HTML entry pages in the repository root so existing page URLs
+  remain stable.
 

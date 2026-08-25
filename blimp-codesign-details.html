@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robust Blimp Scheduling-Control Co-Design | Renke Wang</title>
+  <meta
+    name="description"
+    content="Robust scheduling-control co-design for multi-blimp inspection with heterogeneous computational resources and wind disturbances."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260824-32" />
+  <link rel="stylesheet" href="assets/projects/blimp-codesign/blimp-codesign.css?v=20260824-08" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: {
+        scale: 0.96
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script defer src="assets/projects/blimp-codesign/blimp-inspection-demo.js?v=20260824-33"></script>
+</head>
+<body class="blimp-page">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#blimp-codesign-project" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="blimp-detail-page">
+    <div class="container">
+      <header class="blimp-detail-header">
+        <p class="eyebrow">Scheduling-Control Co-Design &middot; Multi-Robot Inspection</p>
+        <h1>Robust Co-Design for Blimp Motion Control with Heterogeneous Computational Resources</h1>
+        <p class="blimp-paper-citation">
+          <strong>Ongoing research:</strong> manuscript under review.
+        </p>
+        <p class="blimp-detail-lead">
+          A robust co-design framework coordinates shared computation and motion
+          control for cooperative robotic blimps operating under uncertain wind.
+        </p>
+      </header>
+
+      <section class="blimp-scope" aria-labelledby="blimp-scope-heading">
+        <div>
+          <p class="eyebrow">System</p>
+          <h2 id="blimp-scope-heading">Inspection with shared off-board computation</h2>
+          <p>
+            Multiple blimps follow inspection routes while sharing heterogeneous
+            off-board computation for wind estimation and control updates.
+          </p>
+        </div>
+        <dl>
+          <div><dt>Agents</dt><dd>Cooperative robotic blimps</dd></div>
+          <div><dt>Resources</dt><dd>Heterogeneous off-board compute</dd></div>
+          <div><dt>Decision</dt><dd>Online scheduling and control</dd></div>
+          <div><dt>Disturbance</dt><dd>Uncertain wind</dd></div>
+        </dl>
+      </section>
+
+      <section class="blimp-section" aria-labelledby="blimp-overview-heading">
+        <header class="blimp-section-header">
+          <p class="eyebrow">Physical and computational system</p>
+          <h2 id="blimp-overview-heading">Why scheduling changes the trajectory</h2>
+          <p>
+            Before its wind-estimation task completes, a blimp follows the
+            nominal heading and drifts with the unknown wind. Once the estimate
+            becomes available, the heading is corrected toward the next
+            waypoint. A longer scheduling delay therefore creates a larger
+            deviation and a smaller safety margin inside the grid cell.
+          </p>
+        </header>
+        <div class="blimp-overview-grid">
+          <figure class="blimp-system-figure">
+            <img
+              src="assets/projects/blimp-codesign/blimp_fig1.png"
+              alt="Multiple blimps connected to heterogeneous computational resources while following inspection trajectories"
+            />
+            <figcaption>
+              Multiple lighter-than-air agents share remote computation for
+              wind estimation and control updates.
+            </figcaption>
+          </figure>
+          <div class="blimp-sequence" aria-label="Scheduling and control sequence">
+            <div><span>1</span><p><strong>Enter a grid cell</strong>Generate a wind-estimation task at \(\alpha_n[i]\).</p></div>
+            <div><span>2</span><p><strong>Resolve contention</strong>Assign at most one task to each processor.</p></div>
+            <div><span>3</span><p><strong>Estimate local wind</strong>Complete the task at \(\gamma_n[i]\).</p></div>
+            <div><span>4</span><p><strong>Correct the heading</strong>Steer from the drift point to the next waypoint.</p></div>
+          </div>
+        </div>
+
+        <div class="blimp-error-explanation">
+          <h3>From scheduling delay to tracking error</h3>
+          <p>
+            When a blimp enters an inspection cell at \(t=\alpha_n[i]\), it releases a local wind-estimation task. Until that task finishes at \(t=\gamma_n[i]\), the controller does not yet have the updated wind information, so the wind-perturbed motion can drift away from the predicted trajectory.
+          </p>
+          <p>
+            Once the estimate becomes available, the controller redirects the blimp toward the next waypoint. The dashed green path is the predicted motion, the solid black path is the wind-perturbed motion, and the gray region qualitatively represents the tracking error accumulated over the waiting interval \([\alpha_n[i],\gamma_n[i]]\). Reducing scheduling delay shortens this interval and can therefore reduce trajectory deviation.
+          </p>
+        </div>
+
+        <figure class="blimp-error-figure" aria-labelledby="blimp-error-caption">
+          <div class="blimp-error-figure-scroll">
+            <svg viewBox="0 0 960 360" role="img" aria-labelledby="blimp-error-title blimp-error-desc">
+              <title id="blimp-error-title">Tracking-error dynamics inside one inspection cell</title>
+              <desc id="blimp-error-desc">A dashed predicted path and a solid wind-perturbed path cross a square inspection cell. The gray region between them represents accumulated tracking error before the wind estimate becomes available.</desc>
+              <defs>
+                <marker id="blimp-wind-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+                  <path d="M0,0 L9,4.5 L0,9 Z" fill="#2777a8" />
+                </marker>
+              </defs>
+
+              <rect class="blimp-error-cell" x="132" y="34" width="696" height="280" />
+              <path class="blimp-error-grid" d="M306 34V314 M480 34V314 M654 34V314 M132 104H828 M132 174H828 M132 244H828" />
+
+              <path class="blimp-error-area" d="M132 267 L828 78 L518 224 Z" />
+              <path class="blimp-error-predicted" d="M132 267 L828 78" />
+              <path class="blimp-error-perturbed" d="M132 267 L518 224 L828 78" />
+
+              <line class="blimp-error-gap" x1="502.37" y1="166.43" x2="518" y2="224" />
+              <line class="blimp-error-wind" x1="332" y1="162" x2="370" y2="215" marker-end="url(#blimp-wind-arrow)" />
+
+              <circle class="blimp-error-point" cx="132" cy="267" r="6" />
+              <circle class="blimp-error-ready" cx="518" cy="224" r="6" />
+              <circle class="blimp-error-point" cx="828" cy="78" r="6" />
+
+              <text class="blimp-error-label" x="152" y="296">task released</text>
+              <text class="blimp-error-symbol" x="152" y="316">entry time α</text>
+              <text class="blimp-error-label" x="536" y="242">wind estimate available</text>
+              <text class="blimp-error-symbol" x="536" y="262">completion time γ</text>
+              <text class="blimp-error-label" x="690" y="59">next waypoint</text>
+              <text class="blimp-error-predicted-label" x="586" y="128">predicted trajectory</text>
+              <text class="blimp-error-perturbed-label" x="250" y="287">wind-perturbed trajectory</text>
+              <text class="blimp-error-area-label" x="404" y="219">tracking error</text>
+              <text class="blimp-error-wind-label" x="300" y="151">wind</text>
+            </svg>
+          </div>
+          <figcaption id="blimp-error-caption">
+            With piecewise-constant velocity and wind, each motion phase is a straight segment. The dashed perpendicular shows the instantaneous cross-track error; the gray wedge illustrates the deviation accumulated before the updated wind estimate becomes available.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="blimp-section" aria-labelledby="blimp-formulation-heading">
+        <header class="blimp-section-header">
+          <p class="eyebrow">Optimization problem</p>
+          <h2 id="blimp-formulation-heading">Core co-design problem</h2>
+          <p>
+            The controller jointly selects resource assignments and motion-control
+            actions. The unpublished implementation uses a more detailed model;
+            the public formulation below shows only its core structure.
+          </p>
+        </header>
+
+        <div class="blimp-formula" aria-label="Blimp scheduling-control optimization problem">
+          <div class="blimp-equation">
+            \[
+            \min_{\mathcal U,\,\mathcal A}\quad J=w_T T_{\mathrm{mission}}+w_D D_{\mathrm{schedule}}+w_E E_{\mathrm{tracking}}
+            \]
+            \[
+            \text{subject to}\quad \mathcal U(t)\in\mathcal F_{\mathrm{resource}},\quad \gamma=\alpha+\delta+C(\mathcal U),\quad x_{k+1}=f(x_k,a_k,d_k),\quad x_k\in\mathcal X_{\mathrm{safe}},\ a_k\in\mathcal A,\quad 0\leq\delta_k\leq\bar\delta_k.
+            \]
+          </div>
+        </div>
+
+        <p class="blimp-constraint-notes">Resource feasibility &middot; heterogeneous task timing &middot; wind-perturbed dynamics &middot; route and actuation safety &middot; robust delay feasibility</p>
+
+        <div class="blimp-objective-terms">
+          <article>
+            <h3>Scheduling delay</h3>
+            <p>Discourages waiting for shared computation while a blimp continues to drift.</p>
+          </article>
+          <article>
+            <h3>Tracking error</h3>
+            <p>Penalizes separation between the planned and wind-perturbed trajectories.</p>
+          </article>
+          <article>
+            <h3>Total inspection time</h3>
+            <p>Checks whether improved coordination also changes the overall mission duration.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="blimp-section" aria-labelledby="blimp-demo-heading">
+        <header class="blimp-section-header">
+          <p class="eyebrow">Representative animation example</p>
+          <h2 id="blimp-demo-heading">Predicted and realized motion under i.i.d. wind</h2>
+          <p>
+            This animation initially uses the fixed seed 20260824, so Restart or
+            a page refresh reproduces the same illustrative wind realization;
+            Generate another example creates a different realization. The dashed
+            trajectory uses the mean wind estimate, the solid trajectory uses the
+            sampled realization, and the faint trajectories show Monte Carlo samples.
+          </p>
+        </header>
+
+        <div class="blimp-demo" data-blimp-demo>
+          <div class="blimp-demo-controls" aria-label="Simulation controls">
+            <div class="blimp-control-actions">
+              <button type="button" class="blimp-control-primary" data-action="toggle">Pause</button>
+              <button type="button" data-action="restart">Restart</button>
+              <button type="button" data-action="resample">Generate another example</button>
+            </div>
+            <label>
+              Focus
+              <select data-control="blimp">
+                <option value="0">Blimp 1</option>
+                <option value="1">Blimp 2</option>
+                <option value="2">Blimp 3</option>
+                <option value="3">Blimp 4</option>
+              </select>
+            </label>
+            <label>
+              Speed
+              <select data-control="speed">
+                <option value="0.5">0.5&times;</option>
+                <option value="1" selected>1&times;</option>
+                <option value="2">2&times;</option>
+              </select>
+            </label>
+            <label>
+              Monte Carlo
+              <select data-control="samples">
+                <option value="12">12 runs</option>
+                <option value="24" selected>24 runs</option>
+                <option value="40">40 runs</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="blimp-view-options" aria-label="Visible trajectory layers">
+            <label><input type="checkbox" data-layer="predicted" checked /> Predicted</label>
+            <label><input type="checkbox" data-layer="montecarlo" checked /> Monte Carlo</label>
+            <label><input type="checkbox" data-layer="wind" checked /> Wind vectors</label>
+            <label><input type="checkbox" data-layer="processor-links" checked /> Processor communication</label>
+            <span>Example seed <strong data-value="seed">20260824</strong></span>
+          </div>
+
+          <div class="blimp-canvas-wrap">
+            <canvas
+              data-canvas
+              width="960"
+              height="560"
+              role="img"
+              aria-label="Animated four-blimp inspection map showing trajectories under stochastic wind and temporary communication links to active processors"
+            >
+              Animated inspection trajectories for four blimps sharing two computational resources.
+            </canvas>
+          </div>
+
+          <div class="blimp-demo-legend" aria-label="Trajectory legend">
+            <span><i class="blimp-legend-line blimp-legend-nominal"></i>Nominal route</span>
+            <span><i class="blimp-legend-line blimp-legend-predicted"></i>Predicted</span>
+            <span><i class="blimp-legend-line blimp-legend-actual"></i>Actual</span>
+            <span><i class="blimp-legend-line blimp-legend-montecarlo"></i>Monte Carlo</span>
+            <span><i class="blimp-legend-arrow">&rarr;</i>Sampled wind</span>
+          </div>
+
+          <figure class="blimp-occupancy-result">
+            <header>
+              <p class="eyebrow">Scheduling result from the original simulation</p>
+              <h3>Blimp task occupancy and two-processor allocation</h3>
+            </header>
+            <img
+              src="assets/projects/blimp-codesign/blimp_task_processor_occupancy.png"
+              alt="Six-panel MATLAB scheduling result with task-occupancy traces for four blimps and allocation traces for two computational resources"
+              loading="lazy"
+            />
+            <figcaption>
+              The upper four panels show the task state of Blimps 1&ndash;4 (labeled System 1&ndash;4 in the original plot): 0 means idle, 0.5 means a released task is waiting, and 1 means the task is executing. Blue dashed lines mark task-generation times. The lower two panels show which blimp occupies Resource 1 or Resource 2 at each significant scheduling moment; values 1&ndash;4 identify the assigned blimp and 0 denotes an idle processor.
+            </figcaption>
+          </figure>
+
+          <div class="blimp-live-readout">
+            <dl>
+              <div><dt>Simulation time</dt><dd data-value="time">0.0 s</dd></div>
+              <div><dt>Focused task</dt><dd data-value="task">Cell 1</dd></div>
+              <div><dt>Task state</dt><dd data-value="state">Estimating wind</dd></div>
+              <div><dt>Wind sample</dt><dd data-value="wind">5.0 cm/s</dd></div>
+              <div><dt>Scheduling delay</dt><dd data-value="delay">0.0 s</dd></div>
+              <div><dt>Robust bound</dt><dd data-value="bound">&mdash;</dd></div>
+            </dl>
+          </div>
+
+          <div class="blimp-resources" aria-label="Current computational resource assignments">
+            <div>
+              <span>Processor A <small>fast processor</small></span>
+              <strong data-resource="0">Blimp 1 &middot; Cell 1</strong>
+            </div>
+            <div>
+              <span>Processor B <small>standard processor</small></span>
+              <strong data-resource="1">Blimp 2 &middot; Cell 1</strong>
+            </div>
+          </div>
+          <p class="blimp-demo-status" data-status aria-live="polite">
+            Representative control-aware schedule initialized.
+          </p>
+        </div>
+      </section>
+
+      <section class="blimp-section blimp-results-section" aria-labelledby="blimp-results-heading">
+        <header class="blimp-section-header">
+          <p class="eyebrow">Representative four-blimp study</p>
+          <h2 id="blimp-results-heading">Control-aware scheduling reduces accumulated delay</h2>
+        </header>
+
+        <div class="blimp-results-table-wrap">
+          <table class="blimp-results-table">
+            <thead>
+              <tr>
+                <th scope="col">Metric</th>
+                <th scope="col">Proposed method</th>
+                <th scope="col">Fixed priority</th>
+                <th scope="col">Difference</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Total scheduling delay</th>
+                <td>8.66 s</td>
+                <td>18.89 s</td>
+                <td><strong>&minus;54.2%</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">Cumulative tracking error</th>
+                <td>1.1365 m<sup>2</sup></td>
+                <td>1.3171 m<sup>2</sup></td>
+                <td><strong>&minus;13.7%</strong></td>
+              </tr>
+              <tr>
+                <th scope="row">Total inspection time</th>
+                <td>114.56 s</td>
+                <td>115.46 s</td>
+                <td><strong>&minus;0.90 s</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="blimp-results-note">
+          The main improvement is the reduction in accumulated waiting time, which limits wind-induced drift before the controller receives an updated local wind estimate. The similar inspection times indicate that the primary gains are better coordination and tracking quality rather than a large reduction in total mission duration.
+        </p>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
