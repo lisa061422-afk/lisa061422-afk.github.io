@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safe Intersection Scheduling Reproduction | Renke Wang</title>
+  <meta
+    name="description"
+    content="ECE 623 paper-reproduction project on fixed-precedence scheduling for autonomous vehicles at a traffic intersection."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260824-21" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#ece623-intersection-project" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="course-repro-detail-page">
+    <div class="container">
+      <header class="course-repro-header">
+        <p class="eyebrow">ECE 623 Course Project &middot; Spring 2024</p>
+        <h1>Safe Intersection Scheduling &mdash; Paper Reproduction</h1>
+        <p class="course-repro-lead">
+          Reproduction of a fixed-precedence vehicle-coordination formulation
+          from a 2018 European Control Conference paper, focusing on nonlinear
+          scheduling, safety constraints, and a four-vehicle numerical case.
+        </p>
+        <div class="course-repro-actions">
+          <a
+            class="btn btn-ghost"
+            href="https://doi.org/10.23919/ECC.2018.8550558"
+            target="_blank"
+            rel="noopener"
+          >Reference Paper</a>
+        </div>
+      </header>
+
+      <section class="course-repro-scope" aria-labelledby="reproduction-scope-heading">
+        <h2 id="reproduction-scope-heading">Reproduction Scope</h2>
+        <ul>
+          <li>Reconstructed the paper's time discretization, objective, and feasibility constraints.</li>
+          <li>Implemented the nonlinear program for a fixed vehicle-crossing order.</li>
+          <li>Evaluated a four-vehicle, two-lane case using position trajectories and piecewise-constant acceleration profiles.</li>
+        </ul>
+      </section>
+
+      <p class="course-repro-note">
+        <strong>Scope note:</strong> This is a course reproduction of a published
+        formulation. It does not claim a new scheduling method or a full
+        reimplementation of the paper's distributed ALADIN architecture.
+      </p>
+
+      <section class="course-repro-section" aria-labelledby="formulation-heading">
+        <header class="course-repro-section-header">
+          <p class="eyebrow">Problem Formulation</p>
+          <h2 id="formulation-heading">Fixed-Precedence Intersection Scheduling</h2>
+          <p>
+            The crossing order is given. The optimization schedules when each
+            vehicle enters and exits the shared intersection region. Piecewise-
+            constant acceleration variables are included to keep the timing
+            schedule physically feasible.
+          </p>
+        </header>
+
+        <div class="course-repro-decision-row">
+          <div>
+            <h3>Timing variables</h3>
+            <p>Entry and exit times, <em>t</em><sub>i</sub><sup>in</sup> and <em>t</em><sub>i</sub><sup>out</sup>, for each vehicle.</p>
+          </div>
+          <div>
+            <h3>Feasibility variables</h3>
+            <p>Piecewise-constant accelerations <em>a</em><sub>i,k</sub> and auxiliary variables for rear-end separation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="course-repro-section" aria-labelledby="objective-heading">
+        <header class="course-repro-section-header">
+          <p class="eyebrow">Objective</p>
+          <h2 id="objective-heading">Balance Speed Tracking, Effort, and Smoothness</h2>
+        </header>
+
+        <div class="course-repro-formula" aria-label="Optimization objective">
+          <p>
+            min&nbsp; <em>J</em> = &Sigma;<sub>i</sub> [
+            <em>Q</em><sub>i</sub>&Sigma;<sub>k</sub>(<em>v</em><sub>i,k</sub> &minus; <em>v</em><sub>i</sub><sup>ref</sup>)<sup>2</sup>
+            + <em>R</em><sub>i</sub>&Sigma;<sub>k</sub><em>a</em><sub>i,k</sub><sup>2</sup>
+            + <em>S</em><sub>i</sub>&Sigma;<sub>k</sub>(<em>a</em><sub>i,k</sub> &minus; <em>a</em><sub>i,k&minus;1</sub>)<sup>2</sup> ]
+          </p>
+        </div>
+
+        <div class="course-repro-objective-list">
+          <div>
+            <h3>Reference-speed deviation</h3>
+            <p>Keeps each vehicle close to its desired traveling speed.</p>
+          </div>
+          <div>
+            <h3>Acceleration effort</h3>
+            <p>Discourages unnecessarily aggressive acceleration and braking.</p>
+          </div>
+          <div>
+            <h3>Acceleration variation</h3>
+            <p>Penalizes abrupt changes between consecutive time segments.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="course-repro-section" aria-labelledby="constraints-heading">
+        <header class="course-repro-section-header">
+          <p class="eyebrow">Constraints</p>
+          <h2 id="constraints-heading">Scheduling and Safety Requirements</h2>
+        </header>
+
+        <dl class="course-repro-constraints">
+          <div>
+            <dt>Positive time segments</dt>
+            <dd>Every discretized interval must have positive duration.</dd>
+          </div>
+          <div>
+            <dt>Kinematic consistency</dt>
+            <dd>Position and velocity follow the discretized motion equations for each acceleration segment.</dd>
+          </div>
+          <div>
+            <dt>Operating bounds</dt>
+            <dd>Vehicle speed and acceleration remain within prescribed limits.</dd>
+          </div>
+          <div>
+            <dt>Intersection occupancy</dt>
+            <dd>The scheduled exit of one vehicle precedes the next vehicle's entry, so at most one vehicle occupies the conflict region.</dd>
+          </div>
+          <div>
+            <dt>Rear-end separation</dt>
+            <dd>Neighboring vehicles in the same lane maintain at least the required safe distance throughout the approach.</dd>
+          </div>
+          <div>
+            <dt>Boundary conditions</dt>
+            <dd>Each trajectory reaches the prescribed intersection entry and exit positions at its scheduled times.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="course-repro-section course-repro-results" aria-labelledby="results-heading">
+        <header class="course-repro-section-header">
+          <p class="eyebrow">Reproduced Numerical Case</p>
+          <h2 id="results-heading">Four Vehicles on Two Lanes</h2>
+          <p>
+            The selected case evaluates four vehicles approaching from two
+            directions under a fixed crossing order and a shared intersection
+            occupancy constraint.
+          </p>
+        </header>
+
+        <div class="course-repro-figures">
+          <figure>
+            <a href="ece623-scenario-1-position.png" target="_blank" rel="noopener">
+              <img
+                src="ece623-scenario-1-position.png"
+                alt="Reproduced position trajectories for four vehicles in the two-lane intersection scenario"
+                loading="lazy"
+                decoding="async"
+              >
+            </a>
+            <figcaption>
+              <strong>Position trajectories</strong>
+              <span>Scheduled arrivals at and departures from the shared intersection region.</span>
+            </figcaption>
+          </figure>
+          <figure>
+            <a href="ece623-scenario-1-acceleration.png" target="_blank" rel="noopener">
+              <img
+                src="ece623-scenario-1-acceleration.png"
+                alt="Piecewise-constant acceleration profiles for the reproduced four-vehicle scenario"
+                loading="lazy"
+                decoding="async"
+              >
+            </a>
+            <figcaption>
+              <strong>Feasible acceleration profiles</strong>
+              <span>Piecewise-constant decisions associated with the optimized timing schedule.</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <p class="course-repro-validation">
+          <strong>Validation:</strong> The reproduced case satisfies the
+          one-vehicle-at-a-time intersection schedule, prescribed entry and
+          exit positions, rear-end separation, and bounded acceleration requirements.
+        </p>
+      </section>
+
+      <footer class="course-repro-reference">
+        <p>
+          <strong>Reference:</strong> J. Shi, Y. Zheng, Y. Jiang, M. Zanon,
+          R. Hult, and B. Houska, &ldquo;Distributed Control Algorithm for Vehicle
+          Coordination at Traffic Intersections,&rdquo; 2018 European Control
+          Conference (ECC), pp. 1166&ndash;1171.
+        </p>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
