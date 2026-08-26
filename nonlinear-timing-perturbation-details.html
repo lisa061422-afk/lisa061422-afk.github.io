@@ -6,19 +6,19 @@
   <title>Nonlinear Systems with Timing Perturbations | Renke Wang</title>
   <meta
     name="description"
-    content="A scalar nonlinear control example using Jacobian linearization, a local LTV error model, and a timing-dependent feedback gain."
+    content="Two solution directions for nonlinear systems with timing perturbations: Jacobian linearization and Koopman-based lifting."
   />
   <meta property="og:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
   <meta
     property="og:description"
-    content="Jacobian-based local LTV modeling and a timing-aware controller gain for a scalar nonlinear system."
+    content="Jacobian linearization and Koopman-based lifting for nonlinear systems with timing perturbations."
   />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
   <meta
     name="twitter:description"
-    content="Jacobian-based local LTV modeling and a timing-aware controller gain for a scalar nonlinear system."
+    content="Jacobian linearization and Koopman-based lifting for nonlinear systems with timing perturbations."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,17 +50,32 @@
   <main class="nonlinear-project-detail">
     <div class="container nonlinear-project-container">
       <header class="nonlinear-project-header">
-        <p class="eyebrow">Solution 1: Jacobian Linearization</p>
+        <p class="eyebrow">Two Solution Directions</p>
         <h1>Nonlinear Systems with Timing Perturbations</h1>
         <p class="nonlinear-project-lead">
-          A Jacobian linearization along the nominal trajectory converts the local tracking-error dynamics into a scalar LTV model, where a timing-dependent gain compensates for delayed control updates.
+          This project develops two complementary approaches: a local Jacobian-based LTV formulation and a Koopman-based lifted representation of the nonlinear dynamics.
         </p>
       </header>
 
+      <div class="nonlinear-solution-grid" aria-label="Two solution directions">
+        <article>
+          <p>Solution 1</p>
+          <h2>Jacobian Linearization</h2>
+          <span>Local LTV error dynamics, timing-dependent controller gain, and scalar simulations.</span>
+          <a href="#jacobian-heading">View Solution 1 <span aria-hidden="true">&darr;</span></a>
+        </article>
+        <article class="nonlinear-solution-card--primary">
+          <p>Solution 2 &middot; Primary Paper Direction</p>
+          <h2>Koopman-Based Method</h2>
+          <span>Lifted linear representation for nonlinear prediction and timing-aware control design.</span>
+          <a href="#koopman-heading">View Solution 2 <span aria-hidden="true">&darr;</span></a>
+        </article>
+      </div>
+
       <section class="nonlinear-project-section" aria-labelledby="jacobian-heading">
         <header class="nonlinear-project-section-header">
-          <p class="eyebrow">Local Model</p>
-          <h2 id="jacobian-heading">Jacobian linearization</h2>
+          <p class="eyebrow">Solution 1 &middot; Local Model</p>
+          <h2 id="jacobian-heading">Jacobian Linearization</h2>
           <p>
             Consider a scalar nonlinear plant and its nominal trajectory. With \(e(t)=x(t)-x^n(t)\), the first-order error dynamics are time-varying because the Jacobian is evaluated along \(x^n(t)\).
           </p>
@@ -136,9 +151,39 @@
         </article>
       </section>
 
+      <section class="nonlinear-project-section nonlinear-koopman-section" aria-labelledby="koopman-heading">
+        <header class="nonlinear-project-section-header">
+          <p class="eyebrow">Solution 2 &middot; Primary Paper Direction</p>
+          <h2 id="koopman-heading">Koopman-Based Method</h2>
+          <p>
+            The second route lifts the nonlinear state into observable coordinates and seeks a finite-dimensional linear predictor for control design. This is the primary direction being developed for the paper.
+          </p>
+        </header>
+
+        <div class="nonlinear-koopman-card">
+          <div class="nonlinear-koopman-copy">
+            <span>In Development</span>
+            <h3>Lifted linear representation</h3>
+            <p>
+              A lifting map \(z_k=\psi(x_k)\) represents the nonlinear dynamics in a higher-dimensional observable space.
+            </p>
+          </div>
+          <div class="nonlinear-equation nonlinear-equation--koopman">
+            \[
+            z_{k+1}\approx A_K z_k+B_K u_k,
+            \qquad
+            x_k\approx C_K z_k.
+            \]
+          </div>
+          <p class="nonlinear-koopman-note">
+            The timing-perturbation model and controller will be formulated in the lifted coordinates; detailed controller and robustness results are under development.
+          </p>
+        </div>
+      </section>
+
       <section class="nonlinear-project-section" aria-labelledby="simulation-heading">
         <header class="nonlinear-project-section-header">
-          <p class="eyebrow">Simulation</p>
+          <p class="eyebrow">Solution 1 &middot; Simulation</p>
           <h2 id="simulation-heading">Three scalar nonlinear cases</h2>
           <p>
             Each run evaluates the Jacobian along the nominal trajectory and recomputes the scalar gain at the delayed update time. The simulations use explicit Euler integration with \(dt=10^{-4}\,\mathrm{s}\).
