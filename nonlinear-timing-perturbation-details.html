@@ -6,19 +6,19 @@
   <title>Nonlinear Systems with Timing Perturbations | Renke Wang</title>
   <meta
     name="description"
-    content="Two solution directions for nonlinear systems with timing perturbations: Jacobian linearization and Koopman-based lifting."
+    content="Two solution directions for nonlinear systems with timing perturbations: Jacobian linearization and data-driven Koopman identification."
   />
   <meta property="og:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
   <meta
     property="og:description"
-    content="Jacobian linearization and Koopman-based lifting for nonlinear systems with timing perturbations."
+    content="Jacobian linearization and data-driven Koopman identification for nonlinear systems with timing perturbations."
   />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
   <meta
     name="twitter:description"
-    content="Jacobian linearization and Koopman-based lifting for nonlinear systems with timing perturbations."
+    content="Jacobian linearization and data-driven Koopman identification for nonlinear systems with timing perturbations."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +53,7 @@
         <p class="eyebrow">Two Solution Directions</p>
         <h1>Nonlinear Systems with Timing Perturbations</h1>
         <p class="nonlinear-project-lead">
-          This project develops two complementary approaches: a local Jacobian-based LTV formulation and a Koopman-based lifted representation of the nonlinear dynamics.
+          This project develops two complementary approaches: a local Jacobian-based LTV formulation and a data-driven Koopman model identified from nonlinear trajectory data.
         </p>
       </header>
 
@@ -66,8 +66,8 @@
         </article>
         <article class="nonlinear-solution-card--primary">
           <p>Solution 2 &middot; Primary Paper Direction</p>
-          <h2>Koopman-Based Method</h2>
-          <span>Lifted linear representation for nonlinear prediction and timing-aware control design.</span>
+          <h2>Data-Driven Koopman Method</h2>
+          <span>Learn a lifted linear predictor from state-input trajectory data for timing-aware control.</span>
           <a href="#koopman-heading">View Solution 2 <span aria-hidden="true">&darr;</span></a>
         </article>
       </div>
@@ -154,29 +154,31 @@
       <section class="nonlinear-project-section nonlinear-koopman-section" aria-labelledby="koopman-heading">
         <header class="nonlinear-project-section-header">
           <p class="eyebrow">Solution 2 &middot; Primary Paper Direction</p>
-          <h2 id="koopman-heading">Koopman-Based Method</h2>
+          <h2 id="koopman-heading">Data-Driven Koopman Method</h2>
           <p>
-            The second route lifts the nonlinear state into observable coordinates and seeks a finite-dimensional linear predictor for control design. This is the primary direction being developed for the paper.
+            The second route learns a lifted linear predictor directly from simulated or measured state-input trajectories. Rather than deriving a Koopman model analytically, the model matrices are identified from data. This is the primary direction being developed for the paper.
           </p>
         </header>
 
         <div class="nonlinear-koopman-card">
           <div class="nonlinear-koopman-copy">
             <span>In Development</span>
-            <h3>Lifted linear representation</h3>
+            <h3>Identify the lifted model from data</h3>
             <p>
-              A lifting map \(z_k=\psi(x_k)\) represents the nonlinear dynamics in a higher-dimensional observable space.
+              Snapshot pairs \(\{x_k,u_k,x_{k+1}\}\) are lifted through selected or learned observables \(z_k=\psi(x_k)\), and the finite-dimensional predictor is fitted by regression.
             </p>
           </div>
           <div class="nonlinear-equation nonlinear-equation--koopman">
             \[
-            z_{k+1}\approx A_K z_k+B_K u_k,
+            \begin{bmatrix}A_K & B_K\end{bmatrix}
+            =Z_+
+            \begin{bmatrix}Z_-\\ U_-\end{bmatrix}^{\dagger},
             \qquad
-            x_k\approx C_K z_k.
+            z_{k+1}\approx A_Kz_k+B_Ku_k.
             \]
           </div>
           <p class="nonlinear-koopman-note">
-            The timing-perturbation model and controller will be formulated in the lifted coordinates; detailed controller and robustness results are under development.
+            The identified lifted model will then be used for timing-perturbation prediction and controller design. Data generation, observable selection, and validation results are under development.
           </p>
         </div>
       </section>
