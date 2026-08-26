@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nonlinear Systems with Timing Perturbations | Renke Wang</title>
+  <meta
+    name="description"
+    content="A scalar nonlinear control example using Jacobian linearization, a local LTV error model, and a timing-dependent feedback gain."
+  />
+  <meta property="og:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
+  <meta
+    property="og:description"
+    content="Jacobian-based local LTV modeling and a timing-aware controller gain for a scalar nonlinear system."
+  />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Nonlinear Systems with Timing Perturbations | Renke Wang" />
+  <meta
+    name="twitter:description"
+    content="Jacobian-based local LTV modeling and a timing-aware controller gain for a scalar nonlinear system."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css?v=20260825-01" />
+  <link rel="stylesheet" href="assets/projects/nonlinear-control/nonlinear-control.css?v=20260826-01" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { scale: 0.98 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="nonlinear-project-page">
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html#home" class="brand">Renke Wang</a>
+      <a href="index.html#timing-perturbation-nonlinear" class="figure-back">Back to project</a>
+    </div>
+  </header>
+
+  <main class="nonlinear-project-detail">
+    <div class="container nonlinear-project-container">
+      <header class="nonlinear-project-header">
+        <p class="eyebrow">Solution 1: Jacobian Linearization</p>
+        <h1>Nonlinear Systems with Timing Perturbations</h1>
+        <p class="nonlinear-project-lead">
+          A Jacobian linearization along the nominal trajectory converts the local tracking-error dynamics into a scalar LTV model, where a timing-dependent gain compensates for delayed control updates.
+        </p>
+      </header>
+
+      <section class="nonlinear-project-section" aria-labelledby="jacobian-heading">
+        <header class="nonlinear-project-section-header">
+          <p class="eyebrow">Local Model</p>
+          <h2 id="jacobian-heading">Jacobian linearization</h2>
+          <p>
+            Consider a scalar nonlinear plant and its nominal trajectory. With \(e(t)=x(t)-x^n(t)\), the first-order error dynamics are time-varying because the Jacobian is evaluated along \(x^n(t)\).
+          </p>
+        </header>
+
+        <div class="nonlinear-formula-card" aria-label="Jacobian linearization of a scalar nonlinear control system">
+          <div class="nonlinear-equation">
+            \[
+            \dot{x}=f(t,x)+b\,u, \qquad
+            \dot{x}^{n}=f(t,x^{n})+b\,u^{n},
+            \]
+            \[
+            A(t)=\left.\frac{\partial f(t,x)}{\partial x}\right|_{x=x^{n}(t)},
+            \qquad
+            \dot e(t)\approx A(t)e(t)+b\bigl(u(t)-u^{n}(t)\bigr).
+            \]
+          </div>
+        </div>
+      </section>
+
+      <section class="nonlinear-project-section" aria-labelledby="gain-heading">
+        <header class="nonlinear-project-section-header">
+          <p class="eyebrow">Scalar Controller</p>
+          <h2 id="gain-heading">Timing-dependent correction gain</h2>
+          <p>
+            Let the delayed update arrive at \(\tau_k=t_k+\Delta_k\). Over the remaining interval, a constant feedback correction is applied to the nominal input.
+          </p>
+        </header>
+
+        <div class="nonlinear-controller-law" aria-label="Scalar timing-dependent controller and gain">
+          <div class="nonlinear-controller-main">
+            \[
+            u(t)=u_k^n-K(\Delta_k)e(\tau_k),
+            \qquad t\in[\tau_k,t_{k+1}),
+            \]
+          </div>
+          <div class="nonlinear-controller-gain">
+            <p>Gain for the locally linearized scalar system</p>
+            <div class="nonlinear-equation nonlinear-equation--gain">
+              \[
+              K(\Delta_k)=
+              \left[
+              b\int_{\tau_k}^{t_{k+1}}
+              \exp\!\left(-\int_{\tau_k}^{s}A(r)\,dr\right)ds
+              \right]^{-1}.
+              \]
+            </div>
+          </div>
+        </div>
+
+        <article class="nonlinear-example">
+          <div>
+            <p class="nonlinear-example-label">Example</p>
+            <h3>\(f(x)=\sin x\)</h3>
+            <p>
+              Along the nominal trajectory, \(A(t)=\cos\!\bigl(x^n(t)\bigr)\). Substituting this Jacobian gives
+            </p>
+          </div>
+          <div class="nonlinear-equation nonlinear-equation--example">
+            \[
+            K_{\sin}(\Delta_k)=
+            \left[
+            b\int_{\tau_k}^{t_{k+1}}
+            \exp\!\left(
+            -\int_{\tau_k}^{s}\cos\!\bigl(x^n(r)\bigr)\,dr
+            \right)ds
+            \right]^{-1}.
+            \]
+          </div>
+          <p class="nonlinear-example-note">
+            For the first-order LTV error model, this gain drives the predicted error to zero at the next nominal update time.
+          </p>
+        </article>
+      </section>
+
+      <section class="nonlinear-project-section" aria-labelledby="simulation-heading">
+        <header class="nonlinear-project-section-header">
+          <p class="eyebrow">Simulation</p>
+          <h2 id="simulation-heading">Three scalar nonlinear cases</h2>
+          <p>
+            Each run evaluates the Jacobian along the nominal trajectory and recomputes the scalar gain at the delayed update time. The simulations use explicit Euler integration with \(dt=10^{-4}\,\mathrm{s}\).
+          </p>
+        </header>
+
+        <p class="nonlinear-simulation-method">
+          The upper panel isolates the smooth state trajectories; the lower panel shows the piecewise-constant controls. Black denotes the nominal system, red the delayed system with Jacobian-based correction, and blue dashed lines the nominal update times.
+        </p>
+
+        <div class="nonlinear-simulation-list">
+          <article class="nonlinear-simulation-card">
+            <header>
+              <div>
+                <p class="nonlinear-example-label">Case 1 &middot; Periodic Forcing</p>
+                <h3>Forced nonlinear sine drift</h3>
+                <p>\(\dot x=-0.70\sin x+0.55\sin(1.25t)+0.18\sin(3.2t)+u\)</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Timing perturbation</dt>
+                  <dd>\(0.16\text{--}0.22\,\mathrm{s}\)</dd>
+                </div>
+                <div>
+                  <dt>RMS error reduction</dt>
+                  <dd>38.8%</dd>
+                </div>
+              </dl>
+            </header>
+            <figure class="nonlinear-simulation-figure">
+              <a href="assets/projects/nonlinear-control/sim_forced-pendulum.png" target="_blank" rel="noopener">
+                <img
+                  src="assets/projects/nonlinear-control/sim_forced-pendulum.png"
+                  alt="Smooth nominal and corrected delayed trajectories for a periodically forced scalar nonlinear sine system"
+                />
+              </a>
+              <figcaption>
+                Two forcing frequencies produce smooth, nonuniform rises, falls, and turning points over the full horizon.
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="nonlinear-simulation-card">
+            <header>
+              <div>
+                <p class="nonlinear-example-label">Case 2 &middot; Bistable Cubic</p>
+                <h3>Forced cubic system</h3>
+                <p>\(\dot x=0.75x-0.35x^3+0.45\cos(1.1t)+0.16\sin(2.7t)+u\)</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Timing perturbations</dt>
+                  <dd>\(0.15\text{--}0.20\,\mathrm{s}\)</dd>
+                </div>
+                <div>
+                  <dt>RMS error reduction</dt>
+                  <dd>17.8%</dd>
+                </div>
+              </dl>
+            </header>
+            <figure class="nonlinear-simulation-figure">
+              <a href="assets/projects/nonlinear-control/sim_forced-bistable-cubic.png" target="_blank" rel="noopener">
+                <img
+                  src="assets/projects/nonlinear-control/sim_forced-bistable-cubic.png"
+                  alt="Smooth nominal and corrected delayed trajectories for a periodically forced bistable cubic scalar system"
+                />
+              </a>
+              <figcaption>
+                The cubic drift and two forcing frequencies create unequal peaks, valleys, and transition rates rather than nearly linear segments.
+              </figcaption>
+            </figure>
+          </article>
+
+          <article class="nonlinear-simulation-card">
+            <header>
+              <div>
+                <p class="nonlinear-example-label">Case 3 &middot; Time Modulation</p>
+                <h3>Multi-harmonic nonlinear drift</h3>
+                <p>\(\dot x=[0.45+0.28\sin(0.85t)]\sin(2x)+0.32\cos(1.75t)+0.14\sin(3.6t)+u\)</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Timing perturbations</dt>
+                  <dd>\(0.16\text{--}0.22\,\mathrm{s}\)</dd>
+                </div>
+                <div>
+                  <dt>RMS error reduction</dt>
+                  <dd>37.7%</dd>
+                </div>
+              </dl>
+            </header>
+            <figure class="nonlinear-simulation-figure">
+              <a href="assets/projects/nonlinear-control/sim_modulated-multiharmonic.png" target="_blank" rel="noopener">
+                <img
+                  src="assets/projects/nonlinear-control/sim_modulated-multiharmonic.png"
+                  alt="Smooth nominal and corrected delayed trajectories for a time-modulated multi-harmonic scalar nonlinear system"
+                />
+              </a>
+              <figcaption>
+                Time modulation generates several smooth peaks and shoulders while the local Jacobian changes continuously.
+              </figcaption>
+            </figure>
+          </article>
+        </div>
+
+        <p class="nonlinear-simulation-footnote">
+          RMS reductions compare the corrected trajectory with the same delayed execution without feedback correction.
+          <a href="assets/projects/nonlinear-control/nonlinear_timing_simulations.py" download>Simulation script</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
