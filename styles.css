@@ -1436,6 +1436,169 @@ p { margin: 0 0 1em; }
   color: var(--color-text);
   font-weight: 700;
 }
+.unicycle-wheel-model {
+  margin-top: 3rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--color-border);
+}
+.unicycle-wheel-header {
+  max-width: 840px;
+  margin-bottom: 1.25rem;
+}
+.unicycle-wheel-header h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.unicycle-wheel-header > p:last-child {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.unicycle-wheel-model-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+.unicycle-wheel-diagram,
+.unicycle-wheel-controller {
+  margin: 0;
+  padding: 1.1rem 1.2rem;
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+.unicycle-wheel-diagram {
+  background: #ffffff;
+}
+.unicycle-wheel-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.unicycle-wheel-diagram svg text {
+  font-family: "Lato", sans-serif;
+}
+.unicycle-wheel-body {
+  fill: #f8fafc;
+  stroke: #9aaba4;
+  stroke-width: 3;
+}
+.unicycle-wheel-front {
+  fill: #e7f4ef;
+  stroke: #7fa99a;
+  stroke-width: 3;
+}
+.unicycle-wheel-centerline,
+.unicycle-wheel-axle {
+  fill: none;
+  stroke: #aebbb6;
+  stroke-dasharray: 8 8;
+  stroke-width: 2;
+}
+.unicycle-wheel-tire {
+  fill: #26343c;
+  stroke: #111827;
+  stroke-width: 2;
+}
+.unicycle-wheel-label {
+  fill: var(--color-text);
+  font-size: 22px;
+  font-weight: 700;
+}
+.unicycle-wheel-speed-label,
+.unicycle-wheel-vector-label,
+.unicycle-wheel-axis-label {
+  fill: var(--color-accent);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+}
+.unicycle-wheel-vector-label,
+.unicycle-wheel-axis-label {
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 7px;
+}
+.unicycle-wheel-speed-label tspan,
+.unicycle-wheel-axis-label tspan {
+  font-size: 70%;
+}
+.unicycle-wheel-motion,
+.unicycle-wheel-turn {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-linecap: round;
+  stroke-width: 4;
+  marker-end: url("#wheel-motion-arrow");
+}
+.unicycle-wheel-turn { stroke-width: 3; }
+.unicycle-wheel-center {
+  fill: var(--color-accent);
+}
+.unicycle-wheel-center-label {
+  fill: var(--color-text);
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+}
+.unicycle-wheel-extension {
+  stroke: #94a3a0;
+  stroke-dasharray: 5 5;
+  stroke-width: 1.5;
+}
+.unicycle-wheel-dimension {
+  stroke: #5f6f69;
+  stroke-width: 2;
+  marker-start: url("#wheel-dimension-arrow");
+  marker-end: url("#wheel-dimension-arrow");
+}
+.unicycle-wheel-dimension-label {
+  fill: #3f4c47;
+  font-size: 23px;
+  font-style: italic;
+  font-weight: 700;
+  text-anchor: middle;
+}
+#wheel-motion-arrow path { fill: var(--color-accent); }
+#wheel-dimension-arrow path { fill: #5f6f69; }
+.unicycle-wheel-diagram figcaption {
+  margin-top: 0.5rem;
+  color: var(--color-text-soft);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  text-align: center;
+}
+.unicycle-wheel-controller {
+  overflow-x: auto;
+}
+.unicycle-wheel-controller h3 {
+  margin: 0 0 0.55rem;
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.unicycle-wheel-controller h3:nth-of-type(2) {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+.unicycle-wheel-controller-equation {
+  min-width: 0;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+.unicycle-wheel-controller-equation mjx-container[jax="CHTML"][display="true"] {
+  margin: 0.45rem 0 !important;
+  text-align: left !important;
+}
+.unicycle-wheel-sign-note {
+  margin: 0.6rem 0 0;
+  color: var(--color-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
 .unicycle-cases {
   margin-top: 3rem;
   padding-top: 2.25rem;
@@ -2668,9 +2831,14 @@ p { margin: 0 0 1em; }
   .timing-symbols { grid-template-columns: 1fr; }
   .unicycle-scope-grid,
   .unicycle-results-summary,
+  .unicycle-wheel-model-grid,
   .unicycle-case-media,
   .unicycle-error-legend dl {
     grid-template-columns: 1fr;
+  }
+  .unicycle-wheel-controller-equation {
+    min-width: 0;
+    font-size: 0.82rem;
   }
   .unicycle-results-summary dl { grid-template-columns: 1fr; }
   .unicycle-case-header {
@@ -2755,6 +2923,7 @@ p { margin: 0 0 1em; }
   margin-top: 0.8rem;
 }
 
+.unicycle-wheel-model,
 .unicycle-cases,
 .unicycle-extra-test,
 .course-repro-section,

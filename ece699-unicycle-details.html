@@ -14,7 +14,17 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260824-25" />
+  <link rel="stylesheet" href="styles.css?v=20260825-39" />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      chtml: { scale: 0.98 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -58,6 +68,113 @@
         <strong>Validation:</strong> All four cases converged toward the target
         pose with near-zero range error and sub-degree angular errors.
       </p>
+
+      <section class="unicycle-wheel-model" aria-labelledby="wheel-dynamics-heading">
+        <header class="unicycle-wheel-header">
+          <p class="eyebrow">Controller Design</p>
+          <h2 id="wheel-dynamics-heading">Differential-Drive Wheel Controller</h2>
+          <p>
+            The body-level commands \(v\) and \(\omega\) are converted directly
+            into the right and left wheel angular speeds.
+          </p>
+        </header>
+
+        <div class="unicycle-wheel-model-grid">
+          <figure class="unicycle-wheel-diagram">
+            <svg viewBox="0 0 720 430" role="img" aria-labelledby="wheel-diagram-title wheel-diagram-desc">
+              <title id="wheel-diagram-title">Differential-drive vehicle geometry</title>
+              <desc id="wheel-diagram-desc">
+                Top view of a vehicle with left and right wheels, wheel radius r,
+                track width two l, forward speed v, and yaw rate omega.
+              </desc>
+              <defs>
+                <marker id="wheel-motion-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                </marker>
+                <marker id="wheel-dimension-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 5 L 10 0 L 10 10 z"></path>
+                </marker>
+              </defs>
+
+              <rect class="unicycle-wheel-body" x="205" y="105" width="350" height="220" rx="26"></rect>
+              <path class="unicycle-wheel-front" d="M 555 145 L 610 215 L 555 285 Z"></path>
+              <line class="unicycle-wheel-centerline" x1="235" y1="215" x2="585" y2="215"></line>
+              <line class="unicycle-wheel-axle" x1="355" y1="89" x2="355" y2="341"></line>
+
+              <rect class="unicycle-wheel-tire" x="285" y="70" width="140" height="38" rx="16"></rect>
+              <rect class="unicycle-wheel-tire" x="285" y="322" width="140" height="38" rx="16"></rect>
+              <text class="unicycle-wheel-label" x="465" y="132">Left wheel</text>
+              <text class="unicycle-wheel-label" x="465" y="316">Right wheel</text>
+
+              <line class="unicycle-wheel-motion" x1="430" y1="89" x2="540" y2="89"></line>
+              <line class="unicycle-wheel-motion" x1="430" y1="341" x2="540" y2="341"></line>
+              <text class="unicycle-wheel-speed-label" x="447" y="66">r q&#775;<tspan baseline-shift="sub">L</tspan></text>
+              <text class="unicycle-wheel-speed-label" x="447" y="386">r q&#775;<tspan baseline-shift="sub">R</tspan></text>
+
+              <circle class="unicycle-wheel-center" cx="355" cy="215" r="7"></circle>
+              <text class="unicycle-wheel-center-label" x="370" y="239">C</text>
+              <line class="unicycle-wheel-motion unicycle-wheel-body-speed" x1="355" y1="215" x2="585" y2="215"></line>
+              <text class="unicycle-wheel-vector-label" x="505" y="196">v</text>
+              <text class="unicycle-wheel-axis-label" x="555" y="255">x<tspan baseline-shift="sub">B</tspan></text>
+
+              <path class="unicycle-wheel-turn" d="M 315 260 A 62 62 0 1 1 315 170"></path>
+              <text class="unicycle-wheel-vector-label" x="273" y="207">&#969;</text>
+
+              <line class="unicycle-wheel-extension" x1="150" y1="89" x2="285" y2="89"></line>
+              <line class="unicycle-wheel-extension" x1="150" y1="341" x2="285" y2="341"></line>
+              <line class="unicycle-wheel-dimension" x1="150" y1="89" x2="150" y2="341"></line>
+              <text class="unicycle-wheel-dimension-label" x="106" y="222">2l</text>
+
+              <line class="unicycle-wheel-extension" x1="355" y1="52" x2="355" y2="70"></line>
+              <line class="unicycle-wheel-extension" x1="425" y1="52" x2="425" y2="70"></line>
+              <line class="unicycle-wheel-dimension" x1="355" y1="52" x2="425" y2="52"></line>
+              <text class="unicycle-wheel-dimension-label" x="385" y="38">r</text>
+            </svg>
+            <figcaption>
+              \(r\): wheel radius &middot; \(2l\): track width &middot;
+              \(\dot q_L,\dot q_R\): wheel angular speeds
+            </figcaption>
+          </figure>
+
+          <article class="unicycle-wheel-controller">
+            <h3>Main wheel-speed dynamics</h3>
+            <div class="unicycle-wheel-controller-equation">
+              \[
+                v=\frac{r}{2}\left(\dot q_R+\dot q_L\right),
+                \qquad
+                \omega=\frac{r}{2l}\left(\dot q_R-\dot q_L\right).
+              \]
+              \[
+                \dot q_R=\frac{v+l\omega}{r},
+                \qquad
+                \dot q_L=\frac{v-l\omega}{r}.
+              \]
+            </div>
+
+            <h3>Closed-loop wheel controller</h3>
+            <div class="unicycle-wheel-controller-equation">
+              \[
+                v=k_1\rho,
+                \qquad
+                \omega=k_2\alpha+k_3\phi+k_4\dot\alpha+k_5\dot\phi.
+              \]
+              \[
+                \boxed{
+                  \dot q_{R,L}
+                  =\frac{1}{r}\left[
+                    k_1\rho
+                    \;\pm\;
+                    l\left(k_2\alpha+k_3\phi+k_4\dot\alpha+k_5\dot\phi\right)
+                  \right]
+                }
+              \]
+            </div>
+            <p class="unicycle-wheel-sign-note">
+              Use \(+\) for the right wheel and \(-\) for the left wheel.
+            </p>
+          </article>
+        </div>
+      </section>
 
       <section class="unicycle-cases" aria-labelledby="simulation-cases-heading">
         <header class="unicycle-cases-header">
