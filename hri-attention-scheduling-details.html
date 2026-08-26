@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Attention-Guided Human–Multi-Robot Collaboration | Renke Wang</title>
+  <title>Human-Attention Scheduling for Multi-Robot Supervision | Renke Wang</title>
   <meta
     name="description"
-    content="Predictive scheduling and recommendation generation for a human-operated multi-robot system with time-critical obstacle-avoidance tasks."
+    content="An optimization-based recommendation system for allocating limited human attention among multiple robots, evaluated with 40 human participants."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,12 +38,13 @@
     <div class="container">
       <header class="hri-detail-header">
         <p class="eyebrow">Human&ndash;Multi-Robot Collaboration</p>
-        <h1>Attention-Guided Recommendations for Human&ndash;Multi-Robot Collaboration</h1>
+        <h1>Human-Attention Scheduling for Multi-Robot Supervision</h1>
         <p class="hri-detail-lead">
-          A receding-horizon scheduler allocates one human operator among four
-          robots facing time-critical obstacle-avoidance tasks. The resulting
-          service decisions are converted into on-screen recommendations that
-          identify which robot needs attention and when.
+          This project develops an optimization-based recommendation system for
+          allocating limited human attention among multiple robots facing
+          time-critical obstacle-avoidance tasks. The system determines which
+          robot should receive attention and when, and was evaluated in a
+          controlled study with 40 human participants.
         </p>
         <div class="hri-detail-actions">
           <a class="btn btn-ghost" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11217805" target="_blank" rel="noopener">Paper</a>
@@ -53,17 +54,32 @@
 
       <section class="hri-summary-grid" aria-label="Project summary">
         <div>
-          <h2>Task sources</h2>
-          <p>Four robots generate obstacle-avoidance tasks with release times, service times, and deadlines.</p>
+          <h2>Task model</h2>
+          <p>Operator interventions are modeled as obstacle-avoidance tasks with release times, service times, and deadlines.</p>
         </div>
         <div>
-          <h2>Shared resource</h2>
-          <p>One human operator can assist at most one robot at a time.</p>
+          <h2>Scheduling method</h2>
+          <p>Decision-tree search determines which robot should receive the limited human-attention resource and when.</p>
         </div>
         <div>
-          <h2>Decision output</h2>
-          <p>The scheduler selects the robot to assist and converts that decision into a timed recommendation.</p>
+          <h2>Evaluation</h2>
+          <p>The resulting attention-guided recommendation system was evaluated in a controlled study with 40 human participants.</p>
         </div>
+      </section>
+
+      <section class="hri-section" aria-labelledby="contribution-heading">
+        <header class="hri-section-header">
+          <p class="eyebrow">My Contribution</p>
+          <h2 id="contribution-heading">Real-Time Human-Attention Scheduling</h2>
+          <p>
+            Within the broader recommendation-system project, I developed the
+            real-time scheduling methodology. My work modeled operator
+            interventions as deadline-constrained tasks, used receding-horizon
+            decision-tree search to optimize which robot should receive attention
+            and when, and converted the resulting schedule into timed
+            recommendations for the operator.
+          </p>
+        </header>
       </section>
 
       <section class="hri-section" aria-labelledby="system-heading">
