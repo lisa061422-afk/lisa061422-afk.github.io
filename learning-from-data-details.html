@@ -6,19 +6,19 @@
   <title>Transfer Learning for Dog Image Classification | Renke Wang</title>
   <meta
     name="description"
-    content="An ECE 527 course project using MobileNetV2 transfer learning for 20-class dog image classification."
+    content="A concise ECE 527 project overview covering the classification problem, MobileNetV2 transfer-learning architecture, and evaluation results."
   />
   <meta property="og:title" content="Transfer Learning for Dog Image Classification | Renke Wang" />
   <meta
     property="og:description"
-    content="MobileNetV2 transfer learning, data augmentation, and quantitative evaluation on a 20-class dog-image dataset."
+    content="A 20-class dog-image classifier built by fine-tuning MobileNetV2 and evaluated on held-out and unseen data."
   />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Transfer Learning for Dog Image Classification | Renke Wang" />
   <meta
     name="twitter:description"
-    content="MobileNetV2 transfer learning, data augmentation, and quantitative evaluation on a 20-class dog-image dataset."
+    content="A 20-class dog-image classifier built by fine-tuning MobileNetV2 and evaluated on held-out and unseen data."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,7 +26,7 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260827-1" />
+  <link rel="stylesheet" href="styles.css?v=20260827-2" />
 </head>
 <body>
   <header class="site-header">
@@ -42,186 +42,135 @@
         <p class="eyebrow">ECE 527 &middot; Learning From Data</p>
         <h1>Transfer Learning for 20-Class Dog Image Classification</h1>
         <p class="hri-detail-lead">
-          This course capstone adapts an ImageNet-pretrained MobileNetV2 to a
-          20-class dog-image dataset. The project covers the full workflow from
-          preprocessing and augmentation through fine-tuning, learning-curve
-          analysis, confusion-matrix inspection, and evaluation on unseen data.
+          This project investigates whether a pretrained visual model can be
+          adapted to distinguish 20 dog-image classes when only a modest
+          labeled dataset is available.
         </p>
       </header>
 
-      <section class="hri-summary-grid" aria-label="Project summary">
-        <div>
-          <h2>Dataset</h2>
-          <p>3,132 RGB images at 224 &times; 224 resolution across 20 classes.</p>
-        </div>
-        <div>
-          <h2>Transfer strategy</h2>
-          <p>ImageNet-pretrained MobileNetV2 with its final 10 layers fine-tuned.</p>
-        </div>
-        <div>
-          <h2>Evaluation</h2>
-          <p>84.21% held-out accuracy and 92.00% on a separate 100-image set.</p>
-        </div>
-      </section>
-
-      <section class="hri-section" aria-labelledby="dataset-heading">
+      <section class="hri-section" aria-labelledby="problem-heading">
         <header class="hri-section-header">
-          <p class="eyebrow">Problem Setup</p>
-          <h2 id="dataset-heading">A Complete Multi-Class Classification Pipeline</h2>
+          <p class="eyebrow">Problem</p>
+          <h2 id="problem-heading">Reliable Classification from Limited Training Data</h2>
           <p>
-            The provided data contain 3,132 dog images assigned to 20 numerical
-            class labels. A fixed 80/20 split was used for model development:
-            2,505 images for training and 627 for held-out validation and
-            testing. A separate 100-image course evaluation set
-            was used after model development.
+            The task is to map a 224 &times; 224 RGB dog image to one of 20
+            classes. Training a CNN from scratch on 3,132 images generalized
+            poorly, so the central problem is how to reuse learned visual
+            features while adapting the model to this smaller dataset.
           </p>
         </header>
 
-        <div class="hri-system-grid">
-          <div class="hri-system-figures">
-            <figure>
-              <img
-                src="assets/projects/learning-from-data/transfer-dataset-samples.png"
-                alt="One sample from each of the 20 dog-image classes"
-                loading="eager"
-                decoding="async"
-              >
-              <figcaption>
-                <strong>Twenty-class image dataset</strong>
-                One representative image from each numerical class in the
-                course-provided dataset.
-              </figcaption>
-            </figure>
-          </div>
-
-          <dl class="hri-model-list">
-            <div>
-              <dt>Input scaling</dt>
-              <dd>Pixel intensities are normalized from [0, 255] to [0, 1].</dd>
-            </div>
-            <div>
-              <dt>Data split</dt>
-              <dd>An 80/20 split with a fixed random seed supports repeatable evaluation.</dd>
-            </div>
-            <div>
-              <dt>Augmentation</dt>
-              <dd>Random rotation, translation, shear, zoom, and horizontal flipping reduce overfitting.</dd>
-            </div>
-            <div>
-              <dt>Output</dt>
-              <dd>A 20-unit softmax layer produces class probabilities for each image.</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <section class="hri-section" aria-labelledby="foundations-heading">
-        <header class="hri-section-header">
-          <p class="eyebrow">Course Foundations</p>
-          <h2 id="foundations-heading">From Classical Models to Transfer Learning</h2>
-          <p>
-            Earlier assignments established the model-selection and evaluation
-            ideas used in the capstone. They are supporting foundations rather
-            than separate projects on this page.
-          </p>
-        </header>
-
-        <dl class="hri-constraints" aria-label="Learning progression">
+        <dl class="hri-model-list" aria-label="Problem setup">
           <div>
-            <dt>Classical classification</dt>
-            <dd>Kernel density estimation, Naive Bayes, the perceptron algorithm, and linear and nonlinear SVMs.</dd>
+            <dt>Input</dt>
+            <dd>3,132 labeled RGB images across 20 dog classes.</dd>
           </div>
           <div>
-            <dt>Regression models</dt>
-            <dd>Linear and ridge regression, followed by logistic regression for probabilistic classification.</dd>
+            <dt>Objective</dt>
+            <dd>Predict the correct class for dog images not used during training.</dd>
           </div>
           <div>
-            <dt>Tree-based learning</dt>
-            <dd>Decision trees, random forests, Extra Trees, AdaBoost, cross-validation, and grid search.</dd>
-          </div>
-          <div>
-            <dt>Neural networks</dt>
-            <dd>MLPs and CNNs introduced representation learning, regularization, and architecture comparison before the transfer-learning capstone.</dd>
+            <dt>Challenge</dt>
+            <dd>Learn discriminative features without overfitting a relatively small image dataset.</dd>
           </div>
         </dl>
       </section>
 
       <section class="hri-section" aria-labelledby="model-heading">
         <header class="hri-section-header">
-          <p class="eyebrow">Model Design</p>
-          <h2 id="model-heading">Fine-Tune a Pretrained Visual Representation</h2>
+          <p class="eyebrow">CNN Design</p>
+          <h2 id="model-heading">MobileNetV2 Transfer-Learning Backbone</h2>
           <p>
-            An initial CNN trained from scratch produced only about 2.5%
-            validation accuracy, motivating reuse of ImageNet features. The
-            final architecture keeps most of MobileNetV2 frozen and adapts its
-            highest-level features to the 20-class task.
+            The model starts from ImageNet-pretrained MobileNetV2 features,
+            fine-tunes the final 10 backbone layers, and adds a compact
+            convolutional head for the 20-class task.
           </p>
         </header>
 
-        <dl class="hri-model-list">
-          <div>
-            <dt>Backbone</dt>
-            <dd>MobileNetV2 without its original classification head; only the final 10 backbone layers are unfrozen.</dd>
-          </div>
-          <div>
-            <dt>Task-specific head</dt>
-            <dd>Two convolutional blocks with 256 and 128 filters, global average pooling, a 128-unit dense layer, and 50% dropout.</dd>
-          </div>
-          <div>
-            <dt>Optimization</dt>
-            <dd>Adam with an initial learning rate of 10<sup>&minus;4</sup>, batch size 16, and 15 training epochs.</dd>
-          </div>
-          <div>
-            <dt>Learning-rate control</dt>
-            <dd>ReduceLROnPlateau lowers the learning rate when validation loss stops improving.</dd>
-          </div>
-        </dl>
+        <details class="learning-model-disclosure">
+          <summary>
+            <span class="learning-model-summary-copy">
+              <strong>View the complete CNN architecture</strong>
+              <span>Backbone, feature dimensions, convolutional head, and softmax output</span>
+            </span>
+            <span class="learning-model-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="learning-model-content">
+            <dl class="hri-model-list">
+              <div>
+                <dt>Backbone</dt>
+                <dd>MobileNetV2 without its original classifier; earlier layers are frozen and the final 10 are fine-tuned.</dd>
+              </div>
+              <div>
+                <dt>Classifier head</dt>
+                <dd>Conv2D(256) &rarr; MaxPool &rarr; Conv2D(128) &rarr; MaxPool &rarr; global average pooling.</dd>
+              </div>
+              <div>
+                <dt>Output</dt>
+                <dd>Dense(128) &rarr; Dropout(0.5) &rarr; Dense(20) with softmax probabilities.</dd>
+              </div>
+            </dl>
 
-        <figure class="hri-wide-figure">
-          <img
-            src="assets/projects/learning-from-data/transfer-model-architecture.png"
-            alt="Architecture of the transfer-learning classifier from a 224 by 224 RGB image through MobileNetV2, convolution and pooling layers, global average pooling, a dense layer, dropout, and a 20-class softmax output"
-            loading="lazy"
-            decoding="async"
-          >
-          <figcaption>
-            <strong>Transfer-learning architecture</strong>
-            ImageNet-pretrained MobileNetV2 supplies the visual features. Its
-            earlier layers remain frozen, its final 10 layers are fine-tuned,
-            and the new convolutional classification head maps the extracted
-            features to 20 class probabilities.
-          </figcaption>
-        </figure>
+            <figure class="hri-wide-figure">
+              <img
+                src="assets/projects/learning-from-data/transfer-model-architecture.png"
+                alt="Architecture of the transfer-learning classifier from a 224 by 224 RGB image through MobileNetV2, convolution and pooling layers, global average pooling, a dense layer, dropout, and a 20-class softmax output"
+                loading="lazy"
+                decoding="async"
+              >
+              <figcaption>
+                <strong>Complete model architecture</strong>
+                Frozen backbone layers, fine-tuned layers, and the newly added
+                task-specific classifier are distinguished in the diagram.
+              </figcaption>
+            </figure>
+          </div>
+        </details>
       </section>
 
       <section class="hri-section" aria-labelledby="results-heading">
         <header class="hri-section-header">
-          <p class="eyebrow">Quantitative Results</p>
-          <h2 id="results-heading">Convergence and Generalization</h2>
+          <p class="eyebrow">Results</p>
+          <h2 id="results-heading">Evaluation on Held-Out and Unseen Images</h2>
           <p>
-            Training and validation curves converge near the same level, with
-            limited evidence of late-stage overfitting. The confusion matrix is
-            strongly diagonal overall while exposing specific class pairs that
-            remain difficult to separate.
+            Transfer learning produced stable validation performance and
+            generalized to the separate course evaluation set. The confusion
+            matrix summarizes which of the 20 classes remain difficult to
+            distinguish.
           </p>
         </header>
 
         <section class="hri-summary-grid" aria-label="Model results">
           <div>
+            <h2>Held-out accuracy</h2>
+            <p>84.21% on the 20% development split.</p>
+          </div>
+          <div>
+            <h2>Separate evaluation</h2>
+            <p>92.00% on 100 unseen dog images.</p>
+          </div>
+          <div>
             <h2>Final training accuracy</h2>
             <p>85.07% after 15 epochs.</p>
           </div>
-          <div>
-            <h2>Held-out accuracy</h2>
-            <p>84.21% with a loss of 0.5338.</p>
-          </div>
-          <div>
-            <h2>Separate evaluation set</h2>
-            <p>92.00% accuracy on 100 unseen images.</p>
-          </div>
         </section>
 
-        <div class="hri-study-grid">
+        <figure class="hri-wide-figure learning-classification-figure">
+          <img
+            src="assets/projects/learning-from-data/transfer-classification-examples.jpg"
+            alt="Six unseen dog images correctly classified by the trained model with their true classes, predictions, and confidence values"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>
+            <strong>Classification examples</strong>
+            Six correctly classified examples drawn from the separate
+            100-image evaluation set; labels are the numerical class identifiers
+            provided with the course dataset.
+          </figcaption>
+        </figure>
+
+        <div class="hri-study-grid learning-results-grid">
           <figure>
             <img
               src="assets/projects/learning-from-data/transfer-accuracy.png"
@@ -231,19 +180,7 @@
             >
             <figcaption>
               <strong>Accuracy curves</strong>
-              Validation accuracy rises quickly with transferred features and stabilizes near 84%.
-            </figcaption>
-          </figure>
-          <figure>
-            <img
-              src="assets/projects/learning-from-data/transfer-loss.png"
-              alt="Training and validation loss over 15 epochs"
-              loading="lazy"
-              decoding="async"
-            >
-            <figcaption>
-              <strong>Loss curves</strong>
-              Training and validation loss converge as the learning rate is reduced.
+              Training and validation accuracy converge near the same level.
             </figcaption>
           </figure>
           <figure>
@@ -255,7 +192,7 @@
             >
             <figcaption>
               <strong>Confusion matrix</strong>
-              The diagonal structure summarizes class-level performance and highlights remaining confusions.
+              The diagonal structure shows strong class-level performance while highlighting remaining confusions.
             </figcaption>
           </figure>
         </div>
