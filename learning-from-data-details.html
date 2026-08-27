@@ -26,7 +26,7 @@
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20260827-2" />
+  <link rel="stylesheet" href="styles.css?v=20260827-3" />
 </head>
 <body>
   <header class="site-header">
@@ -87,45 +87,34 @@
           </p>
         </header>
 
-        <details class="learning-model-disclosure">
-          <summary>
-            <span class="learning-model-summary-copy">
-              <strong>View the complete CNN architecture</strong>
-              <span>Backbone, feature dimensions, convolutional head, and softmax output</span>
-            </span>
-            <span class="learning-model-toggle" aria-hidden="true"></span>
-          </summary>
-          <div class="learning-model-content">
-            <dl class="hri-model-list">
-              <div>
-                <dt>Backbone</dt>
-                <dd>MobileNetV2 without its original classifier; earlier layers are frozen and the final 10 are fine-tuned.</dd>
-              </div>
-              <div>
-                <dt>Classifier head</dt>
-                <dd>Conv2D(256) &rarr; MaxPool &rarr; Conv2D(128) &rarr; MaxPool &rarr; global average pooling.</dd>
-              </div>
-              <div>
-                <dt>Output</dt>
-                <dd>Dense(128) &rarr; Dropout(0.5) &rarr; Dense(20) with softmax probabilities.</dd>
-              </div>
-            </dl>
-
-            <figure class="hri-wide-figure">
-              <img
-                src="assets/projects/learning-from-data/transfer-model-architecture.png"
-                alt="Architecture of the transfer-learning classifier from a 224 by 224 RGB image through MobileNetV2, convolution and pooling layers, global average pooling, a dense layer, dropout, and a 20-class softmax output"
-                loading="lazy"
-                decoding="async"
-              >
-              <figcaption>
-                <strong>Complete model architecture</strong>
-                Frozen backbone layers, fine-tuned layers, and the newly added
-                task-specific classifier are distinguished in the diagram.
-              </figcaption>
-            </figure>
+        <dl class="hri-model-list">
+          <div>
+            <dt>Backbone</dt>
+            <dd>MobileNetV2 without its original classifier; earlier layers are frozen and the final 10 are fine-tuned.</dd>
           </div>
-        </details>
+          <div>
+            <dt>Classifier head</dt>
+            <dd>Conv2D(256) &rarr; MaxPool &rarr; Conv2D(128) &rarr; MaxPool &rarr; global average pooling.</dd>
+          </div>
+          <div>
+            <dt>Output</dt>
+            <dd>Dense(128) &rarr; Dropout(0.5) &rarr; Dense(20) with softmax probabilities.</dd>
+          </div>
+        </dl>
+
+        <figure class="hri-wide-figure learning-model-figure">
+          <img
+            src="assets/projects/learning-from-data/transfer-model-architecture.png"
+            alt="Architecture of the transfer-learning classifier from a 224 by 224 RGB image through MobileNetV2, convolution and pooling layers, global average pooling, a dense layer, dropout, and a 20-class softmax output"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>
+            <strong>Complete model architecture</strong>
+            Frozen backbone layers, fine-tuned layers, and the newly added
+            task-specific classifier are distinguished in the diagram.
+          </figcaption>
+        </figure>
       </section>
 
       <section class="hri-section" aria-labelledby="results-heading">
