@@ -176,6 +176,22 @@
             <dd>ReduceLROnPlateau lowers the learning rate when validation loss stops improving.</dd>
           </div>
         </dl>
+
+        <figure class="hri-wide-figure">
+          <img
+            src="assets/projects/learning-from-data/transfer-model-architecture.png"
+            alt="Architecture of the transfer-learning classifier from a 224 by 224 RGB image through MobileNetV2, convolution and pooling layers, global average pooling, a dense layer, dropout, and a 20-class softmax output"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>
+            <strong>Transfer-learning architecture</strong>
+            ImageNet-pretrained MobileNetV2 supplies the visual features. Its
+            earlier layers remain frozen, its final 10 layers are fine-tuned,
+            and the new convolutional classification head maps the extracted
+            features to 20 class probabilities.
+          </figcaption>
+        </figure>
       </section>
 
       <section class="hri-section" aria-labelledby="results-heading">
