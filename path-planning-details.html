@@ -24,19 +24,6 @@
       overflow-x: auto;
     }
     .pp-ppo-figure .pp-ppo-scroll img { min-width: 960px; }
-    .pp-ppo-figure .pp-ppo-scroll:focus-visible {
-      outline: 2px solid var(--color-accent);
-      outline-offset: 3px;
-    }
-    .pp-ppo-figure .pp-ppo-actions {
-      margin: 0.55rem 0 0;
-      color: var(--color-text-soft);
-      font-size: 0.82rem;
-    }
-    .pp-ppo-mobile-hint { display: none; }
-    @media (max-width: 1008px) {
-      .pp-ppo-mobile-hint { display: inline; }
-    }
   </style>
   <script>
     window.MathJax = {
@@ -193,13 +180,7 @@
         </header>
 
         <figure class="hri-wide-figure pp-ppo-figure">
-          <a
-            class="pp-ppo-scroll"
-            href="assets/projects/path-planning/ppo_tree_actor_critic.svg"
-            target="_blank"
-            rel="noopener"
-            aria-label="Open the full-size PPO actor–critic architecture diagram in a new tab"
-          >
+          <div class="pp-ppo-scroll">
             <img
               src="assets/projects/path-planning/ppo_tree_actor_critic.svg"
               alt="PPO on the C-MPC decision tree. The actor scores feasible branches using shared per-robot networks and mean/max pooling, followed by a softmax. The critic uses state features to estimate the remaining return."
@@ -208,7 +189,7 @@
               loading="lazy"
               decoding="async"
             >
-          </a>
+          </div>
           <figcaption>
             <strong>PPO on the decision tree.</strong>
             The actor scores each feasible branch using shared per-robot MLPs,
@@ -217,10 +198,6 @@
             Each episode follows one root-to-leaf path; nodes with a single
             successor are advanced by the analytical timing model.
           </figcaption>
-          <p class="pp-ppo-actions">
-            <a href="assets/projects/path-planning/ppo_tree_actor_critic.svg" target="_blank" rel="noopener">Open full-size diagram ↗</a>
-            <span class="pp-ppo-mobile-hint">Scroll the diagram horizontally to see all details.</span>
-          </p>
         </figure>
       </section>
 
