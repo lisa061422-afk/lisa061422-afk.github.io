@@ -6,7 +6,7 @@
   <title>Path Planning and Scheduling Co-Design | Renke Wang</title>
   <meta
     name="description"
-    content="Cost function and constraints for joint path planning and intersection scheduling in a warehouse traffic network."
+    content="Cost function, constraints, and PPO actor-critic architecture for joint path planning and intersection scheduling in a warehouse traffic network."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,29 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css?v=20260825-38" />
+  <style>
+    #ppo-architecture { scroll-margin-top: 80px; }
+    .path-planning-detail-page .pp-ppo-figure { max-width: 1040px; }
+    .pp-ppo-figure .pp-ppo-scroll {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .pp-ppo-figure .pp-ppo-scroll img { min-width: 960px; }
+    .pp-ppo-figure .pp-ppo-scroll:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+    .pp-ppo-figure .pp-ppo-actions {
+      margin: 0.55rem 0 0;
+      color: var(--color-text-soft);
+      font-size: 0.82rem;
+    }
+    .pp-ppo-mobile-hint { display: none; }
+    @media (max-width: 1008px) {
+      .pp-ppo-mobile-hint { display: inline; }
+    }
+  </style>
   <script>
     window.MathJax = {
       tex: {
@@ -157,6 +180,48 @@
             </p>
           </article>
         </div>
+      </section>
+
+      <section class="hri-section" id="ppo-architecture" aria-label="PPO Actor–Critic Architecture">
+        <header class="hri-section-header">
+          <p class="eyebrow">PPO Actor–Critic Architecture</p>
+          <p>
+            The C-MPC decision tree serves as the reinforcement-learning environment.
+            A PPO actor selects one feasible branch at each decision node, while a
+            critic estimates the expected return from the remaining subtree.
+          </p>
+        </header>
+
+        <figure class="hri-wide-figure pp-ppo-figure">
+          <a
+            class="pp-ppo-scroll"
+            href="assets/projects/path-planning/ppo_tree_actor_critic.svg"
+            target="_blank"
+            rel="noopener"
+            aria-label="Open the full-size PPO actor–critic architecture diagram in a new tab"
+          >
+            <img
+              src="assets/projects/path-planning/ppo_tree_actor_critic.svg"
+              alt="PPO on the C-MPC decision tree. The actor scores feasible branches using shared per-robot networks and mean/max pooling, followed by a softmax. The critic uses state features to estimate the remaining return."
+              width="1080"
+              height="620"
+              loading="lazy"
+              decoding="async"
+            >
+          </a>
+          <figcaption>
+            <strong>PPO on the decision tree.</strong>
+            The actor scores each feasible branch using shared per-robot MLPs,
+            mean/max pooling, and a softmax over the available branches. The critic
+            uses state features only to predict \(V_\phi(s_q)\).
+            Each episode follows one root-to-leaf path; nodes with a single
+            successor are advanced by the analytical timing model.
+          </figcaption>
+          <p class="pp-ppo-actions">
+            <a href="assets/projects/path-planning/ppo_tree_actor_critic.svg" target="_blank" rel="noopener">Open full-size diagram ↗</a>
+            <span class="pp-ppo-mobile-hint">Scroll the diagram horizontally to see all details.</span>
+          </p>
+        </figure>
       </section>
 
       <section class="hri-section path-planning-example" aria-label="Co-Design Example">
